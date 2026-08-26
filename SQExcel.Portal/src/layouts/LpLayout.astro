@@ -10,11 +10,15 @@ interface Props {
 
 const { title, description } = Astro.props;
 
+// GitHub Pagesのプロジェクトサイト（base設定あり）でも正しくリンクするよう、
+// astro.config.mjsのbaseを反映したimport.meta.env.BASE_URLを前置する
+// （BASE_URLは末尾スラッシュが保証されないため、ここで正規化する）
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const navLinks = [
-  { href: '/ja/', label: 'ホーム', icon: 'fa-house' },
-  { href: '/ja/news/', label: 'ニュース', icon: 'fa-newspaper' },
-  { href: '/ja/docs/', label: 'ドキュメント', icon: 'fa-file-lines' },
-  { href: '/ja/download/', label: 'ダウンロード', icon: 'fa-download' },
+  { href: `${base}ja/`, label: 'ホーム', icon: 'fa-house' },
+  { href: `${base}ja/news/`, label: 'ニュース', icon: 'fa-newspaper' },
+  { href: `${base}ja/docs/`, label: 'ドキュメント', icon: 'fa-file-lines' },
+  { href: `${base}ja/download/`, label: 'ダウンロード', icon: 'fa-download' },
 ];
 ---
 
@@ -22,7 +26,7 @@ const navLinks = [
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet" />

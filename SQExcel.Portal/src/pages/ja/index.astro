@@ -1,48 +1,73 @@
 ---
-import { Image } from 'astro:assets';
-import LpLayout from '../../layouts/LpLayout.astro';
-import Carousel from '../../components/lp/Carousel.astro';
+import { Image } from "astro:assets";
+import LpLayout from "../../layouts/LpLayout.astro";
+import Carousel from "../../components/lp/Carousel.astro";
 
-import heroPart from '../../content/docs/ja/docs/images/lp/hero-parts.jpg';
-import dbSqlServer from '../../content/docs/ja/docs/images/lp/db-sqlserver.jpg';
-import dbOracle from '../../content/docs/ja/docs/images/lp/db-oracle.jpg';
-import dbPostgresql from '../../content/docs/ja/docs/images/lp/db-postgresql.jpg';
-import dbMysql from '../../content/docs/ja/docs/images/lp/db-mysql.jpg';
-import dbMariadb from '../../content/docs/ja/docs/images/lp/db-mariadb.jpg';
-import dbSqlite from '../../content/docs/ja/docs/images/lp/db-sqlite.jpg';
-import featureQuickMode from '../../content/docs/ja/docs/images/lp/feature-quickmode.jpg';
-import featureInputSheet from '../../content/docs/ja/docs/images/lp/feature-inputsheet.jpg';
-import featureDataCreation from '../../content/docs/ja/docs/images/lp/feature-datacreation.jpg';
-import featureFullDml from '../../content/docs/ja/docs/images/lp/feature-fulldml.jpg';
+import heroPart from "../../content/docs/ja/docs/images/lp/hero-parts.jpg";
+import dbSqlServer from "../../content/docs/ja/docs/images/lp/db-sqlserver.jpg";
+import dbOracle from "../../content/docs/ja/docs/images/lp/db-oracle.jpg";
+import dbPostgresql from "../../content/docs/ja/docs/images/lp/db-postgresql.jpg";
+import dbMysql from "../../content/docs/ja/docs/images/lp/db-mysql.jpg";
+import dbMariadb from "../../content/docs/ja/docs/images/lp/db-mariadb.jpg";
+import dbSqlite from "../../content/docs/ja/docs/images/lp/db-sqlite.jpg";
+import featureQuickMode from "../../content/docs/ja/docs/images/lp/feature-quickmode.jpg";
+import featureInputSheet from "../../content/docs/ja/docs/images/lp/feature-inputsheet.jpg";
+import featureDataCreation from "../../content/docs/ja/docs/images/lp/feature-datacreation.jpg";
+import featureFullDml from "../../content/docs/ja/docs/images/lp/feature-fulldml.jpg";
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
 const databases = [
-  { name: 'SQL Server', version: '対応バージョン：SQL Server 2022（内部バージョン 16.0）以降', image: dbSqlServer },
-  { name: 'Oracle', version: '対応バージョン：Oracle AI Database 23ai以降', image: dbOracle },
-  { name: 'PostgreSQL', version: '対応バージョン： PostgreSQL 18以降', image: dbPostgresql },
-  { name: 'MySQL', version: '対応バージョン：MySQL 8.4以降', image: dbMysql },
-  { name: 'MariaDB', version: '対応バージョン：MariaDB 11.4以降', image: dbMariadb },
-  { name: 'SQLite', version: '対応バージョン：SQLite 3.53.x以降', image: dbSqlite },
+  {
+    name: "SQL Server",
+    version: "対応バージョン：SQL Server 2022（内部バージョン 16.0）以降",
+    image: dbSqlServer,
+  },
+  {
+    name: "Oracle",
+    version: "対応バージョン：Oracle AI Database 23ai以降",
+    image: dbOracle,
+  },
+  {
+    name: "PostgreSQL",
+    version: "対応バージョン： PostgreSQL 18以降",
+    image: dbPostgresql,
+  },
+  { name: "MySQL", version: "対応バージョン：MySQL 8.4以降", image: dbMysql },
+  {
+    name: "MariaDB",
+    version: "対応バージョン：MariaDB 11.4以降",
+    image: dbMariadb,
+  },
+  {
+    name: "SQLite",
+    version: "対応バージョン：SQLite 3.53.x以降",
+    image: dbSqlite,
+  },
 ];
 
 const features = [
   {
-    title: 'クイックモード',
-    description: '素早くDBに接続して直ぐに入力シート操作を開始。',
+    title: "クイックモード",
+    description: "素早くDBに接続して直ぐに入力シート操作を開始。",
     image: featureQuickMode,
   },
   {
-    title: 'リッチな入力シート',
-    description: 'データ入出力双方に利用出来て、テーブル・項目情報が一目で俯瞰できる入力シート。',
+    title: "リッチな入力シート",
+    description:
+      "データ入出力双方に利用出来て、テーブル・項目情報が一目で俯瞰できる入力シート。",
     image: featureInputSheet,
   },
   {
-    title: '様々な入力シートデータ作成方法',
-    description: '入力シートデータ作成方法は自由。関数を使っても良し、Microsoft 365 Copilotを使っても良し。',
+    title: "様々な入力シートデータ作成方法",
+    description:
+      "入力シートデータ作成方法は自由。関数を使っても良し、Microsoft 365 Copilotを使っても良し。",
     image: featureDataCreation,
   },
   {
-    title: 'データ全処理・SQL出力対応',
-    description: 'INSERT/UPDATE/UPSERT/DELETEの全処理に対応。SQL出力、エラー原因の出力にも対応。',
+    title: "データ全処理・SQL出力対応",
+    description:
+      "INSERT/UPDATE/UPSERT/DELETEの全処理に対応。SQL出力、エラー原因の出力にも対応。",
     image: featureFullDml,
   },
 ];
@@ -56,8 +81,11 @@ const features = [
     <div class="lp-hero-inner">
       <div class="lp-hero-copy">
         <h1>SQExcel</h1>
-        <p class="lp-hero-tagline">SQL ServerやOracle他、主要6種類のDBとExcelを行き来させるデータ交換ツール</p>
-        <a class="lp-download-button" href="/ja/download/">
+        <p class="lp-hero-tagline">
+          SQL
+          ServerやOracle他、主要6種類のDBとExcelを行き来させるデータ交換ツール
+        </p>
+        <a class="lp-download-button" href={`${base}ja/download/`}>
           <span class="lp-download-icon">&#8595;</span>
           <span>
             <span class="lp-download-label">Download</span>
@@ -66,7 +94,13 @@ const features = [
         </a>
       </div>
       <div class="lp-hero-image">
-        <Image src={heroPart} alt="SQExcelのホーム画面とIO操作画面のスクリーンショット" width={1200} height={800} loading="eager" />
+        <Image
+          src={heroPart}
+          alt="SQExcelのホーム画面とIO操作画面のスクリーンショット"
+          width={1200}
+          height={800}
+          loading="eager"
+        />
       </div>
     </div>
   </section>
@@ -75,16 +109,29 @@ const features = [
     <div class="lp-section-inner">
       <div class="lp-section-heading">
         <h2>対応データベース</h2>
-        <p>簡単に接続して直ぐに使える。主要6つのDBとのExcelを介したデータのやり取り！</p>
+        <p>
+          簡単に接続して直ぐに使える。主要6つのDBとのExcelを介したデータのやり取り！
+        </p>
       </div>
-      <Carousel id="db-carousel" label="対応データベース" count={databases.length}>
-        {databases.map((db) => (
-          <article class="lp-card" data-carousel-card>
-            <Image src={db.image} alt={`${db.name}での実行結果画面`} width={560} height={380} />
-            <h3>{db.name}</h3>
-            <p>{db.version}</p>
-          </article>
-        ))}
+      <Carousel
+        id="db-carousel"
+        label="対応データベース"
+        count={databases.length}
+      >
+        {
+          databases.map((db) => (
+            <article class="lp-card" data-carousel-card>
+              <Image
+                src={db.image}
+                alt={`${db.name}での実行結果画面`}
+                width={560}
+                height={380}
+              />
+              <h3>{db.name}</h3>
+              <p>{db.version}</p>
+            </article>
+          ))
+        }
       </Carousel>
     </div>
   </section>
@@ -93,16 +140,25 @@ const features = [
     <div class="lp-section-inner">
       <div class="lp-section-heading">
         <h2>機能概要</h2>
-        <p>リッチな入力シートを作成して初期データ投入からデータメンテナンスまであらゆる開発シーンで利用可能な豊富な機能を提供します。</p>
+        <p>
+          リッチな入力シートを作成して初期データ投入からデータメンテナンスまであらゆる開発シーンで利用可能な豊富な機能を提供します。
+        </p>
       </div>
       <Carousel id="feature-carousel" label="機能概要" count={features.length}>
-        {features.map((feature) => (
-          <article class="lp-card" data-carousel-card>
-            <Image src={feature.image} alt={`${feature.title}の画面キャプチャ（ダミー）`} width={560} height={380} />
-            <h3>{feature.title}</h3>
-            <p>{feature.description}</p>
-          </article>
-        ))}
+        {
+          features.map((feature) => (
+            <article class="lp-card" data-carousel-card>
+              <Image
+                src={feature.image}
+                alt={`${feature.title}の画面キャプチャ`}
+                width={560}
+                height={380}
+              />
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
+            </article>
+          ))
+        }
       </Carousel>
     </div>
   </section>

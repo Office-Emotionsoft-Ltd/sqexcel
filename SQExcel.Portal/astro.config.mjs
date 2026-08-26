@@ -7,12 +7,16 @@ import { unified } from '@astrojs/markdown-remark';
 
 // TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
 // site: 'https://sqexcel.com' のみ設定する（base はルート直下になるため不要）。
+const base = '/sqexcel-prev-k3m9x2p7';
+
 export default defineConfig({
   site: 'https://office-emotionsoft-ltd.github.io',
-  base: '/sqexcel-prev-k3m9x2p7',
+  base,
   // TODO: LP（src/pages/index.astro）作成時にこのリダイレクトは削除すること
+  // 注意: Astroのredirectsはbaseを自動的に前置しないため、ここでも明示的にbaseを連結する必要がある
+  // （前置しないと本リダイレクトの生成先ページがbase違いで404になる）
   redirects: {
-    '/': '/ja/docs/',
+    '/': `${base}/ja/docs/`,
   },
   markdown: {
     // starlight-image-zoom（Sätteri未対応）を使うため、remark/rehypeベースの旧processorに切り替え
