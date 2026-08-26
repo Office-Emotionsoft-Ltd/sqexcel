@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import icon from '../../content/docs/ja/docs/images/lp/SQExcel48x48.png';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<a class={`lp-logo ${className}`} href="/ja/">
+  <Image src={icon} alt="" width={48} height={48} class="lp-logo-icon" />
+  <span class="lp-logo-text">SQExcel</span>
+</a>
+
+<style>
+  .lp-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    color: var(--lp-text);
+  }
+
+  .lp-logo :global(.lp-logo-icon) {
+    width: 3rem;
+    height: 3rem;
+    display: block;
+  }
+
+  .lp-logo-text {
+    font-family: var(--lp-font-logo);
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: 0.01em;
+  }
+</style>

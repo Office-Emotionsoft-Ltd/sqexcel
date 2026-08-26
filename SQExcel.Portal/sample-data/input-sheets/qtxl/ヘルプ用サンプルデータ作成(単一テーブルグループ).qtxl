@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ネット広告代理店A社販売管理システム" description="ネット広告代理店A社販売管理システムの開発及びメンテナンスを行います。" workFolder="C:\Work\SQExcelプロジェクト\SalesManagementSysDev">
+  <databases>
+    <database name="販売管理システムメインDB" description="A社販売管理システムの中核となるデータベース" databaseType="SqlServer" treatStringEmptyAsNull="false">
+      <connections>
+        <connection name="ローカル開発環境" isValid="true" isDefaultConnection="true" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB" userId="s2e_owner" password="s2e_owner_$pwd!">
+          <schemas>
+            <schema name="accounting">
+              <tables>
+                <table schemaName="accounting" physicalName="billing_transfers" logicalName="経理引き渡しデータ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="applog">
+              <tables>
+                <table schemaName="applog" physicalName="all_types_test" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="all_types_test2" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="app_logs" logicalName="アプリケーションログ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="hr">
+              <tables>
+                <table schemaName="hr" physicalName="departments" logicalName="部門マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="hr" physicalName="employees" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="sales">
+              <tables>
+                <table schemaName="sales" physicalName="clients" logicalName="取引先マスター" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="common_codes" logicalName="共通コードマスター" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details" logicalName="契約明細" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts" logicalName="契約ヘッダー" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details" logicalName="見積明細" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations" logicalName="見積ヘッダー" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sale_details" logicalName="販売明細" isSelectedForGroup="false" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sales_headers" logicalName="販売ヘッダー" isSelectedForGroup="false" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="services" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+        <connection name="結合テスト環境" isValid="true" isDefaultConnection="false" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB" userId="s2e_user" password="s2e_user_$pwd!">
+          <schemas />
+        </connection>
+        <connection name="システムテスト環境" isValid="true" isDefaultConnection="false" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB" userId="sa" password="sa_$pwd!">
+          <schemas />
+        </connection>
+      </connections>
+      <tableGroups>
+        <tableGroup name="マスター＆「トラン一括処理用グループ" description="販売管理システムメインDB内のマスター系及びトランザクション系テーブルを一括処理するためのテーブルグループ" useAllTablesInGroup="false">
+          <groupTableNames>
+            <tableName>hr.departments</tableName>
+            <tableName>hr.employees</tableName>
+            <tableName>sales.clients</tableName>
+            <tableName>sales.common_codes</tableName>
+            <tableName>sales.services</tableName>
+            <tableName>sales.contract_details</tableName>
+            <tableName>sales.contracts</tableName>
+            <tableName>sales.quotation_details</tableName>
+            <tableName>sales.quotations</tableName>
+          </groupTableNames>
+          <targetTableNames>
+            <tableName>hr.departments</tableName>
+            <tableName>hr.employees</tableName>
+          </targetTableNames>
+        </tableGroup>
+      </tableGroups>
+    </database>
+    <database name="A社基幹システム用DB" description="販売管理システムから参照する基幹システム用DB&#xD;&#xA;A社の基幹システムはOracleを使用" databaseType="Oracle" treatStringEmptyAsNull="true">
+      <connections />
+      <tableGroups />
+    </database>
+  </databases>
+</project>

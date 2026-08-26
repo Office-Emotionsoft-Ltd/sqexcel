@@ -1,0 +1,181 @@
+# SQExcel Help 変更履歴
+
+ヘルプ初版（SQL2Excel.Help）のブラッシュアップ作業の記録。日付ごとに追記していく。
+
+## 2026-07-19
+
+### ブラッシュアップ作業方針の確定
+
+ヘルプ初版を以下の手順でページ単位にブラッシュアップしていく方針を確定。
+
+1. 各ページの初版内容に足りない部分を追記する
+2. 図面挿入用プレースホルダーに実際の図面ファイルを作成し、リンクを貼る
+3. Claude AIに依頼し、より一般ユーザーが読みやすい書き方に整形してもらう
+4. 整形されたページを確認して決定版とする（「SQExcel の紹介」ページはこの手順を完了済み）
+5. 全体を見直し、修正が必要なページを個別に修正する
+
+### オプション設定ダイアログのページ階層修正
+
+オプション設定ダイアログはホーム画面からも参照されるため、ページ階層を1つ上げて「スタートページ」「IO操作画面」と並列にした（表示位置はIO操作画面の次）。
+
+- `features/io-operations/option-settings-dialog.md` → `features/option-settings-dialog.md` に移動（`git mv`）
+- `astro.config.mjs` のStarlightサイドバー定義を更新（IO操作画面配下の子項目から、IO操作画面と並列の項目へ）
+- リンク参照を更新：`toc.md`、`features/index.md`（一覧表に行を追加）、`features/io-operations/index.md`、`features/io-operations/input-sheet-builder-dialog.md`
+
+### 画像格納用フォルダ構成の新設
+
+- `src/content/docs/ja/images/` を画像ルートフォルダとして新設（`/docs/ja/` 配下に置く理由：日本語版と英語版では表示する画像自体が異なるため）
+- ページごとに非階層のサブフォルダを作成し、フォルダ名は各ページのURLスラッグに統一（ページタイトルではなくスラッグを採用した理由：Starlightの多言語構成では同一ページの日本語版・英語版でURLスラッグが共通のため、英語版作成時にフォルダ名を再検討する必要がなくなる）
+- 現時点で画像プレースホルダーが存在する18ページ分のフォルダを作成し、空フォルダをgit管理下に置くため `.gitkeep` を配置
+
+作成したフォルダ一覧：`quick-start` `operation-flow` `manual-entry` `formulas` `copilot` `foreign-key-order` `small-scale` `medium-scale` `large-scale` `start-page` `home-screen` `io-operations` `input-sheet-builder-dialog` `data-import-dialog` `data-export-dialog` `option-settings-dialog` `structure` `data-export`
+
+### 画像挿入記法の確認
+
+`src/content/docs/` 配下の画像は相対パスのMarkdown画像記法で参照する（Astroがビルド時に自動最適化するため）。パスの起点は画像を挿入する側のmdファイルの場所。
+
+```markdown
+![代替テキスト](./images/quick-start/quick-start01.jpg)   <!-- ja/quick-start.md から（0階層） -->
+![代替テキスト](../images/copilot/copilot01.jpg)          <!-- ja/data-entry/copilot.md から（1階層上） -->
+```
+
+### 次のアクション
+
+- 各ページの画像プレースホルダーに対応する実画像の作成・挿入（古谷氏が順次作業）
+
+## 2026-07-21
+
+### 「取り敢えず使ってみよう」ページの決定版化
+
+`quick-start.md` に実画像21枚＋操作手順で使用したサンプルExcel（`quick-start.xlsx`）を挿入し、ブラッシュアップ手順1〜4（追記・画像挿入・整形・確認）を完了。
+
+### 「操作の流れとデータモデル階層」ページの決定版化
+
+`operation-flow.md` を `operation-flow.mdx` に変換し、実画像14枚＋操作手順で使用したサンプルExcel（`operation-flow.xlsx`）を挿入して決定版化。プロジェクト新規作成〜アプリDB複数登録〜接続複数登録〜テーブルグループ設定までの一連の流れを画像付きで解説。
+
+### 表記統一の追従修正
+
+「IO操作画面」表記統一（[[project_sql2excel_ui_controls]]参照）に伴う残存箇所を `features/home-screen.md`・`features/io-operations/index.md`・`features/option-settings-dialog.md`・`operation-flow.md`・`quick-start.md` で修正。
+
+### 開発環境設定
+
+`.vscode/settings.json` を新設（`.mdx` を Markdown として認識・ワードラップ100桁）。`.mdx` ページ運用開始に伴う設定。
+
+### 次のアクション
+
+- 残るページの決定版化（ブラッシュアップ手順1〜4）を1ページずつ継続
+- サンプルDBの中規模(50テーブル)・大規模(100テーブル)ダミーテーブル追加/削除SQL（全6DB種）は`docs/SampleDB/maintenance/`に用意済み。DB反映は次回以降
+
+## 2026-07-22
+
+### 「SQExcelの入力シート操作概要」ページの修正
+
+`input-sheet-overview.md` を `input-sheet-overview.mdx` に変換し、以下2点を修正。
+
+- 「入力シート操作の基本フロー」のパターン①・パターン②をStarlightコンポーネント`Steps`を使った表現に書き直し。矢印図（テキストアート）を廃止し、タイトルの連番表記は`Steps`自身の番号と衝突しないよう「パターン①/②」から「パターンA/B」に変更
+- 「3つのデータ投入方法」セクションの前に新規セクション「入力シート作成の概要」を追加し、「通常の入力シート作成を実行する場合」「データ簡易出力を実行する場合」の2サブセクションを新設（後者は[取り敢えず使ってみよう](/ja/quick-start/)へのリンク）
+
+## 2026-07-23
+
+### 「サンプルデータベースについて」ページのテーブル定義表のスタイル修正
+
+`sample-db.md` を `sample-db.mdx` に変換し、departments〜contract_detailsの9テーブル定義表を`<div class="sampledb-field-table">`で囲んだ上で、`custom.css`に専用スタイルを追加した。
+
+- テーブルフォントサイズを0.9emに縮小
+- `table-layout: fixed`で列幅を固定し、物理項目名・論理項目名の表示幅を16%ずつの均等幅に設定（従来は論理項目名が物理項目名・データ型に押されて狭く表示されていた）
+- 物理項目名・データ型・規定値の3列は`word-break: break-all`で半角英数字でも折り返しを許可
+- 主キー/NOT NULL列は6〜7%の最小幅で中央揃え、データ型15%・規定値14%・用途目的26%で配分（CHAR/INT/DATETIME2/VARCHAR(20)/GETDATE()等の頻出値はcanvas計測で幅を調整し折り返さず1行に収まるようにした。NVARCHAR(200)以上やDECIMAL等の長い値は折り返しを許容）
+
+`npm run build`で34ページ生成・エラーなし。`npm run preview`+Claude in Chromeで実ページを確認し、departments/clients/quotation_detailsの3テーブルで意図通りの表示（列幅均等化・頻出値の折り返し抑制）を確認済み。
+
+### 画像クリックでのズーム機能導入（`starlight-image-zoom`）
+
+サイト内の全画像をクリックするとページ内オーバーレイで拡大表示されるよう、Starlightプラグイン`starlight-image-zoom`（v0.15.0）を導入した。
+
+- `npm i starlight-image-zoom`でインストール。`astro.config.mjs`の`starlight()`設定に`plugins: [starlightImageZoom()]`を追加
+- ビルド時に「Astro 7の既定Markdownプロセッサー（Sätteri）が本プラグイン未対応」というエラーが発生したため、`@astrojs/markdown-remark`を明示インストールし、`astro.config.mjs`の`markdown.processor`に`unified()`を設定してremark/rehypeベースの旧プロセッサーへ切り替えた（Sätteri対応は[プラグイン側のIssue](https://github.com/HiDeoo/starlight-image-zoom/issues/63)で追跡中）
+- `npm run build`（34ページ・エラーなし）→ `npm run preview`+Claude in Chromeで`quick-start`ページの画像クリック→拡大表示（altテキストがキャプション表示）→再クリックで閉じる、の一連の動作を確認済み
+
+## 2026-07-29
+
+### 「画面構成」表（ホーム画面・IO操作画面）のスタイル修正
+
+`home-screen.md`/`io-operations/index.md`の「画面構成」表（No./エリア/内容の3列）で、3列目（内容）が幅を優先的に取り、2列目（エリア名）が不自然な位置で折り返される問題を修正した。
+
+- 両ファイルを`home-screen.mdx`/`io-operations/index.mdx`に変換し（`git mv`）、表を`<div class="screen-area-table">`で囲んだ
+- `custom.css`に`.screen-area-table`クラスを新設。`table-layout: fixed`で1列目(No.)6%／2列目(エリア)26%／3列目(内容)68%に配分（従来比で2列目の表示幅が約1.7倍に拡大）
+- `npm run build`（34ページ・エラーなし）＋Claude in Chromeで両ページの表示を確認。最長のエリア名（「テーブルグループ操作パネル」等）も自然な区切りで折り返されることを確認
+- 別ページ単位での個別対応は不要。プラグインがMarkdown/MDX中の全画像（`![]()`構文・`<img>`・`<Image>`/`<Picture>`コンポーネント）に自動適用されるため、既存の全ページ・今後追加するページの画像に一律で有効
+
+## 2026-08-04
+
+### ページ構成を3階層から2階層へ全面刷新
+
+Starlight公式サイトのサイドバーが2階層（カテゴリ＋ページ）で明快だったことを参考に、SQExcel.Helpも従来の3階層（グループ＞サブグループ＞ページ）構成を2階層（グループ＞ページ）へ刷新した。ページファイルの移動・URL変更・本文編集は行わず、サイドバー構造とグループラベルのみを変更している。
+
+- **7章「SQExcelの入力シート操作のポイント」**（旧ラベル「SQExcelの入力シート操作概要」）：入れ子だった「入力シートへのデータ投入方法」グループを解消し、投入方法の選択肢＋4方式＋比較の6ページをグループ直下のフラットな兄弟項目に変更
+- **9章「SQExcel機能説明」**：入れ子だった「IO操作画面」グループを解消し、IO操作画面本体＋3ダイアログをフラットな兄弟項目に変更（3ダイアログのラベルには文脈が失われないよう「IO操作画面：」を接頭辞として付与）
+- **新設10章「SQExcelの入力シートの説明」**：9章に入れ子だった「SQExcelの入力シート」グループ（概要・構造と作成機能・データ取り込み・データ出力・検索条件記入方法の5ページ）を独立した最上位グループへ昇格。「構造と作成機能」のラベルには「SQExcelの」を接頭辞として付与し「SQExcelの入力シートの構造と作成機能」に変更
+- 章番号（1, 2, 3...や7-1, 7-2...）はサイドバー上には元々表示しておらず、今回の構成検討時の便宜的な識別子としてのみ使用したため、コード上の変更は不要だった
+- 追従修正：`toc.md`（目次ページ）の見出し・行ラベルを新構成に合わせて更新し、「SQExcelの入力シート」セクションを独立した見出しに分離。`features/index.md`（機能説明トップ）のテーブルから独立した「SQExcelの入力シート」の行を削除し、フラット化した3ダイアログの行を追加
+- `npm run build`で34ページ生成・エラーなしを確認済み
+
+## 2026-08-21
+
+### ドキュメントURLを`/ja/docs/`・`/en/docs/`へ移行
+
+WinScp（`winscp.net/eng/docs/...`）を参考に、LPヘッダの4リンク（ホーム／ニュース／ドキュメント／ダウンロード）に対応させるURL構成へ刷新。ドキュメント（ヘルプ）はロケール直下から1階層下の`docs/`配下へ移動。
+
+- `src/content/docs/ja/*` → `src/content/docs/ja/docs/*`、`en/*` → `en/docs/*` へ全ファイル移動（画像フォルダごと）
+- `astro.config.mjs`のサイドバー`link:`32箇所に`/docs`プレフィックスを追加
+- 記事内の絶対パス内部リンク（`](/ja/xxx/)`形式）30ファイル約145箇所を`](/ja/docs/xxx/)`へ一括置換（画像参照は全て相対パスだったため無修正で動作継続）
+- 暫定リダイレクト`'/' → '/ja/'`を`'/ja/docs/'`へ修正
+- `npm run build`で65ページ生成。サイト全体のHTML出力を走査し、内部リンク破損ゼロを確認
+
+### ニュース機能（`starlight-blog`）の方式を決定
+
+`prefix: 'news'`設定で`https://sqexcel.com/ja/news/...`とする方針を確定（多言語フォールバックにも標準対応）。導入自体はニュース機能に本格着手するまで保留。最初の記事はPreview版リリースのお知らせ＋詳細なリリースノート本文の予定。
+
+### LPのURL構成・ロケール別ページ化を決定
+
+LPは単一`/`ページではなくロケール毎に作成する方針へ変更（`src/pages/ja/index.astro`＝日本語、`src/pages/en/index.astro`＝英語）。ロケールなし`/`アクセス時は日本語LPへリダイレクトする方針。英語版LPは画像の英語化作業が別途必要なため日本語版より遅れて公開の見込み。
+
+## 2026-08-22
+
+### 日本語版LP第1版を実装（ダミー画像）
+
+設計書`SQExceインストーラーサイト設計書.pdf`（v0.5.1、`C:\Repos_MS\East\SQL2Excel\v100\SQL2Excel\docs\その他仕様書\SQExcelLP+自動アップデート\`配下）を基に、`src/pages/ja/index.astro`としてLP第1版を実装。
+
+- 共通レイアウト`src/layouts/LpLayout.astro`（ヘッダ4リンク＋フッタ3カラム）、カルーセルUI`src/components/lp/Carousel.astro`（外部ライブラリ不使用、CSSスクロールスナップ＋矢印ボタン）を新設
+- ヒーロー（キャッチコピー＋Downloadボタン）／対応データベースカルーセル（6DB）／機能概要カルーセル（4機能）を設計書通りに再現
+- ダミー画像11点を`src/content/docs/ja/docs/images/lp/`にSVGで作成（環境にImageMagick/Pillowが無かったためPython標準ライブラリで自作）。実スクリーンショットへの差し替えは今後の課題
+- ナビの「ニュース」「ダウンロード」リンクが404にならないよう、`src/pages/ja/news/index.astro`・`src/pages/ja/download/index.astro`に「準備中」表示の暫定スタブページを追加
+- ダウンロードダイアログ本体（EXE/MSI選択・PerUserインストール文言等）は意図的に未実装（実装可否はLP着手時に相談、と留保されていたため）
+- `astro:assets`の`<Image>`はデフォルト`loading="lazy"`のため、自動操作ブラウザ環境でヒーロー画像の読み込みが完了しない事象を確認し、ヒーロー画像に`loading="eager"`を明示指定して解消
+- `npm run build`で68ページ生成・エラーなし。Claude in Chromeで実際に表示確認済み（ヒーロー・カルーセル2種・フッタ・ドキュメントページとも正常表示、カルーセルのスクロール動作も確認）
+
+## 2026-08-25
+
+### 日本語版LPのデザイン修正（`SQExcel.Portal.LP修正指示.pdf`、FlowLauncher参考）
+
+古谷氏から修正指示書（8項目）を受領し、GitHub公開前のLPブラッシュアップとして対応。作業前バックアップは`work\backup\SQExcel.Portal(202608250329).zip`として古谷氏が別途保管済み。
+
+- **ロゴ共通化**：ヘッダ・フッタで重複していたロゴMarkup（`XL`バッジ＋テキスト）を`src/components/lp/Logo.astro`に統合し、`SQExcel128x128.png`（`src/content/docs/ja/docs/images/lp/`に配置済み）を表示するよう変更。フッタ側は`transform: scale(0.85)`で85%縮小表示
+- **フォント強調**：ロゴ・ヒーロー見出し「SQExcel」を`Segoe UI Black`相当（font-weight 900）、トップメニュー・ヒーローのタグラインを`BIZ UDPGothic`Bold（Google Fonts経由で読み込み）に変更。CSS変数`--lp-font-logo`/`--lp-font-heading`を`LpLayout.astro`の`:root`に追加
+- **トップメニューへのアイコン追加**：`@fortawesome/fontawesome-free`をnpm依存として追加し、`fontawesome.min.css`＋`solid.min.css`のみ読み込み（brands/regularフォントは除外し軽量化）。ホーム／ニュース／ドキュメント／ダウンロードの各リンク前にFont Awesomeアイコンを表示
+- **ヒーローエリアの比率変更**：左側（ロゴ＋説明文＋Downloadボタン）と右側（イメージ）の幅比率を`1fr 1fr`（50:50）から`35fr 65fr`へ変更
+- **カルーセル改修**（`src/components/lp/Carousel.astro`、対応データベース・機能概要の両方に適用）：矢印ボタンを拡大（2.5rem→3.25rem）、下部のスクロールバーを非表示化、カード枚数分のドットインジケータを追加して現在位置を表示。矢印クリックで末尾↔先頭を循環する挙動を実装
+  - 実機検証で「コンテナ幅の関係で最後のカードがちょうどのスクロール位置まで届かず、次へボタンが末尾で止まる」バグを発見。`scrollLeft`と`step`の単純な除算ではなく、最大スクロール位置（`scrollWidth - clientWidth`）を基準に現在位置・遷移先をクランプする方式に修正して解消
+- **フッタメニューの配色**：カテゴリ見出し（ページ／リンク／サポート）を`--lp-text`（黒系）、リンク本体を`--lp-accent`（青）に変更
+- `npm run build`を2回実行しいずれもエラーなし（68ページ生成、Font Awesomeのwoff2が`dist/_astro/`に正しくバンドルされることを確認）。`npm run dev`＋Claude in Chromeで全項目の表示・カルーセル循環動作（6DBカルーセルを6回連続クリックし先頭に戻ることを確認）を目視確認済み
+
+## 2026-08-26
+
+### 日本語版LPのカルーセル不具合修正（`SQExcel.Portal.LP修正指示2.pdf`、FlowLauncher参考）
+
+前日の改修で残っていた2件の不具合を修正（`src/components/lp/Carousel.astro`）。
+
+- **表示不備**：メインコンテナ内の3枚目パネルの右端が切れる問題を、トラックのカード間隔（`gap`）を`1.5rem`→`0.5rem`に縮小して解消
+- **移動ボタン・インジケータの不整合**：ドットインジケータのクリックによるジャンプ機能（カード番号に直接ジャンプ）が、表示3枚ぶんの制約と噛み合わず「右端から2番目のドットがクリック不能」「次へクリックで隣のドットを飛ばして右端へ移動」という不具合の原因だったため、インジケータを**非クリックの読み取り専用表示**（`<button>`→`<span>`）に変更し、ドット数を指示書通り「パネル数−1」に変更（対応DB：6→5個、機能概要：4→3個）。ボタン操作は内部の`activeIndex`を1ずつ増減させる方式に書き換え、右端で「次へ」→先頭へ、左端で「前へ」→末尾（右端フラッシュ状態）へ巡回する無限ループを実装
+  - 指示書内で「左端から前へクリックした際にインジケータの●印をアクティブにする」記述が2箇所とも「先頭の●印」となっていたが、右端が表示される旨の記述と整合させるため「末尾の●印」がアクティブになる実装とした（先頭・先頭の重複記載は誤記と判断、要確認）
+- `npm run build`でエラーなしを確認。実機確認はClaude in Chrome拡張が未接続だったため古谷氏が手動で実施し、動作OKの報告を受けた

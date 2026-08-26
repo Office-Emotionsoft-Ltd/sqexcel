@@ -1,0 +1,208 @@
+# SampleDB テーブル定義
+
+ネット広告代理店向け簡易販売管理システムをモデルにしたサンプルデータベース（SampleDB）の全テーブルの項目定義です。<br/>
+E/R図・テーブル間のリレーションについては [外部キー参照のあるテーブルへのデータ挿入及び削除手順（重要）](/ja/data-entry/foreign-key-order/) を参照してください。
+
+## テーブル一覧
+
+| No. | テーブル物理名 | テーブル論理名 | 備考 |
+|---|---|---|---|
+| 1 | departments | 部門マスター | 自己参照FK（親部門） |
+| 2 | employees | 従業員マスター | 担当者マスター兼用 |
+| 3 | clients | 取引先マスター | |
+| 4 | common_codes | 汎用コードマスタ | |
+| 5 | services | サービスマスター | 広告サービス種別・料金定義 |
+| 6 | quotations | 見積ヘッダー | |
+| 7 | quotation_details | 見積明細 | |
+| 8 | contracts | 契約ヘッダー | 見積と1:1対応 |
+| 9 | contract_details | 契約明細 | |
+
+---
+
+## departments（部門マスター）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| dept_id | 部門ID | CHAR(6) | ○ | ○ | | 部門を一意に識別するID（0詰め6桁） |
+| dept_name | 部門名 | NVARCHAR(200) | | ○ | | 部門の表示名 |
+| parent_dept_id | 親部門ID | CHAR(6) | | | | 親部門のdept_id（NULLなら最上位）。departmentsへの自己参照FK |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
+
+---
+
+## employees（従業員マスター）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| employee_id | 従業員ID | CHAR(8) | ○ | ○ | | 従業員・担当者を一意に識別するID（0詰め8桁） |
+| dept_id | 部門ID | CHAR(6) | | ○ | | 所属部門。departmentsへのFK |
+| last_name | 姓 | NVARCHAR(100) | | ○ | | 従業員の姓 |
+| first_name | 名 | NVARCHAR(100) | | ○ | | 従業員の名 |
+| email | 業務メールアドレス | NVARCHAR(255) | | | | 業務用メールアドレス（一意） |
+| is_active | 有効フラグ | BIT | | ○ | 1 | 1=有効、0=無効 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
+
+---
+
+## clients（取引先マスター）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| client_id | 取引先ID | CHAR(8) | ○ | ○ | | 取引先を一意に識別するID（0詰め8桁） |
+| client_name | 取引先名 | NVARCHAR(200) | | ○ | | 取引先の正式名称 |
+| client_name_kana | 取引先名カナ | NVARCHAR(200) | | | | 取引先名のフリガナ |
+| contact_person | 先方担当者名 | NVARCHAR(100) | | | | 取引先の担当者名 |
+| phone | 電話番号 | VARCHAR(30) | | | | 連絡先電話番号 |
+| email | メールアドレス | NVARCHAR(255) | | | | 取引先メールアドレス |
+| address_line1 | 住所1 | NVARCHAR(200) | | | | 番地・建物名（国際標準形式） |
+| address_line2 | 住所2 | NVARCHAR(200) | | | | 追加住所行（使用頻度低） |
+| city | 市区町村 | NVARCHAR(100) | | | | 市区町村 |
+| state_province | 都道府県・州 | NVARCHAR(100) | | | | 都道府県または州 |
+| postal_code | 郵便番号 | VARCHAR(20) | | | | 郵便番号（ハイフンなし） |
+| country_code | 国コード | CHAR(2) | | ○ | 'JP' | ISO 3166-1 alpha-2 国コード |
+| is_active | 有効フラグ | BIT | | ○ | 1 | 1=有効、0=無効 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+---
+
+## services（サービスマスター）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| service_id | サービスID | CHAR(8) | ○ | ○ | | サービスを一意に識別するID（0詰め8桁） |
+| service_name | サービス名 | NVARCHAR(200) | | ○ | | サービスの名称 |
+| ad_type | 広告種別 | CHAR(1) | | ○ | | common_codeで定義域を設定 |
+| banner_size | バナーサイズ | VARCHAR(20) | | | | バナー広告のサイズ（バナー広告のみ） |
+| html_embed_available | HTML埋め込み可否 | BIT | | ○ | 0 | 1=可、0=不可 |
+| js_embed_available | JS埋め込み可否 | BIT | | ○ | 0 | 1=可、0=不可 |
+| video_duration_sec | 動画表示時間（秒） | INT | | | | 動画広告の表示時間（秒単位） |
+| price_weekly | 週単位料金（税抜） | DECIMAL(15,2) | | ○ | 0 | 週単位の広告掲載料金 |
+| price_monthly | 月単位料金（税抜） | DECIMAL(15,2) | | ○ | 0 | 月単位の広告掲載料金 |
+| currency_code | 通貨コード | CHAR(3) | | ○ | 'JPY' | ISO 4217 通貨コード |
+| is_active | 有効フラグ | BIT | | ○ | 1 | 1=有効、0=無効 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+---
+
+## common_codes（共通コードマスター）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| category_name | 区分名 | NVARCHAR(100) | ○ | ○ | | DB内のテーブルで使用される各種区分名。実際のテーブル項目の物理名を指定する。 |
+| category_code | 区分値 | NVARCHAR(100) | ○ | ○ | | その区分のコード値 |
+| category_code_name | 区分値名 | NVARCHAR(200) | | ○ | | その区分のコード値に割り当てられる名前 |
+| category_code_description | 区分値説明 | NVARCHAR(100) | | | | その区分のコード値の説明 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+※ category_name と category_code の複合主キー。
+
+---
+
+## quotations（見積ヘッダー）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| quotation_id | 見積ID | CHAR(12) | ○ | ○ | | 見積を一意に識別するID（0詰め12桁） |
+| client_id | 取引先ID（広告主） | CHAR(8) | | ○ | | 広告主。clientsへのFK |
+| site_operator_id | サイト運営会社ID | CHAR(8) | | ○ | | 広告掲載サイトの運営会社。clientsへのFK |
+| display_start_date | 広告表示開始日 | DATE | | ○ | | 広告掲載開始日 |
+| display_end_date | 広告表示終了日 | DATE | | ○ | | 広告掲載終了日 |
+| payment_terms | 決済条件 | NVARCHAR(200) | | | | 支払条件の説明 |
+| billing_type | 請求種別 | CHAR(1) | | ○ | '1' | '1'=一括請求、'2'=月締め請求 |
+| currency_code | 通貨コード | CHAR(3) | | ○ | 'JPY' | ISO 4217 通貨コード |
+| total_amount_foreign | 外貨建て合計金額 | DECIMAL(18,2) | | | | 外貨建ての見積合計金額 |
+| total_amount_jpy | 円建て合計金額 | DECIMAL(18,2) | | | | 円建ての見積合計金額 |
+| total_amount_jpy_est | 予想円換算合計金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算合計金額 |
+| employee_id | 担当者ID | CHAR(8) | | ○ | | 担当営業社員。employeesへのFK |
+| status | ステータス | CHAR(1) | | ○ | '1' | 見積のステータスコード |
+| notes | 備考 | NVARCHAR(1000) | | | | 自由記述の備考欄 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+---
+
+## quotation_details（見積明細）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| detail_id | 明細ID | CHAR(15) | ○ | ○ | | 見積明細を一意に識別するID（0詰め15桁） |
+| quotation_id | 見積ID | CHAR(12) | | ○ | | 親見積。quotationsへのFK |
+| line_no | 行番号 | INT | | ○ | | 明細行の表示順番号 |
+| site_url | サイトURL | VARCHAR(500) | | ○ | | 広告掲載サイトのURL |
+| service_id | サービスID | CHAR(8) | | ○ | | 使用サービス。servicesへのFK |
+| display_weeks | 掲載週数 | INT | | | | 広告掲載週数（週単位の場合） |
+| display_months | 掲載月数 | INT | | | | 広告掲載月数（月単位の場合） |
+| unit_price_foreign | 外貨建て単価 | DECIMAL(15,2) | | | | 外貨建て単価 |
+| amount_foreign | 外貨建て金額 | DECIMAL(18,2) | | | | 外貨建て明細金額 |
+| amount_jpy | 円建て金額 | DECIMAL(18,2) | | | | 円建て明細金額 |
+| amount_jpy_est | 予想円換算金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算金額 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+---
+
+## contracts（契約ヘッダー）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| contract_id | 契約ID | CHAR(12) | ○ | ○ | | 契約を一意に識別するID（0詰め12桁） |
+| quotation_id | 見積ID | CHAR(12) | | ○ | | 基となった見積。quotationsへのFK（1:1） |
+| client_id | 取引先ID（広告主） | CHAR(8) | | ○ | | 広告主。clientsへのFK |
+| site_operator_id | サイト運営会社ID | CHAR(8) | | ○ | | 広告掲載サイトの運営会社。clientsへのFK |
+| display_start_date | 広告表示開始日 | DATE | | ○ | | 広告掲載開始日 |
+| display_end_date | 広告表示終了日 | DATE | | ○ | | 広告掲載終了日 |
+| payment_terms | 決済条件 | NVARCHAR(200) | | | | 支払条件の説明 |
+| billing_type | 請求種別 | CHAR(1) | | ○ | '1' | '1'=一括請求、'2'=月締め請求 |
+| currency_code | 通貨コード | CHAR(3) | | ○ | 'JPY' | ISO 4217 通貨コード |
+| total_amount_foreign | 外貨建て合計金額 | DECIMAL(18,2) | | | | 外貨建ての契約合計金額 |
+| total_amount_jpy | 円建て合計金額 | DECIMAL(18,2) | | | | 円建ての契約合計金額 |
+| total_amount_jpy_est | 予想円換算合計金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算合計金額 |
+| employee_id | 担当者ID | CHAR(8) | | ○ | | 担当営業社員。employeesへのFK |
+| status | ステータス | CHAR(1) | | ○ | '1' | 契約のステータスコード |
+| notes | 備考 | NVARCHAR(1000) | | | | 自由記述の備考欄 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+
+---
+
+## contract_details（契約明細）
+
+| 物理項目名 | 論理項目名 | データ型（SQL Server基準） | 主キー | NOT NULL | 規定値 | 用途・目的 |
+|---|---|---|---|---|---|---|
+| detail_id | 明細ID | CHAR(15) | ○ | ○ | | 契約明細を一意に識別するID（0詰め15桁） |
+| contract_id | 契約ID | CHAR(12) | | ○ | | 親契約。contractsへのFK |
+| quotation_detail_id | 見積明細ID | CHAR(15) | | | | 対応する見積明細。quotation_detailsへのFK（NULL許可） |
+| line_no | 行番号 | INT | | ○ | | 明細行の表示順番号 |
+| site_url | サイトURL | VARCHAR(500) | | ○ | | 広告掲載サイトのURL |
+| service_id | サービスID | CHAR(8) | | ○ | | 使用サービス。servicesへのFK |
+| display_weeks | 掲載週数 | INT | | | | 広告掲載週数（週単位の場合） |
+| display_months | 掲載月数 | INT | | | | 広告掲載月数（月単位の場合） |
+| unit_price_foreign | 外貨建て単価 | DECIMAL(15,2) | | | | 外貨建て単価 |
+| amount_foreign | 外貨建て金額 | DECIMAL(18,2) | | | | 外貨建て明細金額 |
+| amount_jpy | 円建て金額 | DECIMAL(18,2) | | | | 円建て明細金額 |
+| amount_jpy_est | 予想円換算金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算金額 |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |

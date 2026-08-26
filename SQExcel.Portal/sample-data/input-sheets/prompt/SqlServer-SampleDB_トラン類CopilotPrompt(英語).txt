@@ -1,0 +1,192 @@
+
+■作業開始時：
+※作業開始に先立ってマスター類のサンプルデータ登録済みのワークブックをCopilotに貼り付けておく！
+----
+今アップロードしたワークブックを以降「マスタデータシート」と称します。
+今アクティブになっているワークブックにはSQL Server上のテーブルのデータ入力用のシートがまとめられています。
+各ワークシートに対象となるテーブルの項目に関する情報が定義されているのでまずはその内容を読み取ってください。
+その後一つ一つの入力シートにサンプルデータを作成する作業がミッションです。
+サンプルデータは海外企業向けデータとして全て英語で作成してもらいます。
+指示があるまで作業には着手しないでください。
+
+----
+【重要】
+サンプルデータを設定してもらうエリアには項目列毎に実際の項目のデータ型に即したセル書式を設定しています。
+サンプルデータの作成に当たってはこのセル書式を絶対に変更しないようにお願いします。
+もし数値型項目に「(null)」のような文字列を入れる場合には入力値の先頭に'(アポストロフィ)を付けて、入力値が文字列であることを示してください。
+サンプルデータを設定するのはA列の項目ヘッダに「入力対象」と書かれた行の1つ下の行のB列からです。
+作業は自分の指示があったシート毎に実施してもらいます。
+----
+このワークブックに含まれるワークシートは、ネット広告代理店の販売管理システムの見積データと契約データ用のものです。
+それぞれヘッダと明細テーブルがあるので、合わせて4テーブル分のワークシートがあります。
+見積データと契約データとも、最初に貼り付けたマスタデータシートに登録されているデータを参照しています。
+どの項目がどのマスターを参照しているかは貼り付けたワークブック、このワークブックそれぞれのワークシートの項目名を見て推測できると思います。
+ここまでよろしいでしょうか？
+
+
+----------------
+■quotations（見積ヘッダ）：
+----------------
+それではまずシート「quotations」へのサンプルデータ作成をお願いします。
+各項目のデータ設定要項は次の通りです。
+・quotation_id：
+　　created_atの年月日のyyyyMMdd表記8ケタ＋前方0詰めの連番4桁(先頭6桁の年月毎に1から開始）
+・client_id：マスタデータシートclientsのclient_id
+・site_operator_id：client_idと同じ値でOK
+・display_start_date：C#のDateTime型最小値をセット
+・display_end_date：1900/01/01をセット(=Excelの最小値)
+・payment_terms：以下より選択する
+　　Net 30 EOM（月末締め翌月末払い）
+　　Net 30（請求書発行日後30日現金払い）
+　　Due on Receipt（請求書受領時払い）
+　　Credit Card Payment upon Invoice（クレジットカード決済）
+　　※（）内の日本語の説明は登録不要です。
+・billing_type：
+　　1(個別請求)、と2(月締め請求)の何れかを選択。
+　　※payment termsの選択に合わせる。
+　　(Net 30とNDue on ReceiptとCredit Card Payment upon Invoiceは1、Net 30だけが2)
+　　※論理名にある「請求種別（1=一括請求,2=月締め請求）」は誤り
+・currency_code：USD
+・total_amount_foreign：
+　　この後作成するcontract_detailsの合計金額をセットする。
+　　※この金額はいったん空白にしておき、contract_detailsのサンプルデータが作成された段階でこのシートに戻って合計金額をセットする。
+・total_amount_jpy：(null)をセット
+・total_amount_jpy_est：
+　　total_amount_foreignの計算が終わった後、レート$1 = \155として円換算する。小数点以下切り捨て。
+・employee_id：
+　　マスタデータシートemployeesで営業関連の部課に所属する従業員のemployee_id
+・status：
+　　マスタデータシートcommon_codesのcategoryname=statusであるレコードのcategory_code：0～4をセット
+　　※値が4であるレコードは後続のquotationsにレコードが作成される。
+・notes：
+　　マスタデータシートを参考にしてclient_idより顧客名、statusよりステータス名、employee_idより従業員名とその所属部門名を
+　　顧客名：XXXXX、ステータス：XXXXXX、営業担当者：XXXX部・XXXXXXのように出力
+・created_at：直近3ヶ月分の適当な日付を古い方から新しい方の順番で作成する。
+・created_by：employee_idの値をセット。
+・updated_at：created_atに20日加算した日付値
+・updated_by：created_byと同じ値でよい
+理解して頂けましたでしょうか（まだデータ作成は開始しないでください）
+----
+
+○想定するデータ：
+従業員数 20 | 50 | 100名程度のネット広告代理店の販売管理システムの見積データを想定する。
+マスタデータシートの顧客情報やサービス情報を参照する。
+
+○作成するデータ数：
+50 | 100 | 200 件。（2割強の成約率があるものとする。)
+
+よろしければサンプルデータの作成を開始してください。
+
+----------------
+■quotation_details（見積明細）：
+----------------
+続いてquotation_details（見積明細）シートのサンプルデータの作成をお願いします。
+先ずは「マスタデータシート」が何のことか分かりますか？
+分からなかったらここで作業を止めてください。
+
+----
+各項目のデータ設定要項は次の通りです。
+・detail_id：quotation_id(12ケタ)＋前方0詰め連番(3桁、quation_id毎に1から開始)
+・quotation_id：親見積ヘッダデータのquotation_id
+・line_no：quation_id毎に1から開始
+・site_url：広告掲載先の架空のサイトのURLを指定。欧米企業のサイトらしいURLにしてください。
+・service_id：マスタデータシートservicesより適当なサービスを選択
+・display_weeks：1～12のいずれか。または(null)
+・display_months：1～3のいずれか。または(null)
+　　display_weeks/ display_monthsの何れか一方に値を入れる
+・unit_price_foreign：
+　　マスタデータシートservicesより取得した週別、または月別サービス単価(USD建て)
+・amount_foreign：
+　　unit_price_foreignにdisplay_weeksまたはdisplay_monthsを乗じて求めた明細金額(USD建て)
+・amount_jpy：(null)をセット
+・amount_jpy_est：(null)をセット
+　　unit_price_foreignにレート$1 = \155を乗じて円換算した値。小数点以下切り捨て。
+・created_at：親quationデータの同じ項目の値＋10分
+・created_by：親quationデータの同じ項目の値
+・updated_at：親quationデータの同じ項目の値＋10分
+・updated_by：親quationデータの同じ項目の値
+理解して頂けましたでしょうか（まだデータ作成は開始しないでください）
+
+----
+○作成するデータ数：
+1つの見積に付き 2～4 | 2～6 | 2～8 件の明細データを作成すること
+○追加作業
+quotation_detailsのデータ作成が完了したら、amount_foreignをdetail_id毎に集計して親quationのtotal_amount_foreignの値を更新すること。
+○注意事項
+くれぐれもservice_idはマスタデータシート」のservicesのservice_idとして登録されているものを選択するようにしてください。
+よろしければサンプルデータの作成に取り掛かってください。​‌
+
+
+----------------
+■contracts（契約ヘッダ）：
+----------------
+それでは現在アクティブになっているcontractsシートのサンプルデータを作成してもらいます。
+contracts(契約ヘッダ)のデータはquotationsをテーブルでstatusが4以上になっているデータについて作成されます。
+元となるquotationsを「契約元見積」と略すことにします。
+ここまでよろしいでしょうか？
+
+----
+それではcontractsの各項目の設定内容を以下のように指定します。
+・contract_id：
+　　created_atの年月日のyyyyMMdd表記8ケタ＋前方0詰めの連番4桁(先頭6桁の年月毎に1から開始）
+　　※採番方法はquotation_idと同じだが、連番は作成されたcontractsデータについてのみカウントしていく。
+・quotation_id：契約元見積の同名項目値
+・client_id：契約元見積の同名項目値
+・site_operator_id：契約元見積の同名項目値
+・display_start_date：契約元見積の同名項目値
+・display_end_date：契約元見積の同名項目値
+・payment_terms：契約元見積の同名項目値
+・billing_type：契約元見積の同名項目値
+・currency_code：契約元見積の同名項目値
+・total_amount_foreign：契約元見積の同名項目値
+・total_amount_jpy：(null)をセット
+・total_amount_jpy_est：契約元見積の同名項目値
+・employee_id：契約元見積の同名項目値
+・status：
+　　4または5をセット。
+　　5となるデータは現在の日付がdisplay_start_date～display_end_date間であるデータ
+・notes：
+　　マスタデータシートを参考にしてclient_idより顧客名、statusよりステータス名、employee_idより従業員名とその所属部門名を
+　　Customer：XXXXX、Status：XXXXXX、Sales Staff：XXXX(Section)・XXXXXX(Employee'sName)のように出力
+・created_at：契約元見積の同名項目値に10を加算した日付
+・created_by：契約元見積の同名項目値
+・updated_at：created_atと同じ値
+・updated_by：created_byと同じ値
+理解して頂けましたでしょうか（まだデータ作成は開始しないでください）
+
+
+----
+○作成するデータ数：
+　quotationsの2割強のデータ。従って10件程度です。
+　----------------
+　quotationsの2割強のデータ。従って40件程度です。
+　よろしければサンプルデータの作成を開始してください。
+
+----------------
+■contract_details（契約明細）：
+----------------
+それでは最後にcontract_detailsシートにデータを作成してもらいます。
+contract_detailsの元になるのは、親のcontractsデータのquotation_idを有するquotations_detailsデータです。
+このデータを「契約元見積明細」と略します。
+ここまでよろしいでしょうか？
+
+それではcontract_detailsの各項目の設定内容を以下のように指定します。
+・detail_id：contract_id(15ケタ)＋前方0詰め連番(3桁、quation_id毎に1から開始)
+・contract_id：親contractデータのID
+・quotation_detail_id：契約元見積明細の同名項目値
+・line_no：契約元見積明細の同名項目値
+・site_url：契約元見積明細の同名項目値
+・service_id：契約元見積明細の同名項目値
+・display_weeks：契約元見積明細の同名項目値
+・display_months：契約元見積明細の同名項目値
+・unit_price_foreign：契約元見積明細の同名項目値
+・amount_foreign：契約元見積明細の同名項目値
+・amount_jpy：契約元見積明細の同名項目値
+・amount_jpy_est：契約元見積明細の同名項目値
+・created_at：親contractデータの同名項目値
+・created_by：親contractデータの同名項目値
+・updated_at：親contractデータの同名項目値
+・updated_by：親contractデータの同名項目値
+
+以上です。よろしければサンプルデータ作成作業を開始してください。
+

@@ -1,0 +1,1467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ヘルプ用大規模システム保守プロジェクト" description="保守・運用フェーズに入った中堅システム・ネット広告代理店D社販売管理システムのメンテナンスプロジェクト" workFolder="C:\Work\SQExcelプロジェクト\LargeSizeMainte">
+  <databases>
+    <database name="D社販売管理システムメインDB" description="D社販売管理システムで使用する唯一のデータベース" databaseType="SqlServer" treatStringEmptyAsNull="false">
+      <connections>
+        <connection name="結合テスト環境" isValid="true" isDefaultConnection="false" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB2" userId="s2e_owner" password="s2e_owner_$pwd!">
+          <schemas>
+            <schema name="accounting">
+              <tables>
+                <table schemaName="accounting" physicalName="billing_transfers" logicalName="経理引き渡しデータ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="applog">
+              <tables>
+                <table schemaName="applog" physicalName="all_types_test" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="all_types_test2" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="app_logs" logicalName="アプリケーションログ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="hr">
+              <tables>
+                <table schemaName="hr" physicalName="departments" logicalName="部門マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="hr" physicalName="employees" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="sales">
+              <tables>
+                <table schemaName="sales" physicalName="clients" logicalName="取引先マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="common_codes" logicalName="共通コードマスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details" logicalName="契約明細" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div01" logicalName="契約明細(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div02" logicalName="契約明細(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div03" logicalName="契約明細(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div04" logicalName="契約明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div05" logicalName="契約明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div06" logicalName="契約明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div07" logicalName="契約明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div08" logicalName="契約明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div09" logicalName="契約明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div10" logicalName="契約明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts" logicalName="契約ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div01" logicalName="契約(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div02" logicalName="契約(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div03" logicalName="契約(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div04" logicalName="契約(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div05" logicalName="契約(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div06" logicalName="契約(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div07" logicalName="契約(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div08" logicalName="契約(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div09" logicalName="契約(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div10" logicalName="契約(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test001" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test002" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test003" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test004" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test005" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test006" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test007" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test008" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test009" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test010" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details" logicalName="見積明細" isSelectedForGroup="true" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div01" logicalName="見積明細(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div02" logicalName="見積明細(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div03" logicalName="見積明細(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div04" logicalName="見積明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div05" logicalName="見積明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div06" logicalName="見積明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div07" logicalName="見積明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div08" logicalName="見積明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div09" logicalName="見積明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div10" logicalName="見積明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations" logicalName="見積ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div01" logicalName="見積(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div02" logicalName="見積(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div03" logicalName="見積(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div04" logicalName="見積(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div05" logicalName="見積(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div06" logicalName="見積(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div07" logicalName="見積(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div08" logicalName="見積(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div09" logicalName="見積(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div10" logicalName="見積(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sale_details" logicalName="販売明細" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sales_headers" logicalName="販売ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="services" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="false" canWrite="false">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+        <connection name="システムテスト環境" isValid="true" isDefaultConnection="false" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB3" userId="s2e_owner" password="s2e_owner_$pwd!">
+          <schemas>
+            <schema name="accounting">
+              <tables>
+                <table schemaName="accounting" physicalName="billing_transfers" logicalName="経理引き渡しデータ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="applog">
+              <tables>
+                <table schemaName="applog" physicalName="all_types_test" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="all_types_test2" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="app_logs" logicalName="アプリケーションログ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="hr">
+              <tables>
+                <table schemaName="hr" physicalName="departments" logicalName="部門マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="hr" physicalName="employees" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="sales">
+              <tables>
+                <table schemaName="sales" physicalName="clients" logicalName="取引先マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="common_codes" logicalName="共通コードマスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details" logicalName="契約明細" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div01" logicalName="契約明細(部門01向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div02" logicalName="契約明細(部門02向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div03" logicalName="契約明細(部門03向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div04" logicalName="契約明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div05" logicalName="契約明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div06" logicalName="契約明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div07" logicalName="契約明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div08" logicalName="契約明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div09" logicalName="契約明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div10" logicalName="契約明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div11" logicalName="契約明細(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div12" logicalName="契約明細(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div13" logicalName="契約明細(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div14" logicalName="契約明細(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div15" logicalName="契約明細(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div16" logicalName="契約明細(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div17" logicalName="契約明細(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div18" logicalName="契約明細(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div19" logicalName="契約明細(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div20" logicalName="契約明細(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div21" logicalName="契約明細(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div22" logicalName="契約明細(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div23" logicalName="契約明細(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details_div24" logicalName="契約明細(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts" logicalName="契約ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div01" logicalName="契約(部門01向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div02" logicalName="契約(部門02向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div03" logicalName="契約(部門03向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div04" logicalName="契約(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div05" logicalName="契約(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div06" logicalName="契約(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div07" logicalName="契約(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div08" logicalName="契約(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div09" logicalName="契約(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div10" logicalName="契約(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div11" logicalName="契約(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div12" logicalName="契約(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div13" logicalName="契約(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div14" logicalName="契約(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div15" logicalName="契約(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div16" logicalName="契約(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div17" logicalName="契約(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div18" logicalName="契約(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div19" logicalName="契約(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div20" logicalName="契約(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div21" logicalName="契約(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div22" logicalName="契約(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div23" logicalName="契約(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts_div24" logicalName="契約(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test001" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test002" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test003" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="long_name_table_for_inputsheet_test004" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details" logicalName="見積明細" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div01" logicalName="見積明細(部門01向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div02" logicalName="見積明細(部門02向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div03" logicalName="見積明細(部門03向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div04" logicalName="見積明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div05" logicalName="見積明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div06" logicalName="見積明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div07" logicalName="見積明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div08" logicalName="見積明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div09" logicalName="見積明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div10" logicalName="見積明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div11" logicalName="見積明細(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div12" logicalName="見積明細(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div13" logicalName="見積明細(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div14" logicalName="見積明細(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div15" logicalName="見積明細(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div16" logicalName="見積明細(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div17" logicalName="見積明細(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div18" logicalName="見積明細(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div19" logicalName="見積明細(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div20" logicalName="見積明細(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div21" logicalName="見積明細(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div22" logicalName="見積明細(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div23" logicalName="見積明細(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details_div24" logicalName="見積明細(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations" logicalName="見積ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div01" logicalName="見積(部門01向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div02" logicalName="見積(部門02向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div03" logicalName="見積(部門03向け)" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div04" logicalName="見積(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div05" logicalName="見積(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div06" logicalName="見積(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div07" logicalName="見積(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div08" logicalName="見積(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div09" logicalName="見積(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div10" logicalName="見積(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div11" logicalName="見積(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div12" logicalName="見積(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div13" logicalName="見積(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div14" logicalName="見積(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div15" logicalName="見積(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div16" logicalName="見積(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div17" logicalName="見積(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div18" logicalName="見積(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div19" logicalName="見積(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div20" logicalName="見積(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div21" logicalName="見積(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div22" logicalName="見積(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div23" logicalName="見積(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations_div24" logicalName="見積(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sale_details" logicalName="販売明細" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sales_headers" logicalName="販売ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="services" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+        <connection name="ローカル開発環境" isValid="true" isDefaultConnection="true" isConnectBySid="false" serverName="JAMESWEBB\SQL2022DEV" portNumber="0" dbName="SQL2ExcelDB" userId="s2e_owner" password="s2e_owner_$pwd!">
+          <schemas>
+            <schema name="accounting">
+              <tables>
+                <table schemaName="accounting" physicalName="billing_transfers" logicalName="経理引き渡しデータ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="applog">
+              <tables>
+                <table schemaName="applog" physicalName="all_types_test" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="all_types_test2" logicalName="全データ型テストテーブル（SQL Server用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="applog" physicalName="app_logs" logicalName="アプリケーションログ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="hr">
+              <tables>
+                <table schemaName="hr" physicalName="departments" logicalName="部門マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="hr" physicalName="employees" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="sales">
+              <tables>
+                <table schemaName="sales" physicalName="clients" logicalName="取引先マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="common_codes" logicalName="共通コードマスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contract_details" logicalName="契約明細" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="contracts" logicalName="契約ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotation_details" logicalName="見積明細" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="quotations" logicalName="見積ヘッダー" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sale_details" logicalName="販売明細" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="sales_headers" logicalName="販売ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="sales" physicalName="services" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+      </connections>
+      <tableGroups>
+        <tableGroup name="マスターテーブル" description="入力シート作成／データの取り込み／データの出力を行うテーブルを選択します。" useAllTablesInGroup="false">
+          <groupTableNames>
+            <tableName>hr.departments</tableName>
+            <tableName>hr.employees</tableName>
+            <tableName>sales.clients</tableName>
+            <tableName>sales.common_codes</tableName>
+            <tableName>sales.services</tableName>
+          </groupTableNames>
+          <targetTableNames>
+            <tableName>hr.departments</tableName>
+            <tableName>hr.employees</tableName>
+            <tableName>sales.clients</tableName>
+            <tableName>sales.common_codes</tableName>
+            <tableName>sales.services</tableName>
+          </targetTableNames>
+        </tableGroup>
+        <tableGroup name="見積と契約トランザクションテーブル" description="見積と契約に関するトランザクションテーブル" useAllTablesInGroup="false">
+          <groupTableNames>
+            <tableName>sales.contract_details</tableName>
+            <tableName>sales.contracts</tableName>
+            <tableName>sales.quotation_details</tableName>
+            <tableName>sales.quotations</tableName>
+          </groupTableNames>
+          <targetTableNames>
+            <tableName>sales.quotations</tableName>
+            <tableName>sales.quotation_details</tableName>
+            <tableName>sales.contracts</tableName>
+            <tableName>sales.contract_details</tableName>
+          </targetTableNames>
+        </tableGroup>
+      </tableGroups>
+    </database>
+    <database name="D社人事・会計系DB" description="D社の人事・会計を含む基幹システムが使用するDB" databaseType="Oracle" treatStringEmptyAsNull="true">
+      <connections>
+        <connection name="システムテスト環境" isValid="true" isDefaultConnection="true" isConnectBySid="false" serverName="localhost" portNumber="1521" dbName="FREEPDB1" userId="s2e_owner" password="s2e_owner_$pwd!">
+          <schemas>
+            <schema name="ACCOUNTING">
+              <tables>
+                <table schemaName="ACCOUNTING" physicalName="BILLING_TRANSFERS" logicalName="経理引き渡しデータ" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="APPLOG">
+              <tables>
+                <table schemaName="APPLOG" physicalName="ALL_TYPES_TEST" logicalName="全データ型テストテーブル（Oracle用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="APPLOG" physicalName="ALL_TYPES_TEST2" logicalName="全データ型テストテーブル2（Oracle用）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="APPLOG" physicalName="APP_LOGS" logicalName="アプリケーションログ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="HR">
+              <tables>
+                <table schemaName="HR" physicalName="DEPARTMENTS" logicalName="部門マスター" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="HR" physicalName="EMPLOYEES" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+            <schema name="SALES">
+              <tables>
+                <table schemaName="SALES" physicalName="CLIENTS" logicalName="取引先マスター" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="COMMON_CODES" logicalName="共通コードマスター" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV01" logicalName="契約(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV02" logicalName="契約(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV03" logicalName="契約(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV04" logicalName="契約(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV05" logicalName="契約(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV06" logicalName="契約(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV07" logicalName="契約(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV08" logicalName="契約(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV09" logicalName="契約(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV10" logicalName="契約(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV11" logicalName="契約(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV12" logicalName="契約(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV13" logicalName="契約(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV14" logicalName="契約(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV15" logicalName="契約(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV16" logicalName="契約(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV17" logicalName="契約(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV18" logicalName="契約(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV19" logicalName="契約(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV20" logicalName="契約(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV21" logicalName="契約(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV22" logicalName="契約(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV23" logicalName="契約(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACTS_DIV24" logicalName="契約(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV01" logicalName="契約明細(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV02" logicalName="契約明細(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV03" logicalName="契約明細(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV04" logicalName="契約明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV05" logicalName="契約明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV06" logicalName="契約明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV07" logicalName="契約明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV08" logicalName="契約明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV09" logicalName="契約明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV10" logicalName="契約明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV11" logicalName="契約明細(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV12" logicalName="契約明細(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV13" logicalName="契約明細(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV14" logicalName="契約明細(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV15" logicalName="契約明細(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV16" logicalName="契約明細(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV17" logicalName="契約明細(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV18" logicalName="契約明細(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV19" logicalName="契約明細(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV20" logicalName="契約明細(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV21" logicalName="契約明細(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV22" logicalName="契約明細(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV23" logicalName="契約明細(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="CONTRACT_DETAILS_DIV24" logicalName="契約明細(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="LONG_NAME_TABLE_FOR_INPUTSHEET_TEST001" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="LONG_NAME_TABLE_FOR_INPUTSHEET_TEST002" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="LONG_NAME_TABLE_FOR_INPUTSHEET_TEST003" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="LONG_NAME_TABLE_FOR_INPUTSHEET_TEST004" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS" logicalName="見積ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV01" logicalName="見積(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV02" logicalName="見積(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV03" logicalName="見積(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV04" logicalName="見積(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV05" logicalName="見積(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV06" logicalName="見積(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV07" logicalName="見積(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV08" logicalName="見積(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV09" logicalName="見積(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV10" logicalName="見積(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV11" logicalName="見積(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV12" logicalName="見積(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV13" logicalName="見積(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV14" logicalName="見積(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV15" logicalName="見積(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV16" logicalName="見積(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV17" logicalName="見積(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV18" logicalName="見積(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV19" logicalName="見積(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV20" logicalName="見積(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV21" logicalName="見積(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV22" logicalName="見積(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV23" logicalName="見積(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATIONS_DIV24" logicalName="見積(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV01" logicalName="見積明細(部門01向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV02" logicalName="見積明細(部門02向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV03" logicalName="見積明細(部門03向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV04" logicalName="見積明細(部門04向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV05" logicalName="見積明細(部門05向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV06" logicalName="見積明細(部門06向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV07" logicalName="見積明細(部門07向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV08" logicalName="見積明細(部門08向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV09" logicalName="見積明細(部門09向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV10" logicalName="見積明細(部門10向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV11" logicalName="見積明細(部門11向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV12" logicalName="見積明細(部門12向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV13" logicalName="見積明細(部門13向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV14" logicalName="見積明細(部門14向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV15" logicalName="見積明細(部門15向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV16" logicalName="見積明細(部門16向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV17" logicalName="見積明細(部門17向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV18" logicalName="見積明細(部門18向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV19" logicalName="見積明細(部門19向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV20" logicalName="見積明細(部門20向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV21" logicalName="見積明細(部門21向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV22" logicalName="見積明細(部門22向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV23" logicalName="見積明細(部門23向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="QUOTATION_DETAILS_DIV24" logicalName="見積明細(部門24向け)" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="SALES_HEADERS" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="SALE_DETAILS" logicalName="" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="SALES" physicalName="SERVICES" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+      </connections>
+      <tableGroups>
+        <tableGroup name="人事・会計系テーブルグループ" description="入力シート作成／データの取り込み／データの出力を行うテーブルを選択します。" useAllTablesInGroup="false">
+          <groupTableNames>
+            <tableName>ACCOUNTING.BILLING_TRANSFERS</tableName>
+            <tableName>HR.DEPARTMENTS</tableName>
+            <tableName>HR.EMPLOYEES</tableName>
+          </groupTableNames>
+          <targetTableNames>
+            <tableName>ACCOUNTING.BILLING_TRANSFERS</tableName>
+            <tableName>HR.DEPARTMENTS</tableName>
+            <tableName>HR.EMPLOYEES</tableName>
+          </targetTableNames>
+        </tableGroup>
+      </tableGroups>
+    </database>
+    <database name="D社ログ専用DB" description="D社全システム共通アプリケーションログ専用DB" databaseType="MariaDb" treatStringEmptyAsNull="false">
+      <connections>
+        <connection name="システムテスト環境" isValid="true" isDefaultConnection="true" isConnectBySid="false" serverName="127.0.0.1" portNumber="3307" dbName="SQL2ExcelDB" userId="s2e_owner" password="s2e_owner_$pwd!" charEncoding="utf8mb4">
+          <schemas>
+            <schema name="">
+              <tables>
+                <table schemaName="" physicalName="all_types_test" logicalName="全データ型テストテーブル（MariaDB用）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="all_types_test2" logicalName="全データ型テストテーブル2（MariaDB用）" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="app_logs" logicalName="アプリケーションログ" isSelectedForGroup="true" isSelectedForTarget="true" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="billing_transfers" logicalName="経理引き渡しデータ" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="clients" logicalName="取引先マスター" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="common_codes" logicalName="共通コードマスター" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="contracts" logicalName="契約ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="contract_details" logicalName="契約明細" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="departments" logicalName="部門マスター" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="employees" logicalName="従業員マスター（担当者マスター）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="quotations" logicalName="見積ヘッダー" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="quotation_details" logicalName="見積明細" isSelectedForGroup="true" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="sales_headers" logicalName="販売ヘッダー" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="sale_details" logicalName="販売明細" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+                <table schemaName="" physicalName="services" logicalName="サービスマスター（広告種別・料金定義）" isSelectedForGroup="false" isSelectedForTarget="false" canRead="true" canWrite="true">
+                  <constraints />
+                  <columns />
+                </table>
+              </tables>
+            </schema>
+          </schemas>
+        </connection>
+      </connections>
+      <tableGroups>
+        <tableGroup name="ログ、その他のテーブルグループ" description="入力シート作成／データの取り込み／データの出力を行うテーブルを選択します。" useAllTablesInGroup="false">
+          <groupTableNames>
+            <tableName>all_types_test</tableName>
+            <tableName>all_types_test2</tableName>
+            <tableName>app_logs</tableName>
+            <tableName>quotations</tableName>
+            <tableName>quotation_details</tableName>
+          </groupTableNames>
+          <targetTableNames>
+            <tableName>all_types_test</tableName>
+            <tableName>all_types_test2</tableName>
+            <tableName>app_logs</tableName>
+          </targetTableNames>
+        </tableGroup>
+      </tableGroups>
+    </database>
+  </databases>
+</project>

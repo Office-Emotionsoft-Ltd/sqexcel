@@ -1,0 +1,216 @@
+:root {
+  --sl-content-width: 50rem;
+  --sl-text-5xl: 2.7rem;
+}
+
+/* サイドバー: 子ページを持つグループ見出しのフォントサイズを少し小さく */
+.sidebar-content .group-label .large {
+  font-size: 0.9rem;
+}
+
+/* サイドバー: グループ見出しと直下の子ページ一覧との間隔を詰める */
+.sidebar-content details>summary {
+  padding-block-end: 0.05em;
+}
+
+.sidebar-content details>ul>li:first-child>a {
+  padding-block-start: 0.10em;
+}
+
+/* サイドバー: 最上位階層の単独ページノード(子を持たないリンク)同士の間隔を詰める */
+.sidebar-content .top-level>li:has(> a)+li:has(> a) {
+  margin-top: 0.05rem;
+}
+
+/* サイドバー: 最上位階層の単独ページノードのフォントサイズを少し小さく */
+/* 注: フォントサイズは <li> ではなく中の <a class="large"> 自体に付いているため、
+   <li> に指定しても .large の font-size に負けて反映されない。<a> を直接狙う。 */
+.sidebar-content .top-level>li:has(> a)>a {
+  font-size: 0.9rem;
+}
+
+/* サイドバー: グループ見出しの文字色を開閉状態で変える(折りたたみ:mediumblue / 展開:chocolate) */
+.sidebar-content details:not([open])>summary .group-label .large {
+  color: mediumblue;
+}
+
+.sidebar-content details[open]>summary .group-label .large {
+  color: chocolate;
+}
+
+/* 右サイドバー: ページ内目次のフォントサイズを少し大きく */
+.right-sidebar-panel :where(a) {
+  font-size: 15px;
+  /* 14px: 15px: 0.9375rem / 16px: 1rem */
+}
+
+/* ページ下部の「前へ/次へ」領域: ページタイトル部分のフォントサイズを少し小さく */
+.pagination-links .link-title {
+  font-size: 17px;
+  /* 元は --sl-text-2xl (24px)。18px程度に縮小 */
+  font-weight: 500;
+}
+
+/* ページ下部の「前へ/次へ」領域: 角丸四角形の背景色を左右で指定 */
+.pagination-links a[rel='prev'] {
+  background-color: aquamarine;
+  color: #1a1a1a;
+  /* 明るい背景でも文字・矢印アイコンが読めるよう濃色に */
+}
+
+.pagination-links a[rel='next'] {
+  background-color: palegreen;
+  color: #1a1a1a;
+}
+
+.pagination-links a[rel='prev'] .link-title,
+.pagination-links a[rel='next'] .link-title {
+  color: #1a1a1a;
+}
+
+/* 「操作の流れとデータモデル階層」ページ: カージナリティ表の1列目(階層)を固定幅にして「プロジェクト」等が折り返さないようにする */
+.cardinality-table th:first-child,
+.cardinality-table td:first-child {
+  width: 8em;
+  white-space: nowrap;
+}
+
+/* 「サンプルデータベースについて」ページ: テーブル項目定義表のスタイル調整
+   物理項目名・論理項目名の表示幅を揃えて広めに確保し、フォントを小さくして
+   1行に収まる情報量を増やす。物理項目名・データ型・規定値は半角英数字でも折り返し許可する。 */
+.sampledb-field-table table {
+  font-size: 0.9em;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.sampledb-field-table th,
+.sampledb-field-table td {
+  overflow-wrap: break-word;
+}
+
+.sampledb-field-table th:nth-child(1),
+.sampledb-field-table td:nth-child(1) {
+  width: 16%;
+  word-break: break-all;
+}
+
+.sampledb-field-table th:nth-child(2),
+.sampledb-field-table td:nth-child(2) {
+  width: 16%;
+}
+
+.sampledb-field-table th:nth-child(3),
+.sampledb-field-table td:nth-child(3) {
+  width: 15%;
+  word-break: break-all;
+}
+
+.sampledb-field-table th:nth-child(4),
+.sampledb-field-table td:nth-child(4) {
+  width: 6%;
+  text-align: center;
+}
+
+.sampledb-field-table th:nth-child(5),
+.sampledb-field-table td:nth-child(5) {
+  width: 7%;
+  text-align: center;
+}
+
+.sampledb-field-table th:nth-child(6),
+.sampledb-field-table td:nth-child(6) {
+  width: 14%;
+  word-break: break-all;
+}
+
+.sampledb-field-table th:nth-child(7),
+.sampledb-field-table td:nth-child(7) {
+  width: 26%;
+}
+
+/* 「中規模以上の開発で使う」ページ: 項目不一致エラーメッセージのスクリーンショットが
+   広く表示され過ぎて文字が滲むため、表示幅を75%に縮小する */
+.medium-scale-error-msg-img img {
+  max-width: 75%;
+}
+
+/* 表示幅を10%に縮小する */
+.medium-scale-img75 img {
+  max-width: 75%;
+}
+
+/* 「画面構成」表(ホーム画面・IO操作画面等): 3列目(内容)が幅を優先的に取ってしまい
+   2列目(エリア名)が不自然な位置で折り返されるため、2列目の幅を約1.7倍に広げる */
+.screen-area-table table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.screen-area-table th,
+.screen-area-table td {
+  overflow-wrap: break-word;
+}
+
+.screen-area-table th:nth-child(1),
+.screen-area-table td:nth-child(1) {
+  width: 6%;
+  text-align: center;
+}
+
+.screen-area-table th:nth-child(2),
+.screen-area-table td:nth-child(2) {
+  width: 26%;
+}
+
+.screen-area-table th:nth-child(3),
+.screen-area-table td:nth-child(3) {
+  width: 68%;
+}
+
+
+/* 「画面構成」表(ホーム画面・IO操作画面等): 3列目(内容)が幅を優先的に取ってしまい
+   2列目(エリア名)が不自然な位置で折り返されるため、2列目の幅を約1.7倍に広げる */
+.two-column-table table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.two-column-table th,
+.two-column-table td {
+  overflow-wrap: break-word;
+}
+
+.two-column-table th:nth-child(1),
+.two-column-table td:nth-child(1) {
+  width: 30%;
+  text-align: left;
+}
+
+.two-column-table th:nth-child(2),
+.two-column -table td:nth-child(2) {
+  width: 70%;
+}
+
+/* 「画面構成」表(ホーム画面・IO操作画面等): 3列目(内容)が幅を優先的に取ってしまい
+   2列目(エリア名)が不自然な位置で折り返されるため、2列目の幅を約1.7倍に広げる */
+.two-column-table46 table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.two-column-table46 th,
+.two-column-table46 td {
+  overflow-wrap: break-word;
+}
+
+.two-column-table46 th:nth-child(1),
+.two-column-table46 td:nth-child(1) {
+  width: 40%;
+  text-align: left;
+}
+
+.two-column-table46 th:nth-child(2),
+.two-column-table46 td:nth-child(2) {
+  width: 60%;
+}
