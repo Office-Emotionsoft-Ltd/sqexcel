@@ -5,10 +5,11 @@ import mdx from '@astrojs/mdx';
 import starlightImageZoom from 'starlight-image-zoom';
 import { unified } from '@astrojs/markdown-remark';
 
-// TODO: Set site/base once the GitHub repository is confirmed, e.g.:
-// site: 'https://YOUR_USERNAME.github.io',
-// base: '/SQL2Excel/',
+// TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
+// site: 'https://sqexcel.com' のみ設定する（base はルート直下になるため不要）。
 export default defineConfig({
+  site: 'https://office-emotionsoft-ltd.github.io',
+  base: '/sqexcel-prev-k3m9x2p7',
   // TODO: LP（src/pages/index.astro）作成時にこのリダイレクトは削除すること
   redirects: {
     '/': '/ja/docs/',
