@@ -1,6 +1,10 @@
 # build output
 dist/
 
+# Velopack配布物。main側では管理せず、releases-dataブランチ＋
+# .github/workflows/deploy.ymlのビルド時コピーで供給する
+public/releases/
+
 # generated types
 .astro/
 

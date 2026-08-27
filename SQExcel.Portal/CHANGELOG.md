@@ -201,3 +201,25 @@ GitHub公開作業（前セクション参照）で発生していたプレビ�
 
 **Why:** プレビュー・本番でPagesのプロジェクトサイトパス（サブパス）が異なるため`base`値も本来異なるべきだが、手動でのその都度書き換え・戻し忘れは過去の404の原因になった手法と同種のリスクを持つ。GitHub Actionsが実行時に自動判別できる情報（`github.repository`）から動的に導出することで、書き換え忘れそのものを構造的に無くした。
 **How to apply:** 今後リポジトリを追加・名称変更する場合も、`deploy.yml`側の変更は不要（`GITHUB_REPOSITORY`から自動追従するため）。独自ドメイン確定後に`base`自体を廃止する際は、この`BASE_PATH`算出ステップごと削除し、`astro.config.mjs`を`site: 'https://sqexcel.com'`のみに戻すこと。
+
+### 本番リポジトリ（`Office-Emotionsoft-Ltd/sqexcel`）へのソース接続
+
+これまでSQExcel.Portalの実ソースはプレビューリポジトリ（`sqexcel-prev-k3m9x2p7`）にのみpushしていたが、本番リポジトリへも接続した。
+
+- `production`リモート（`https://github.com/Office-Emotionsoft-Ltd/sqexcel.git`）を追加し、`main`をforce push（本番`main`には動作確認用の仮`index.html`1枚のみが存在し、無関係な履歴だったため）
+- 本番リポジトリのSettings→Pages→Sourceを「Deploy from a branch」から「GitHub Actions」へ変更
+- 上記`BASE_PATH`自動判別により、コード変更なしで本番URL（`https://office-emotionsoft-ltd.github.io/sqexcel/`）でも正しくビルドされることを確認（トップページのリダイレクト・LPナビリンクとも`/sqexcel/`配下を指すことを`curl`で確認）
+
+**Why:** ダウンロードページ・リリースノートページ実装の前工程として、本番URLでの動作確認ができる状態を先に整える必要があった。
+**How to apply:** 以降、Portal本体の変更は`main`へのpushのみで足り、プレビュー・本番どちらへも同じ手順（`git push preview main`／`git push production main`）で反映できる。
+
+### `releases-data`ブランチによるVelopack配布物の独立配信の仕組みを追加
+
+ダウンロードページ・自動アップデート機能で使うVelopack配布物（`releases`フォルダ一式）を、SQExcel.Portal本体のコミット・pushとは独立して更新できるようにする仕組みを追加した。
+
+- `.github/workflows/deploy.yml`：トリガーに`releases-data`ブランチへのpushを追加。ビルド前に`releases-data`ブランチの存在を`git ls-remote`で確認し、存在する場合のみその中身を`SQExcel.Portal/public/releases/`へコピーしてからAstroビルドする（ブランチが存在しない場合も既存のPortal単独更新が壊れないよう、存在チェックで全ステップをスキップする設計）
+- `SQExcel.Portal/.gitignore`に`public/releases/`を追加し、Velopack配布物が誤って`main`のコミット履歴に混入しないようにした（バイナリの蓄積は`releases-data`ブランチ側に閉じ込める）
+- `releases-data`ブランチは`main`と共通の履歴を持たないorphanブランチとして作成し、本番リポジトリ（`production`リモート）にのみpush。プレビュー側には意図的にpushしない（ダウンロードサイトはプレビュー不要という方針のため）
+
+**Why:** GitHub Pages（Actions経由）は1回のデプロイでサイト全体を丸ごと置き換える仕組みのため、Portal本体とreleasesフォルダを完全に別デプロイにすると片方がもう片方を上書き消去してしまう。同一ワークフロー内で両方を毎回組み立て直す方式にすることで、「releaseの公開作業がPortal本体のコミット・pushとは無関係に行える」という要件と、「Pages全体が1回のデプロイで完結する」という制約を両立させた。
+**How to apply:** 新しいバージョンをリリースする際は、Velopackの`releases`フォルダの中身（`old/`サブフォルダと`web.config`を除く）を`releases-data`ブランチへforce push（`git worktree`等で用意した別ワークツリー上で作業）するだけでよい。Portal本体のソースファイルは一切変更・コミット不要。

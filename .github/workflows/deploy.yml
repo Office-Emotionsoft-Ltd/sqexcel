@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, releases-data]
   workflow_dispatch:
 
 permissions:
@@ -22,6 +22,25 @@ jobs:
         uses: actions/checkout@v4
       - name: Determine BASE_PATH from repository name
         run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+      - name: Check for releases-data branch
+        id: releases_check
+        run: |
+          if git ls-remote --exit-code --heads origin releases-data > /dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Checkout releases-data assets
+        if: steps.releases_check.outputs.exists == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: releases-data
+          path: releases-data
+      - name: Copy release assets into public/releases
+        if: steps.releases_check.outputs.exists == 'true'
+        run: |
+          mkdir -p SQExcel.Portal/public/releases
+          cp -r releases-data/. SQExcel.Portal/public/releases/
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
