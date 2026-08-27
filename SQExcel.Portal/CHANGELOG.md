@@ -223,3 +223,24 @@ GitHub公開作業（前セクション参照）で発生していたプレビ�
 
 **Why:** GitHub Pages（Actions経由）は1回のデプロイでサイト全体を丸ごと置き換える仕組みのため、Portal本体とreleasesフォルダを完全に別デプロイにすると片方がもう片方を上書き消去してしまう。同一ワークフロー内で両方を毎回組み立て直す方式にすることで、「releaseの公開作業がPortal本体のコミット・pushとは無関係に行える」という要件と、「Pages全体が1回のデプロイで完結する」という制約を両立させた。
 **How to apply:** 新しいバージョンをリリースする際は、Velopackの`releases`フォルダの中身（`old/`サブフォルダと`web.config`を除く）を`releases-data`ブランチへforce push（`git worktree`等で用意した別ワークツリー上で作業）するだけでよい。Portal本体のソースファイルは一切変更・コミット不要。
+
+### インストーラDL・自動アップデートのエンドツーエンド実機検証（完了）
+
+`releases-data`ブランチ運用を実データで2回（`202608271554`→`202608271726`→`202608271838`の3バージョン）検証し、当初の2つの作業目標を達成した。
+
+1. `https://office-emotionsoft-ltd.github.io/sqexcel/releases/Emotionsoft.East.SQExcel-win-Setup.exe`からインストーラを実機ダウンロード→インストール→起動まで確認（バイトサイズ一致も確認済み）
+2. `SQExcel.Common.UpdateFeedSettings.FeedUrl`（本体アプリ側、`C:\Repos_MS\East\SQL2Excel\v100\SQL2Excel`リポジトリ）のRELEASE側を`https://office-emotionsoft-ltd.github.io/sqexcel/releases/`に設定した状態で、旧バージョンインストール→新バージョンをreleases-dataへ配置→アプリの更新チェックで新バージョンを検出・取得・適用、まで実機確認済み
+
+- 検証時、未署名の実行ファイルに対してMicrosoft Defender SmartScreenの警告（「詳細情報」→「実行」で回避可能）が表示されることを確認。一般公開に向けては**コード署名証明書の取得が必須タスク**であると判断（[[project_code_signing_certificate]]、費用・取得元は未検討）
+- `releases-data`ブランチへのpushは、GitHub Actionsの`push`トリガーが「pushされたref自体に存在するワークフローファイルのみ実行する」仕様のため機能しない（orphanブランチのため`.github/workflows/`を持たない）。このため毎回のリリース時、`main`ブランチを対象に`gh workflow run deploy.yml --repo Office-Emotionsoft-Ltd/sqexcel --ref main`で手動トリガーする運用を確立した
+
+**Why:** 実機での自動アップデート確認は、Velopackの`SimpleWebSource`＋フラット静的ディレクトリ配信という設計が実際に機能するかを確かめる最終検証だったため。
+**How to apply:** 今後のリリース手順は、①Velopackビルド成果物で`releases-data`ワークツリーを丸ごと置き換え→②`git add`/`commit`/`push production releases-data`→③`gh workflow run deploy.yml --repo Office-Emotionsoft-Ltd/sqexcel --ref main`で手動トリガー、の3ステップで固定運用とする。手動トリガーを省略する自動化（ビルドマシンからの`repository_dispatch`等）は今後の検討事項として未着手。
+
+### 次のアクション
+
+- コード署名証明書の取得（必須タスク、[[project_code_signing_certificate]]）
+- ダウンロードページ（`src/pages/ja/download/index.astro`）・リリースノートページ（`starlight-blog`導入）の実装
+- 英語版LP・ヘルプ本文の着手
+- 独自ドメイン（`sqexcel.com`）取得・Custom domain設定
+- `releases-data`手動トリガーの自動化検討（本体アプリのビルドマシンからの`repository_dispatch`等）
