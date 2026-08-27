@@ -7,7 +7,10 @@ import { unified } from '@astrojs/markdown-remark';
 
 // TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
 // site: 'https://sqexcel.com' のみ設定する（base はルート直下になるため不要）。
-const base = '/sqexcel-prev-k3m9x2p7';
+// BASE_PATH は GitHub Actions（.github/workflows/deploy.yml）が
+// リポジトリ名（github.repository）から自動算出して渡す。ローカルの
+// npm run dev / npm run build ではプレビュー値をデフォルトとして使う。
+const base = process.env.BASE_PATH ?? '/sqexcel-prev-k3m9x2p7';
 
 export default defineConfig({
   site: 'https://office-emotionsoft-ltd.github.io',

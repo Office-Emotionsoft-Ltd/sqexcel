@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Determine BASE_PATH from repository name
+        run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
