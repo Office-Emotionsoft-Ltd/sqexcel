@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import LpLayout from "../../layouts/LpLayout.astro";
 import Carousel from "../../components/lp/Carousel.astro";
+import DownloadButton from "../../components/lp/DownloadButton.astro";
 
 import heroPart from "../../content/docs/ja/docs/images/lp/hero-parts.jpg";
 import dbSqlServer from "../../content/docs/ja/docs/images/lp/db-sqlserver.jpg";
@@ -85,13 +86,7 @@ const features = [
           SQL
           ServerやOracle他、主要6種類のDBとExcelを行き来させるデータ交換ツール
         </p>
-        <a class="lp-download-button" href={`${base}ja/download/`}>
-          <span class="lp-download-icon">&#8595;</span>
-          <span>
-            <span class="lp-download-label">Download</span>
-            <span class="lp-download-version">v0.5.1 - Aug 20, 2026</span>
-          </span>
-        </a>
+        <DownloadButton href={`${base}ja/download/`} />
       </div>
       <div class="lp-hero-image">
         <Image
@@ -189,38 +184,6 @@ const features = [
     color: var(--lp-text-muted);
     margin: 0 0 2rem;
     max-width: 32rem;
-  }
-
-  .lp-download-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--lp-accent);
-    color: white;
-    text-decoration: none;
-    padding: 0.9rem 1.5rem;
-    border-radius: 0.6rem;
-    font-weight: 600;
-  }
-
-  .lp-download-button:hover {
-    background: var(--lp-accent-hover);
-  }
-
-  .lp-download-icon {
-    font-size: 1.3rem;
-  }
-
-  .lp-download-label {
-    display: block;
-    font-size: 1.05rem;
-  }
-
-  .lp-download-version {
-    display: block;
-    font-size: 0.75rem;
-    font-weight: 400;
-    opacity: 0.85;
   }
 
   .lp-hero-image :global(img) {

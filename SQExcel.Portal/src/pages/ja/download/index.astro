@@ -1,26 +1,86 @@
 ---
 import LpLayout from '../../../layouts/LpLayout.astro';
+import DownloadButton from '../../../components/lp/DownloadButton.astro';
+import { getLatestReleaseNote, getDisplayVersion } from '../../../lib/releaseNotes';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const latest = await getLatestReleaseNote('ja');
+const releaseNotesHref = latest
+  ? `${base}ja/docs/release-notes/#${latest.data.version}`
+  : `${base}ja/docs/release-notes/`;
+const downloadHref = `${base}releases/Emotionsoft.East.SQExcel-win-Setup.exe`;
 ---
 
 <LpLayout
   title="ダウンロード | SQExcel"
-  description="SQExcelのダウンロードページ（準備中）。"
+  description="SQExcelのダウンロードページ。最新版インストーラーをダウンロードできます。"
 >
-  <section class="lp-stub">
-    <h1>ダウンロード</h1>
-    <p>ダウンロードページは準備中です。公開まで今しばらくお待ちください。</p>
+  <section class="lp-download-dialog">
+    <div class="lp-download-card">
+      <h1>SQExcelをダウンロード</h1>
+
+      {latest && (
+        <div class="lp-download-notes">
+          <p class="lp-download-notes-heading">
+            リリースノート v{getDisplayVersion(latest)}
+          </p>
+          <p class="lp-download-notes-summary">{latest.data.summary}</p>
+          <a class="lp-download-notes-link" href={releaseNotesHref}>詳しくはこちら →</a>
+        </div>
+      )}
+
+      <DownloadButton href={downloadHref} />
+    </div>
   </section>
 </LpLayout>
 
 <style>
-  .lp-stub {
-    max-width: 48rem;
+  .lp-download-dialog {
+    max-width: 40rem;
     margin: 0 auto;
     padding: 4rem 1.5rem;
+  }
+
+  .lp-download-card {
+    background: var(--lp-card-bg);
+    border: 1px solid var(--lp-border);
+    border-radius: 1rem;
+    box-shadow: var(--lp-card-shadow);
+    padding: 2.5rem;
     text-align: center;
   }
 
-  .lp-stub p {
+  .lp-download-card h1 {
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .lp-download-notes {
+    text-align: left;
+    background: var(--lp-bg-alt);
+    border-radius: 0.6rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .lp-download-notes-heading {
+    margin: 0 0 0.5rem;
+    font-weight: 700;
+  }
+
+  .lp-download-notes-summary {
+    margin: 0 0 0.75rem;
     color: var(--lp-text-muted);
+  }
+
+  .lp-download-notes-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--lp-accent);
+    text-decoration: none;
+  }
+
+  .lp-download-notes-link:hover {
+    color: var(--lp-accent-hover);
   }
 </style>

@@ -1,6 +1,7 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getReleaseNotes, getDisplayVersion } from '../../../lib/releaseNotes';
 
 const channelLabels: Record<string, string> = {
   preview: 'Preview版',
@@ -14,21 +15,28 @@ const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
   day: 'numeric',
 });
 
-const entries = (await getCollection('releaseNotes', (e) => e.id.startsWith('ja/'))).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
-
+const entries = await getReleaseNotes('ja');
 const rendered = await Promise.all(entries.map((entry) => render(entry)));
+
+// StarlightPageは本文中の見出しを自動検出しないため、右側の「このページの内容」用に明示的に渡す
+const headings = entries.map((entry) => ({
+  depth: 2,
+  slug: entry.data.version,
+  text: `v${getDisplayVersion(entry)} — ${dateFormatter.format(entry.data.date)}`,
+}));
 ---
 
-<StarlightPage frontmatter={{ title: 'リリースノート', description: 'SQExcelのバージョンごとの変更履歴。' }}>
+<StarlightPage
+  frontmatter={{ title: 'リリースノート', description: 'SQExcelのバージョンごとの変更履歴。' }}
+  headings={headings}
+>
   {entries.length === 0 && <p>まだ公開されたリリースはありません。</p>}
   {entries.map((entry, i) => {
     const { Content } = rendered[i];
     return (
       <section id={entry.data.version}>
         <h2>
-          v{entry.data.version} — {dateFormatter.format(entry.data.date)}
+          v{getDisplayVersion(entry)} — {dateFormatter.format(entry.data.date)}
           <span class="release-channel">{channelLabels[entry.data.channel]}</span>
         </h2>
         <Content />

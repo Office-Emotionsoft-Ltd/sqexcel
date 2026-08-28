@@ -1,0 +1,56 @@
+---
+import { getLatestReleaseNote, getVersionBadgeLabel } from '../../lib/releaseNotes';
+
+interface Props {
+  href: string;
+  locale?: string;
+  class?: string;
+}
+
+const { href, locale = 'ja', class: className } = Astro.props;
+
+const latest = await getLatestReleaseNote(locale);
+const versionLabel = latest ? getVersionBadgeLabel(latest) : undefined;
+---
+
+<a class:list={['lp-download-button', className]} href={href}>
+  <span class="lp-download-icon">&#8595;</span>
+  <span>
+    <span class="lp-download-label">Download</span>
+    {versionLabel && <span class="lp-download-version">{versionLabel}</span>}
+  </span>
+</a>
+
+<style>
+  .lp-download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--lp-accent);
+    color: white;
+    text-decoration: none;
+    padding: 0.9rem 1.5rem;
+    border-radius: 0.6rem;
+    font-weight: 600;
+  }
+
+  .lp-download-button:hover {
+    background: var(--lp-accent-hover);
+  }
+
+  .lp-download-icon {
+    font-size: 1.3rem;
+  }
+
+  .lp-download-label {
+    display: block;
+    font-size: 1.05rem;
+  }
+
+  .lp-download-version {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+</style>
