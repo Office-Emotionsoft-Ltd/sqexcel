@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import mdx from '@astrojs/mdx';
 import starlightImageZoom from 'starlight-image-zoom';
+import starlightBlog from 'starlight-blog';
 import { unified } from '@astrojs/markdown-remark';
 
 // TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
@@ -33,7 +34,14 @@ export default defineConfig({
       title: 'SQExcel Help',
       description: 'SQExcel - Database & Excel Data Exchange Tool Online Help',
       defaultLocale: 'ja',
-      plugins: [starlightImageZoom()],
+      plugins: [
+        starlightImageZoom(),
+        starlightBlog({
+          prefix: 'news',
+          title: { ja: 'ニュース', en: 'News' },
+          navigation: 'none',
+        }),
+      ],
       customCss: [
         // カスタムCSSファイルへの相対パス
         './src/styles/custom.css',

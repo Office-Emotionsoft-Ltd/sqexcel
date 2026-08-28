@@ -1,0 +1,51 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection, render } from 'astro:content';
+
+const channelLabels: Record<string, string> = {
+  preview: 'Preview版',
+  rc: 'リリース候補（RC）',
+  ga: '正式版',
+};
+
+const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const entries = (await getCollection('releaseNotes', (e) => e.id.startsWith('ja/'))).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const rendered = await Promise.all(entries.map((entry) => render(entry)));
+---
+
+<StarlightPage frontmatter={{ title: 'リリースノート', description: 'SQExcelのバージョンごとの変更履歴。' }}>
+  {entries.length === 0 && <p>まだ公開されたリリースはありません。</p>}
+  {entries.map((entry, i) => {
+    const { Content } = rendered[i];
+    return (
+      <section id={entry.data.version}>
+        <h2>
+          v{entry.data.version} — {dateFormatter.format(entry.data.date)}
+          <span class="release-channel">{channelLabels[entry.data.channel]}</span>
+        </h2>
+        <Content />
+      </section>
+    );
+  })}
+</StarlightPage>
+
+<style>
+  .release-channel {
+    display: inline-block;
+    margin-left: 0.6rem;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    background: var(--sl-color-gray-5);
+    font-size: 0.7rem;
+    font-weight: 600;
+    vertical-align: middle;
+  }
+</style>
