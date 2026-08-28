@@ -1,0 +1,97 @@
+---
+import Logo from './Logo.astro';
+import { getLpNavLinks } from '../../lib/lpNav';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const navLinks = getLpNavLinks(base);
+---
+
+<footer class="lp-footer">
+  <div class="lp-footer-inner">
+    <div class="lp-footer-brand">
+      <Logo class="lp-logo-compact" />
+      <p class="lp-footer-copyright">著作権© 2026 SQExcel</p>
+    </div>
+    <div class="lp-footer-col">
+      <h3>ページ</h3>
+      <ul>
+        {navLinks.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div class="lp-footer-col">
+      <h3>リンク</h3>
+      <ul>
+        <li><a href="https://www.emotionsoft.net" target="_blank" rel="noopener noreferrer">エモーションソフト（開発会社）</a></li>
+      </ul>
+    </div>
+    <div class="lp-footer-col">
+      <h3>サポート</h3>
+      <ul>
+        <li><a href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/issues" target="_blank" rel="noopener noreferrer">バグの報告</a></li>
+        <li><a href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/discussions" target="_blank" rel="noopener noreferrer">ディスカッション</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .lp-footer-brand .lp-logo-compact {
+    transform: scale(0.85);
+    transform-origin: left center;
+  }
+
+  .lp-footer {
+    border-top: 1px solid var(--lp-border);
+    background: var(--lp-bg-alt);
+    margin-top: 4rem;
+  }
+
+  .lp-footer-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .lp-footer-copyright {
+    margin: 0.75rem 0 0;
+    font-size: 0.85rem;
+    color: var(--lp-text-muted);
+  }
+
+  .lp-footer-col h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--lp-text);
+  }
+
+  .lp-footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .lp-footer-col a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--lp-accent);
+  }
+
+  .lp-footer-col a:hover {
+    color: var(--lp-accent-hover);
+  }
+
+  @media (max-width: 640px) {
+    .lp-footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

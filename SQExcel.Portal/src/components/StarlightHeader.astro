@@ -1,0 +1,36 @@
+---
+import Header from '@astrojs/starlight/components/Header.astro';
+import LpNavBar from './lp/LpNavBar.astro';
+
+// ニュース（starlight-blog、prefix: 'news'）ページのみLPと同じヘッダーに差し替える。
+// それ以外（オンラインヘルプ本体・リリースノート）は通常のStarlightヘッダーのまま。
+const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
+---
+
+{isNews ? (
+  <div class="lp-header-on-blog">
+    <LpNavBar />
+  </div>
+) : (
+  <Header />
+)}
+
+<style is:global>
+  /* Starlight標準の<header class="header">（固定ヘッダー枠）自体はPageFrame.astro側が描画しており
+     ここから直接スタイルできないため、:has()で中身を見て枠側を再スキンする。
+     nav高さが変わるとページ本文側のpadding-top計算（--sl-nav-height依存）もズレるため、
+     :root側でも変数を上書きする。 */
+  :root:has(.lp-header-on-blog) {
+    --sl-nav-height: 4.75rem;
+  }
+
+  header.header:has(.lp-header-on-blog) {
+    padding: 0;
+    background: var(--lp-bg);
+    border-bottom-color: var(--lp-border);
+  }
+
+  .lp-header-on-blog {
+    width: 100%;
+  }
+</style>

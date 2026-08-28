@@ -1,0 +1,17 @@
+---
+import LpNavBar from './LpNavBar.astro';
+---
+
+<header class="lp-header">
+  <LpNavBar />
+</header>
+
+<style>
+  .lp-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--lp-bg);
+    border-bottom: 1px solid var(--lp-border);
+  }
+</style>

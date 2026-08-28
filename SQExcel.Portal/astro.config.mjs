@@ -48,6 +48,19 @@ export default defineConfig({
         // カスタムCSSファイルへの相対パス
         './src/styles/custom.css',
       ],
+      // ニュース（starlight-blog）ページのヘッダー/フッターをLPと統一するため、
+      // LpNavBar/LpFooterで使うBIZ UDPGothicをここでも読み込む
+      head: [
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
+        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
+        {
+          tag: 'link',
+          attrs: {
+            rel: 'stylesheet',
+            href: 'https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap',
+          },
+        },
+      ],
       locales: {
         en: { label: 'English', lang: 'en' },
         ja: { label: '日本語', lang: 'ja' },
@@ -55,6 +68,9 @@ export default defineConfig({
       components: {
         // ヘッダーロゴのリンク先を、ロケールルート（LP）ではなくヘルプのトップに向ける
         SiteTitle: './src/components/StarlightSiteTitle.astro',
+        // ニュース（starlight-blog）ページのみLPと同じヘッダー/フッターに差し替える
+        Header: './src/components/StarlightHeader.astro',
+        Footer: './src/components/StarlightFooter.astro',
       },
       sidebar: [
         {

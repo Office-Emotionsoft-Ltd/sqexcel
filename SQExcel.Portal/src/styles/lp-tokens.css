@@ -1,0 +1,30 @@
+/* LP（ランディングページ）の配色・フォント定義。
+   LpLayout.astro（LP系ページ）とcustom.css（Starlight系ページ、ニュース/ブログのヘッダー・フッターLP化用）
+   の両方から読み込まれる共通トークン。 */
+:root {
+  --lp-bg: #ffffff;
+  --lp-bg-alt: #f8fafc;
+  --lp-text: #1e293b;
+  --lp-text-muted: #64748b;
+  --lp-accent: #2563eb;
+  --lp-accent-hover: #1d4ed8;
+  --lp-border: #e2e8f0;
+  --lp-card-bg: #ffffff;
+  --lp-card-shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  --lp-font-logo: "Segoe UI Black", "Segoe UI", -apple-system, sans-serif;
+  --lp-font-heading: "BIZ UDPGothic", "BIZ UDGothic", "Yu Gothic", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lp-bg: #0f172a;
+    --lp-bg-alt: #1e293b;
+    --lp-text: #e2e8f0;
+    --lp-text-muted: #94a3b8;
+    --lp-accent: #60a5fa;
+    --lp-accent-hover: #93c5fd;
+    --lp-border: #334155;
+    --lp-card-bg: #1e293b;
+    --lp-card-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
+}

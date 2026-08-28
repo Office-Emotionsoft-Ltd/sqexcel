@@ -1,0 +1,48 @@
+---
+import Footer from '@astrojs/starlight/components/Footer.astro';
+import LpFooter from './lp/LpFooter.astro';
+
+const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
+---
+
+{isNews ? (
+  <div class="lp-footer-on-blog">
+    <LpFooter />
+  </div>
+) : (
+  <Footer />
+)}
+
+{isNews && (
+  <style is:global>
+    /* ニュースページではLPと統一した見た目にするため、Starlight標準の左サイドバー
+       （すべての記事／最近の記事／RSS）・右サイドバー（ページ内目次）を非表示にし、
+       本文・フッターをLPと同じ全幅の1カラムにする */
+    :root:has(.lp-footer-on-blog) nav.sidebar,
+    :root:has(.lp-footer-on-blog) .right-sidebar-container {
+      display: none;
+    }
+
+    :root:has(.lp-footer-on-blog) {
+      --sl-content-inline-start: 0rem;
+    }
+
+    .main-pane:has(.lp-footer-on-blog) {
+      width: 100% !important;
+    }
+
+    /* starlight-blogは一覧ページ用に「最初のcontent-panel（ページタイトル）」を隠すCSSを
+       同梱しているが、そのCSSが個別記事ページのバンドルにも漏れて記事タイトルまで消えてしまう
+       （Astroのスコープ付きCSSがページバンドルをまたいで共有される既知の挙動）。ここで明示的に
+       復元する（一覧ページ側も「ニュース」という見出しが出て問題ない） */
+    .content-panel:first-of-type {
+      display: block !important;
+    }
+
+    /* LPのフッターはページ全幅（コンテンツ列の中央寄せ制約を突き破る）で表示する */
+    .lp-footer-on-blog {
+      width: 100vw;
+      margin-inline: calc(50% - 50vw);
+    }
+  </style>
+)}
