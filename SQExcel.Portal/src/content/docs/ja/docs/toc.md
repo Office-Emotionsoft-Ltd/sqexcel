@@ -75,4 +75,4 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | ページ | 概要 |
 |---|---|
 | [リリースノート](/ja/docs/release-notes/) | バージョンごとの変更履歴（準備中） |
-| [Officeエモーションソフトについて](/ja/docs/about-emotionsoft/) | 開発元の紹介（準備中） |
+| [Officeエモーションソフトについて](https://emotionsoft.net/ja/) | 開発元（有限会社エモーションソフト）のサイトへ |

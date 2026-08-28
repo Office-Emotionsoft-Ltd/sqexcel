@@ -11,15 +11,18 @@ import { unified } from '@astrojs/markdown-remark';
 // リポジトリ名（github.repository）から自動算出して渡す。ローカルの
 // npm run dev / npm run build ではプレビュー値をデフォルトとして使う。
 const base = process.env.BASE_PATH ?? '/sqexcel-prev-k3m9x2p7';
+// const base = process.env.BASE_PATH ?? '/sqexcel';
+
+const siteOrigin = 'https://office-emotionsoft-ltd.github.io';
 
 export default defineConfig({
-  site: 'https://office-emotionsoft-ltd.github.io',
+  site: siteOrigin,
   base,
-  // TODO: LP（src/pages/index.astro）作成時にこのリダイレクトは削除すること
+  // ロケール省略時（例: /sqexcel/）はLP（/ja/）にフォールバックする。
   // 注意: Astroのredirectsはbaseを自動的に前置しないため、ここでも明示的にbaseを連結する必要がある
   // （前置しないと本リダイレクトの生成先ページがbase違いで404になる）
   redirects: {
-    '/': `${base}/ja/docs/`,
+    '/': `${base}/ja/`,
   },
   markdown: {
     // starlight-image-zoom（Sätteri未対応）を使うため、remark/rehypeベースの旧processorに切り替え
@@ -38,6 +41,10 @@ export default defineConfig({
       locales: {
         en: { label: 'English', lang: 'en' },
         ja: { label: '日本語', lang: 'ja' },
+      },
+      components: {
+        // ヘッダーロゴのリンク先を、ロケールルート（LP）ではなくヘルプのトップに向ける
+        SiteTitle: './src/components/StarlightSiteTitle.astro',
       },
       sidebar: [
         {
@@ -220,9 +227,22 @@ export default defineConfig({
           link: '/docs/release-notes/',
         },
         {
+          label: 'About SQExcel',
+          translations: { ja: 'SQExcelについて' },
+          // LP（ロケールルート）への相対リンク。空文字を渡すとStarlightが
+          // 「/現在ロケール/」を組み立てた上でbaseを前置してくれるため、
+          // オリジン（ドメイン）は付与されず、閲覧環境（localhost/プレビュー/本番）に
+          // 自動追従するリンクになる。
+          link: '',
+        },
+        {
           label: 'About Office Emotionsoft',
           translations: { ja: 'Officeエモーションソフトについて' },
-          link: '/docs/about-emotionsoft/',
+          // 開発元（有限会社エモーションソフト）のサイトへの直接リンク。
+          // 旧スタブページ（/docs/about-emotionsoft/）は廃止し、外部サイトへ直接リンクする方式に統一
+          // （LPフッタの「エモーションソフト（開発会社）」リンクと同じ方針）。
+          link: 'https://emotionsoft.net/ja/',
+          attrs: { target: '_blank', rel: 'noopener noreferrer' },
         },
       ],
     }),

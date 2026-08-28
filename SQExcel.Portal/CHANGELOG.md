@@ -244,3 +244,30 @@ GitHub公開作業（前セクション参照）で発生していたプレビ�
 - 英語版LP・ヘルプ本文の着手
 - 独自ドメイン（`sqexcel.com`）取得・Custom domain設定
 - `releases-data`手動トリガーの自動化検討（本体アプリのビルドマシンからの`repository_dispatch`等）
+
+## 2026-08-28
+
+### LP／オンラインヘルプ間のナビゲーション不備3件を修正
+
+古谷氏からの不備報告（3件）に対応。
+
+1. **オンラインヘルプのヘッダーロゴのリンク先誤り**：Starlight標準の`SiteTitle`コンポーネントは常にロケールルート（`/ja/`）へリンクする仕様だが、`/ja/`はLPが占有しているため、ヘルプ画面で「SQExcel Help」ロゴをクリックするとLPに飛んでしまっていた。`src/components/StarlightSiteTitle.astro`を新設し、`astro.config.mjs`のStarlight`components`オプションで標準コンポーネントを上書き。リンク先をヘルプのトップ（`/{locale}/docs/`）に固定した。
+2. **`/ja`省略時のフォールバック先誤り**：`astro.config.mjs`の`redirects`（ロケール省略時のフォールバック）が`${base}/ja/docs/`（ヘルプトップ）を指していたが、本来はLP（`${base}/ja/`）に遷移すべき仕様のため修正。
+3. **ヘルプからLPへ戻るリンクの欠如**：上記2の修正によりLPへ戻る経路が失われるため、サイドバー最下部「リリースノート」と「Officeエモーションソフトについて」の間に「SQExcelについて」リンクを追加し、LP（`${siteOrigin}${base}/ja/`）へ遷移させるようにした。Starlightのサイドバー`link`は相対パス指定だと自動でロケールを二重付与する（`/ja/ja/`のようになる）仕様のため、`siteOrigin`を含む絶対URLで指定する必要があった。
+
+`npm run build`（68ページ・エラーなし）および`npm run preview`実機（`http://localhost:4321/sqexcel-prev-k3m9x2p7/`）で3件とも動作確認済み。英語版LP（`src/pages/en/index.astro`）は未着手のため、「SQExcelについて」リンクは現状日本語LPのみを指す暫定対応（英語版LP着手時に見直しが必要）。
+
+**Why:** ロケールルート（`/{locale}/`）をLPが占有する設計変更（2026-08-21）以降、Starlightの標準コンポーネント・リダイレクト設定の両方が「ロケールルート＝ヘルプトップ」という古い前提のまま残っていたことが根本原因。
+**How to apply:** 今後ロケールルートの用途（LP/ヘルプトップ）を再度変更する場合は、`astro.config.mjs`の`redirects`・`StarlightSiteTitle.astro`・サイドバー末尾の「SQExcelについて」リンクの3箇所を必ずセットで見直すこと。
+
+### 「SQExcelについて」の環境依存化・「Officeエモーションソフトについて」の外部リンク化
+
+上記3件修正後の古谷氏の実機確認で追加報告があった2点に対応。
+
+1. **「SQExcelについて」リンクがローカル環境でも本番/プレビューのドメインに飛んでしまう不具合**：直前の修正で`link: `${siteOrigin}${base}/ja/`` と絶対URL化した際、`siteOrigin`を`https://office-emotionsoft-ltd.github.io`にハードコードしていたため、`npm run dev`/`npm run preview`（`localhost:4322`等）で確認してもクリックすると本番/プレビューのGitHub Pagesドメインに飛んでしまっていた。調査の結果、Starlightのサイドバー`link`に**空文字列`''`**を渡すと、`ensureLeadingSlash('')`→ロケール付与→`formatPath()`によるbase付与、という内部処理を経て「現在ロケール＋`base`」のみのroot-relativeなパス（例: `/sqexcel-prev-k3m9x2p7/ja/`、オリジンなし）が生成されると判明。`link: ''`に変更し、ハードコードした`siteOrigin`連結を廃止した。これにより閲覧中のホスト（localhost/プレビュー/本番）へ自動追従するようになった。
+2. **「Officeエモーションソフトについて」リンクを開発元サイトへ直接リンク化（指示漏れの解消）**：当初「SQExcelについて」宛の指示として報告されたが、確認の結果、既存の「Officeエモーションソフトについて」サイドバー項目（スタブページ`/docs/about-emotionsoft/`へのリンク）が対象と判明。以前の設計決定（[[project_sqexcel_portal_help]]内「LP設計書レビュー」参照：「About Office Emotionsoft」スタブ削除＋外部直接リンク化、未実装のまま残っていたもの）を実施：サイドバーのリンク先を`https://emotionsoft.net/ja/`（`target="_blank" rel="noopener noreferrer"`付き）に変更し、スタブページ`src/content/docs/ja/docs/about-emotionsoft.md`を削除、`toc.md`内の同ページへの参照リンクも同じ外部リンクに更新した。
+
+`npm run build`（66ページ・about-emotionsoftページ削除分で1ページ減）→`npm run preview`（実際に`localhost:4322`で起動、ご指摘のポートと一致）で、①「SQExcelについて」のhrefが相対パスであること②「Officeエモーションソフトについて」が`emotionsoft.net/ja/`を指すこと③旧スタブページが404になることを確認済み。
+
+**Why:** 1点目は、外部絶対URLを使えばStarlightのロケール二重付与を回避できるという事実にのみ着目し、「オリジンを含む絶対URL」という手段を選んでしまったために生じた副作用（環境非依存にすべき内部リンクを固定ドメイン化してしまった）。空文字トリックはStarlight内部の`isAbsoluteUrl`判定を通さずに済むため、ロケール・base両方の自動付与を活かせる。2点目は、類似した名前の2つのサイドバー項目（「SQExcelについて」と「Officeエモーションソフトについて」）が並んでいたことによる指示の伝達違いだった。
+**How to apply:** サイト内の別ページ（同一Astroサイト内）へのリンクをサイドバーに追加する際は、絶対URLでオリジンをハードコードせず、可能な限り`link: ''`（ロケールルート）や`link: '/docs/xxx/'`（ロケール自動付与を活かした相対パス）を使うこと。オリジンを含む絶対URLが必要になるのは、`emotionsoft.net`のような**サイト外部**へのリンクの場合のみ。
