@@ -8,7 +8,10 @@ const latest = await getLatestReleaseNote('ja');
 const releaseNotesHref = latest
   ? `${base}ja/docs/release-notes/#${latest.data.version}`
   : `${base}ja/docs/release-notes/`;
-const downloadHref = `${base}releases/Emotionsoft.East.SQExcel-win-Setup.exe`;
+// releases-dataブランチ（Velopack配布物）は本番リポジトリにのみpushされるため、
+// プレビュー環境には/releases/フォルダ自体が存在しない。相対パスにするとプレビュー上で404になるため、
+// 実ファイルが常に存在する本番の絶対URLを固定で指定する（ご指示のとおり）
+const downloadHref = 'https://office-emotionsoft-ltd.github.io/sqexcel/releases/Emotionsoft.East.SQExcel-win-Setup.exe';
 ---
 
 <LpLayout

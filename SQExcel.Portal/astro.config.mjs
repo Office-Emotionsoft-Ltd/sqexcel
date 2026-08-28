@@ -5,6 +5,7 @@ import mdx from '@astrojs/mdx';
 import starlightImageZoom from 'starlight-image-zoom';
 import starlightBlog from 'starlight-blog';
 import { unified } from '@astrojs/markdown-remark';
+import { rehypeBaseLinks } from './src/plugins/rehype-base-links.mjs';
 
 // TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
 // site: 'https://sqexcel.com' のみ設定する（base はルート直下になるため不要）。
@@ -27,7 +28,8 @@ export default defineConfig({
   },
   markdown: {
     // starlight-image-zoom（Sätteri未対応）を使うため、remark/rehypeベースの旧processorに切り替え
-    processor: unified(),
+    // ＋Markdown本文中の絶対パス内部リンク（/ja/docs/...）にbaseを自動前置するプラグインを追加
+    processor: unified({ rehypePlugins: [[rehypeBaseLinks, base]] }),
   },
   integrations: [
     starlight({
