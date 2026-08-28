@@ -271,3 +271,64 @@ GitHub公開作業（前セクション参照）で発生していたプレビ�
 
 **Why:** 1点目は、外部絶対URLを使えばStarlightのロケール二重付与を回避できるという事実にのみ着目し、「オリジンを含む絶対URL」という手段を選んでしまったために生じた副作用（環境非依存にすべき内部リンクを固定ドメイン化してしまった）。空文字トリックはStarlight内部の`isAbsoluteUrl`判定を通さずに済むため、ロケール・base両方の自動付与を活かせる。2点目は、類似した名前の2つのサイドバー項目（「SQExcelについて」と「Officeエモーションソフトについて」）が並んでいたことによる指示の伝達違いだった。
 **How to apply:** サイト内の別ページ（同一Astroサイト内）へのリンクをサイドバーに追加する際は、絶対URLでオリジンをハードコードせず、可能な限り`link: ''`（ロケールルート）や`link: '/docs/xxx/'`（ロケール自動付与を活かした相対パス）を使うこと。オリジンを含む絶対URLが必要になるのは、`emotionsoft.net`のような**サイト外部**へのリンクの場合のみ。
+
+## 2026-08-29
+
+### ダウンロードページ・リリースノートページの実装相談〜実装
+
+古谷氏との相談（設計書`SQExceインストーラサイト設計書.pdf`ベース）を経て、以下4点を確定・実装した。
+
+1. ダウンロードページは独立ページ（`/ja/download/`）のまま、中身をカード風にスタイリングする方針を維持
+2. LPの「ニュース」リンクは`starlight-blog`で構築するニュース機能へ、オンラインヘルプの「リリースノート」は今回新設する単一ページ（Visual Studioのリリースノート風、バージョンごとにH2セクション＋テーブル）へ、という2系統に分離
+3. ダウンロードリンクは`import.meta.env.BASE_URL`ベースの相対パスに（後日、下記の理由で本番絶対URLに再修正）
+4. リリースノートのデータソースは、Velopackの`releases.win.json`（アプリ内更新ダイアログ用、日英混在・重複あり）を流用せず、サイト専用の軽量Content Collection（`src/content/release-notes/`）を新設
+
+**starlight-blog導入時の技術検証結果（実機ビルドで確認）：**
+- 投稿フォルダは`prefix`設定に追従する（`prefix: 'news'`なら`content/docs/{locale}/news/`、`blog/`固定ではない）
+- `content.config.ts`のdocsスキーマを`docsSchema({ extend: (context) => blogSchema(context) })`で拡張しないと`date`フロントマターが黙って捨てられビルドエラーになる
+- `starlight-image-zoom`と`MarkdownContent`コンポーネントの登録が競合（警告のみ、`<!-- excerpt -->`本文内マーカーによる自動要約は使えないため`excerpt`フロントマターを明示する運用にした）
+- 既存の`src/pages/ja/news/index.astro`スタブが、starlight-blogの自動生成一覧ページと同一URLで衝突し黙って優先されるため削除が必要
+- 既定では`en/fr/it/de`のUI文字列辞書のみで`ja`訳がなく、「すべての記事」等がキー文字列のまま表示される不具合と、日本語日付（`dateStyle: medium`）が二重エスケープされ`2026&#x2F;08&#x2F;27`のように表示される不具合を、`src/content/i18n/ja.json`追加＋`dateStyle: long`への変更で解消
+
+**実装した構成：**
+- `src/lib/releaseNotes.ts`：`getReleaseNotes`/`getLatestReleaseNote`/`getDisplayVersion`/`getVersionBadgeLabel`のヘルパー
+- `src/pages/ja/docs/release-notes.astro`：`@astrojs/starlight/components/StarlightPage`で、Content Collectionをバージョン降順にループしH2セクション化。`StarlightPage`は本文中の見出しを自動では目次化しないため、`headings` propに明示的に渡す必要があった
+- `src/components/lp/DownloadButton.astro`：最新リリースノートからバージョン・日付バッジを自動取得する共通コンポーネント。LP・ダウンロードページ双方から利用
+- 実データ（`releases.win.json`）を確認したところ、同日中の4件のPreviewビルド（`202608240347`〜`202608271838`）は自動更新機能E2E検証の内部反復（フィードURLのlocalhost→本番切替テスト等）で公開版として告知する実質差分がなかったため、最終状態の1件（`0.1.0-preview.202608271838`）のみを実質的な最初のPreview版として公開する判断とした（古谷氏了承済み）
+
+**Why:** Velopackの`releases.win.json`はアプリ内更新ダイアログ向け（日英混在・重複あり・リリース日フィールドなし）でサイト表示には不向きなため、公開用ページは別データソースを持たせる方が構造的に健全と判断した。
+**How to apply:** 今後のリリース時は、①`SQL2Excel`側`ReleaseNotes\releasenotes.md`更新→②`releases-data`push（従来通り、変更なし）→③`SQExcel.Portal/src/content/release-notes/ja/{version}.md`を1ファイル追記（`version`/`date`/`channel`/`summary`のfrontmatter＋本文はテーブル中心、見出しは使わない）、という3ステップ目が追加される。
+
+### サイト全体の内部リンク`base`不具合の解消
+
+ダウンロードボタン修正の過程で、Markdown本文中に絶対パス（`/ja/docs/xxx/`）で書かれた内部リンク・画像がAstroの`base`設定を反映しない（Astro/Starlightの既知の制約）ことが判明。既存の全ドキュメントページ（約30ファイル・約145箇所）に及ぶ既存バグで、本番URL（`https://office-emotionsoft-ltd.github.io/sqexcel/ja/docs/toc/`）での実機確認でも再現を確認した。
+
+`src/plugins/rehype-base-links.mjs`を新設し、`astro.config.mjs`の`markdown.processor: unified({ rehypePlugins: [[rehypeBaseLinks, base]] })`に組み込むことで、`<a>`/`<img>`の絶対パスに`base`を自動前置するようにした。`.mdx`ページ（`markdown`設定を継承）でも機能することをビルド出力で確認済み。プレビュー用`base`・本番相当`base`の両方でビルドし、全69ページ・base未対応リンク0件・二重prefixなしをスクリプトで確認。
+
+**Why:** Astro/Starlightは`base`設定をMarkdown本文中の手書きリンクに自動反映しない仕様のため、絶対パスでの内部リンク運用（2026-08-21の`/docs/`移行時に確立した既存の書き方）を維持したまま解決するには、rehypeプラグインでの一括変換が最も影響範囲が小さかった。
+**How to apply:** 今後Markdown本文に内部リンクを追加する際は、これまで通り絶対パス（`/ja/docs/xxx/`）で書いてよい（このプラグインが自動でbaseを前置する）。ニュース記事（starlight-blog、`content/docs/{locale}/news/`）はこの仕組みの対象外になりやすいことが分かっており（要因未特定、初回記事では相対パス`../../docs/xxx/`で回避）、ニュース記事執筆時は相対パスを使うこと。
+
+### ダウンロードボタンのリンク先を本番絶対URL固定に修正
+
+当初`BASE_URL`ベースの相対パスにしていたが、`releases-data`ブランチ（Velopack配布物）は`production`リモートにのみpushする運用のため、プレビュー環境には`/releases/`フォルダ自体が存在せず相対パスだと404になる。実ファイルは常に本番にしか存在しないため、`https://office-emotionsoft-ltd.github.io/sqexcel/releases/Emotionsoft.East.SQExcel-win-Setup.exe`という絶対URL固定に修正した（古谷氏指示）。
+
+### ニュースページのヘッダー/フッターをLPと統一（未完了・要修正）
+
+古谷氏より「LPからのニュースリンクの遷移先ヘッダーがオンラインヘルプ用のままになっている、フッタもLPと同じにすべき」との指摘を受け対応。
+
+- LPのヘッダー/フッターを`LpHeader.astro`/`LpFooter.astro`/`LpNavBar.astro`として共通コンポーネント化（LP用CSS変数は`lp-tokens.css`に切り出し、`custom.css`経由でStarlight側にも供給）
+- `astro.config.mjs`の`starlight({ components: { Header, Footer } })`で、`/news/`配下のみLP版に差し替えるオーバーライド（`StarlightHeader.astro`/`StarlightFooter.astro`）を追加
+- 実装中に副次的な不具合を発見・修正：starlight-blogの一覧ページ専用CSS（先頭の`content-panel`を隠す）が個別記事ページのCSSバンドルにも漏れて記事タイトルが消えていた問題（`.content-panel:first-of-type { display: block !important }`で復元）
+
+**未解決の問題（2026-08-29時点、古谷氏の実機確認で指摘）：** ヘッダー・フッターの入れ替えのみを意図していたが、実装では右側TOCパネル・左サイドバーの非表示、`--sl-content-inline-start`のリセットなど周辺レイアウトにも手を入れており、本文の左側余白が過大になる等の副作用が出ている。**次回セッションで修正予定。**
+
+**Why:** Starlightの`Header`/`Footer`は固定高さのナビ枠（`PageFrame.astro`）・左右2カラムグリッド（`TwoColumnContent.astro`）に強く結合しており、LPと同じ全幅フッターを実現するには`:has()`セレクタでサイドバー非表示・幅計算の上書きが必要だった。ここが「ヘッダー/フッターの入れ替えだけ」という当初の依頼スコープを超えて本文レイアウトに影響した根本原因。
+**How to apply:** 次回修正時は、`src/components/StarlightHeader.astro`・`StarlightFooter.astro`内の`:has()`による幅・サイドバー制御ロジックを見直すこと。特に本文（`.main-pane`/`.sl-container`）の左余白計算がどこから来ているか（`--sl-content-inline-start`・`.main-pane`の`width: min(...)`計算・`.sl-container`の`margin-inline: auto`のどれが支配的か）を実機のcomputed styleで再確認してから着手するとよい（今回`getBoundingClientRect`と`getComputedStyle`のJS直接確認で`.content-panel`の`display:none`漏れを特定できた手法が有効だった）。
+
+### 次のアクション
+
+- **ニュースページのヘッダー/フッター統一に伴う本文レイアウト崩れの修正（最優先、古谷氏指摘）**
+- 他3件のPreviewビルド分のリリースノート追加は見送り済み（判断はこのまま維持でOKと古谷氏了承済み）
+- コード署名証明書の取得（[[project_code_signing_certificate]]、未着手）
+- 英語版LP・ヘルプ本文の着手
+- 独自ドメイン（`sqexcel.com`）取得・Custom domain設定
