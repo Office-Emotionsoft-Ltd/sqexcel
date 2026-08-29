@@ -1,0 +1,54 @@
+---
+import Sidebar from '@astrojs/starlight/components/Sidebar.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+import { getCollection } from 'astro:content';
+
+// ニュース（starlight-blog、prefix: 'news'）ページのみ、オンラインヘルプのサイドバーツリーとは
+// 独立した「ニュース」グループ＋各記事タイトルのナビに差し替える。
+const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
+
+let sublist = [];
+
+if (isNews) {
+  const { locale, id: currentId } = Astro.locals.starlightRoute;
+  const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+  const posts = (await getCollection('docs'))
+    .filter((entry) => entry.id.startsWith(`${locale ?? 'ja'}/news/`) && entry.data.date)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+  sublist = [
+    {
+      type: 'group',
+      label: 'ニュース',
+      collapsed: false,
+      badge: undefined,
+      entries: posts.map((entry) => ({
+        type: 'link',
+        label: entry.data.title,
+        href: `${base}${entry.id}/`,
+        isCurrent: entry.id === currentId,
+        badge: undefined,
+        attrs: {},
+      })),
+    },
+  ];
+}
+---
+
+{
+  isNews ? (
+    <>
+      <SidebarPersister>
+        <SidebarSublist sublist={sublist} />
+      </SidebarPersister>
+      <div class="md:sl-hidden">
+        <MobileMenuFooter />
+      </div>
+    </>
+  ) : (
+    <Sidebar />
+  )
+}

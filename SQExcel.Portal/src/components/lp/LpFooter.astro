@@ -1,8 +1,8 @@
 ---
-import Logo from './Logo.astro';
-import { getLpNavLinks } from '../../lib/lpNav';
+import Logo from "./Logo.astro";
+import { getLpNavLinks } from "../../lib/lpNav";
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const navLinks = getLpNavLinks(base);
 ---
 
@@ -15,22 +15,44 @@ const navLinks = getLpNavLinks(base);
     <div class="lp-footer-col">
       <h3>ページ</h3>
       <ul>
-        {navLinks.map((link) => (
-          <li><a href={link.href}>{link.label}</a></li>
-        ))}
+        {
+          navLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
       </ul>
     </div>
     <div class="lp-footer-col">
       <h3>リンク</h3>
       <ul>
-        <li><a href="https://www.emotionsoft.net" target="_blank" rel="noopener noreferrer">エモーションソフト（開発会社）</a></li>
+        <li>
+          <a
+            href="https://www.emotionsoft.net"
+            target="_blank"
+            rel="noopener noreferrer">エモーションソフト（開発会社）</a
+          >
+        </li>
       </ul>
     </div>
     <div class="lp-footer-col">
       <h3>サポート</h3>
       <ul>
-        <li><a href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/issues" target="_blank" rel="noopener noreferrer">バグの報告</a></li>
-        <li><a href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/discussions" target="_blank" rel="noopener noreferrer">ディスカッション</a></li>
+        <li>
+          <a
+            href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/issues"
+            target="_blank"
+            rel="noopener noreferrer">バグの報告</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://github.com/Office-Emotionsoft-Ltd/sqexcel/discussions"
+            target="_blank"
+            rel="noopener noreferrer">ディスカッション</a
+          >
+        </li>
       </ul>
     </div>
   </div>
@@ -51,7 +73,7 @@ const navLinks = getLpNavLinks(base);
   .lp-footer-inner {
     max-width: 72rem;
     margin: 0 auto;
-    padding: 3rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 2rem;
@@ -76,7 +98,11 @@ const navLinks = getLpNavLinks(base);
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.35rem;
+    /* liはブロック要素のため、ここ（ulの継承元）で行の高さを詰めないと、
+       aに line-height を指定しても li 自身の行ボックス（strut）が
+       グローバルな --sl-line-height:1.75 のままになり縮まらない */
+    line-height: 1.2;
   }
 
   .lp-footer-col a {

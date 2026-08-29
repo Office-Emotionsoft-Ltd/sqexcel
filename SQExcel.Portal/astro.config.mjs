@@ -71,6 +71,10 @@ export default defineConfig({
         // ニュース（starlight-blog）ページのみLPと同じヘッダー/フッターに差し替える
         Header: './src/components/StarlightHeader.astro',
         Footer: './src/components/StarlightFooter.astro',
+        // ニュースページのみ、オンラインヘルプのサイドバーツリーから独立した専用ナビに差し替える
+        Sidebar: './src/components/StarlightSidebar.astro',
+        // ニュースページのみ、右カラム（ページ内目次パネル）を出さず本文を全幅にする
+        TwoColumnContent: './src/components/StarlightTwoColumnContent.astro',
       },
       sidebar: [
         {

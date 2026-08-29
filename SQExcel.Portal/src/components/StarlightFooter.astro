@@ -15,22 +15,6 @@ const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
 
 {isNews && (
   <style is:global>
-    /* ニュースページではLPと統一した見た目にするため、Starlight標準の左サイドバー
-       （すべての記事／最近の記事／RSS）・右サイドバー（ページ内目次）を非表示にし、
-       本文・フッターをLPと同じ全幅の1カラムにする */
-    :root:has(.lp-footer-on-blog) nav.sidebar,
-    :root:has(.lp-footer-on-blog) .right-sidebar-container {
-      display: none;
-    }
-
-    :root:has(.lp-footer-on-blog) {
-      --sl-content-inline-start: 0rem;
-    }
-
-    .main-pane:has(.lp-footer-on-blog) {
-      width: 100% !important;
-    }
-
     /* starlight-blogは一覧ページ用に「最初のcontent-panel（ページタイトル）」を隠すCSSを
        同梱しているが、そのCSSが個別記事ページのバンドルにも漏れて記事タイトルまで消えてしまう
        （Astroのスコープ付きCSSがページバンドルをまたいで共有される既知の挙動）。ここで明示的に
@@ -39,10 +23,28 @@ const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
       display: block !important;
     }
 
-    /* LPのフッターはページ全幅（コンテンツ列の中央寄せ制約を突き破る）で表示する */
+    /* StarlightTwoColumnContent.astroがニュースページの右カラム（目次パネル）を
+       出さなくなったため、.main-paneが右カラム用に幅を控えていた計算（[data-has-toc]は
+       ページ属性としては残ったまま）を打ち消し、本文エリアを全幅にする。あわせて記事本文
+       （.sl-container）はサイドバー側（左）に寄せる（右寄せ/中央寄せだと、フッターを
+       全幅まで広げる際の位置計算がサイドバー幅に依存し複雑になるため） */
+    :root:has(.lp-footer-on-blog) .main-pane {
+      width: 100% !important;
+      --sl-content-margin-inline: 0 auto;
+    }
+
+    /* LPのフッターは本文（.sl-container、記事の読みやすい幅に制限されている）の外に出し、
+       ビューポート全幅（0〜100vw）まで広げる。左サイドバー（.sidebar-pane）はposition:fixedの
+       常時表示オーバーレイで、本文がフッター行に入ってもその列に居座り続けるため、CSSで
+       サイドバーの表示終了位置自体を変えることはできない。代わりにフッターの左端をサイドバーの
+       さらに左端（ビューポート左端＝0）まで伸ばし、サイドバーより手前（z-index高）に重ねて
+       描画することで、フッター行ではサイドバーが視覚的に隠れるようにする
+       （--sl-z-index-menu:5 より大きい値が必要） */
     .lp-footer-on-blog {
+      position: relative;
+      z-index: 6;
+      margin-inline-start: calc(-1 * var(--sl-content-pad-x) - var(--sl-content-inline-start, 0px));
       width: 100vw;
-      margin-inline: calc(50% - 50vw);
     }
   </style>
 )}

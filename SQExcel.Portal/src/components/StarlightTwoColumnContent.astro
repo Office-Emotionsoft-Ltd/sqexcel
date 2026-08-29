@@ -1,0 +1,24 @@
+---
+import TwoColumnContent from '@astrojs/starlight/components/TwoColumnContent.astro';
+
+// ニュース（starlight-blog）ページでは右カラム（ページ内目次パネル）自体を出さない。
+// 目次パネルはStarlight標準実装ではposition:fixedの常時表示オーバーレイのため、
+// フッターをLPと同じ全幅に広げるとその固定パネルと視覚的に重なってしまう。
+// ニュースページに「目次」機能は必須ではないため、右カラムごと廃止して本文を全幅にする。
+const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
+---
+
+{
+  isNews ? (
+    <div class="lg:sl-flex">
+      <div class="main-pane">
+        <slot />
+      </div>
+    </div>
+  ) : (
+    <TwoColumnContent>
+      <slot name="right-sidebar" slot="right-sidebar" />
+      <slot />
+    </TwoColumnContent>
+  )
+}
