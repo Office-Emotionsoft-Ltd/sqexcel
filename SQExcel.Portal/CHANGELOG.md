@@ -325,9 +325,39 @@ GitHub公開作業（前セクション参照）で発生していたプレビ�
 **Why:** Starlightの`Header`/`Footer`は固定高さのナビ枠（`PageFrame.astro`）・左右2カラムグリッド（`TwoColumnContent.astro`）に強く結合しており、LPと同じ全幅フッターを実現するには`:has()`セレクタでサイドバー非表示・幅計算の上書きが必要だった。ここが「ヘッダー/フッターの入れ替えだけ」という当初の依頼スコープを超えて本文レイアウトに影響した根本原因。
 **How to apply:** 次回修正時は、`src/components/StarlightHeader.astro`・`StarlightFooter.astro`内の`:has()`による幅・サイドバー制御ロジックを見直すこと。特に本文（`.main-pane`/`.sl-container`）の左余白計算がどこから来ているか（`--sl-content-inline-start`・`.main-pane`の`width: min(...)`計算・`.sl-container`の`margin-inline: auto`のどれが支配的か）を実機のcomputed styleで再確認してから着手するとよい（今回`getBoundingClientRect`と`getComputedStyle`のJS直接確認で`.content-panel`の`display:none`漏れを特定できた手法が有効だった）。
 
+### ニュースページのサイドバー独立化とフッター左余白の解消（前項の続き、解決済み）
+
+前項の副作用（本文左側余白の過大）を修正する過程で、古谷氏より「ニュースページの左ナビ自体もオンラインヘルプのサイドバーツリーから完全に独立させたい（第1階層＝『ニュース』、第2階層＝各記事タイトル）」という設計要望が出たため、単なる副作用修正ではなく設計変更として対応した。
+
+- `src/components/StarlightSidebar.astro`を新設し、`astro.config.mjs`で`components.Sidebar`としてオーバーライド。`/news/`パスの時だけ、Starlightの`SidebarPersister`/`SidebarSublist`を使い、`getCollection('docs')`を`{locale}/news/`で絞り込んだ記事一覧を独自の`sublist`として渡す方式（CSSでの非表示・幅上書きは撤去し、「同じサイドバー枠に別の中身を差し込む」方式に転換）
+- 右カラム（ページ内目次パネル）はニュースページでは非表示にし本文を全幅化（`src/components/StarlightTwoColumnContent.astro`を新設しオーバーライド）
+- 上記により、Starlight標準の`.sidebar-pane`（`position:fixed`の常時表示オーバーレイ）がニュースページでも実体を持つようになった結果、LPフッターの「ページ全幅（`width:100vw; margin-inline:calc(50% - 50vw)`）」技法がサイドバーの下に隠れて重なる副次バグが発生。さらにその場しのぎの修正後も「フッター行になっても左側（サイドバー幅分）が空いたまま」という問題が残り、次回セッション送りとなっていた（原因：`.sidebar-pane`は`position:fixed`のためフッター行でも画面に居座り続け、フッター側のCSSだけでは重なりを解消できない）。
+- 最終的に、`.sidebar-pane`のfixedオーバーレイ自体はそのままに、`StarlightFooter.astro`の`.lp-footer-on-blog`をビューポート全幅（0〜100vw）まで広げた上で`position: relative; z-index: 6`（サイドバーの`--sl-z-index-menu: 5`より高い値）を付与し、フッターをサイドバーの手前に重ねて覆い隠す方式で解消した。ニュース一覧・個別記事の両方、および通常のヘルプページ（影響対象外）で実機確認OK。
+
+**Why:** `PageFrame.astro`（`.sidebar-pane`）はStarlightのオーバーライド可能コンポーネントに含まれ技術的には差し替え可能だが、「フッター直前でサイドバー表示を終わらせる」には本文だけの高さを測る新たな位置決めコンテキストが必要で複雑になる。z-index方式は既存のfixed構造に一切手を入れずCSS数行で見た目の要求を満たせるため採用した。
+**How to apply:** 今後ニュースページのフッター幅・重なりに関わる変更をする場合は`StarlightFooter.astro`の`.lp-footer-on-blog`（`z-index: 6`・`width: 100vw`・`margin-inline-start`計算）を確認すること。Starlight側が`--sl-z-index-menu`を変更した場合はこの`z-index`値も追従が必要（`--sl-z-index-navbar: 10`より下に保つこと）。
+
+### フッターメニューリンクの行間・パディング調整
+
+古谷氏より「フッタ部メニューリンクの行間が広い、全体の高さが2/3程度になるよう詰めてほしい」との依頼を受け、`LpFooter.astro`の`.lp-footer-col`関連CSSのみを修正。
+
+- `.lp-footer-col ul`の`gap`を`0.5rem`→`0.35rem`
+- 同`ul`に`line-height: 1.2`を追加（`<a>`側にだけ指定しても`<li>`自身の行ボックス＝strutがグローバルな`--sl-line-height:1.75`のままのため縮まらない。ブロック要素である`<li>`が継承する`<ul>`側で指定する必要があった）
+- 上記だけではDOM実測で目標（2/3）まで届かず（84%程度、logo・`.lp-footer-inner`の上下パディングが残りの支配要因）だったため、古谷氏が`.lp-footer-inner`の`padding`を`3rem 1.5rem`→`1.5rem 1.5rem`に自ら調整し、実機確認でOKとした。
+
+**Why:** ブロック要素のline-height（strut）は子のインライン要素のline-heightだけでは上書きできないというCSSの挙動により、当初`<a>`側指定では効果が出なかった。
+**How to apply:** 今後フッターリンクの行間を調整する場合は`<ul>`側の`line-height`を確認すること。全体の高さ調整が必要な場合、リンクの行間だけでは効果に限界があり、`.lp-footer-inner`のpaddingやロゴサイズもあわせて検討する必要がある。
+
+### フッター「サポート」欄にリリースノートリンクを追加
+
+古谷氏より、フッターの「サポート」欄（バグの報告・ディスカッション）の上に、オンラインヘルプのリリースノートページへのリンクも追加したいとの依頼。タイトルは「リリースノート」、他の2件と同様に別タブ（`target="_blank"`）で開く仕様。
+
+- リンク先は`` `${base}ja/docs/release-notes/` ``（`import.meta.env.BASE_URL`起点の相対パス）とし、ドメインをハードコードしない（`localhost`/Preview/Production いずれの環境でもその場のドメインに自動追従、[[project_sqexcel_portal_help]]内「内部リンクはBASE_URL経由」の既存方針を踏襲）
+- ビルド後のHTMLで`/sqexcel-prev-k3m9x2p7/ja/docs/release-notes/`のようにbase込みのroot-relativeパスになっていることを確認済み
+
 ### 次のアクション
 
-- **ニュースページのヘッダー/フッター統一に伴う本文レイアウト崩れの修正（最優先、古谷氏指摘）**
+- ~~ニュースページのヘッダー/フッター統一に伴う本文レイアウト崩れの修正~~ → 解決済み（本セッション、上記参照）
 - 他3件のPreviewビルド分のリリースノート追加は見送り済み（判断はこのまま維持でOKと古谷氏了承済み）
 - コード署名証明書の取得（[[project_code_signing_certificate]]、未着手）
 - 英語版LP・ヘルプ本文の着手
