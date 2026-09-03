@@ -86,7 +86,7 @@ SQExcelのインストーラ(Emotionsoft.East.SQExcel-win-Setup.exe)はインス
 
 SQExcelをアンインストールする場合は、必ずWindowsメニュー「インストールされているアプリ」からEmotionSoft.East.SQExcelを選択してアンインストールを行ってください。<br/>
 （Windows10をお使いの方はコントロールメニューの「プログラムのアンインストールまたは変更」からEmotionSoft.East.SQExcelを選択してアンインストールしてください。）<br/>
-<strong>この操作によりアンインストールしないとレジストリに不要なキーが残る</strong>ことになります。（実害はありません）
+この操作によりアンインストールしないとレジストリに不要なキーが残ることになります。（実害はありません）
 
    ![インストールされているアプリからのアンインストール](./images/installation/IST010_UninstallSQExcel.jpg)
 
