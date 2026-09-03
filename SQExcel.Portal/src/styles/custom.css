@@ -137,9 +137,24 @@
   max-width: 75%;
 }
 
-/* 表示幅を10%に縮小する */
+/* 表示幅を75%に縮小する */
 .medium-scale-img75 img {
   max-width: 75%;
+}
+
+/* 表示幅を50%に縮小する */
+.medium-scale-img50 img {
+  max-width: 50%;
+}
+
+/* 表示幅を30%に縮小する */
+.medium-scale-img30 img {
+  max-width: 30%;
+}
+
+/* 表示幅を15%に縮小する */
+.medium-scale-img15 img {
+  max-width: 15%;
 }
 
 /* 「画面構成」表(ホーム画面・IO操作画面等): 3列目(内容)が幅を優先的に取ってしまい
@@ -215,4 +230,38 @@
 .two-column-table46 th:nth-child(2),
 .two-column-table46 td:nth-child(2) {
   width: 60%;
+}
+
+/* 3列テーブル全体のレイアウト固定 */
+.three-column-table433 table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.three-column-table433 th,
+.three-column-table433 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+}
+
+/* 1列目 (40%) */
+.three-column-table433 th:nth-child(1),
+.three-column-table433 td:nth-child(1) {
+  width: 40%;
+  text-align: left;
+}
+
+/* 2列目 (30%) */
+.three-column-table433 th:nth-child(2),
+.three-column-table433 td:nth-child(2) {
+  width: 30%;
+}
+
+/* 3列目 (30%) */
+.three-column-table433 th:nth-child(3),
+.three-column-table433 td:nth-child(3) {
+  width: 30%;
 }

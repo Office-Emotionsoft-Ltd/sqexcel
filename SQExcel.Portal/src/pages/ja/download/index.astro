@@ -1,17 +1,21 @@
 ---
-import LpLayout from '../../../layouts/LpLayout.astro';
-import DownloadButton from '../../../components/lp/DownloadButton.astro';
-import { getLatestReleaseNote, getDisplayVersion } from '../../../lib/releaseNotes';
+import LpLayout from "../../../layouts/LpLayout.astro";
+import DownloadButton from "../../../components/lp/DownloadButton.astro";
+import {
+  getLatestReleaseNote,
+  getDisplayVersion,
+} from "../../../lib/releaseNotes";
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const latest = await getLatestReleaseNote('ja');
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const latest = await getLatestReleaseNote("ja");
 const releaseNotesHref = latest
   ? `${base}ja/docs/release-notes/#${latest.data.version}`
   : `${base}ja/docs/release-notes/`;
 // releases-dataブランチ（Velopack配布物）は本番リポジトリにのみpushされるため、
 // プレビュー環境には/releases/フォルダ自体が存在しない。相対パスにするとプレビュー上で404になるため、
 // 実ファイルが常に存在する本番の絶対URLを固定で指定する（ご指示のとおり）
-const downloadHref = 'https://office-emotionsoft-ltd.github.io/sqexcel/releases/Emotionsoft.East.SQExcel-win-Setup.exe';
+const downloadHref =
+  "https://office-emotionsoft-ltd.github.io/sqexcel/releases/Emotionsoft.East.SQExcel-win-Setup.exe";
 ---
 
 <LpLayout
@@ -22,15 +26,23 @@ const downloadHref = 'https://office-emotionsoft-ltd.github.io/sqexcel/releases/
     <div class="lp-download-card">
       <h1>SQExcelをダウンロード</h1>
 
-      {latest && (
-        <div class="lp-download-notes">
-          <p class="lp-download-notes-heading">
-            リリースノート v{getDisplayVersion(latest)}
-          </p>
-          <p class="lp-download-notes-summary">{latest.data.summary}</p>
-          <a class="lp-download-notes-link" href={releaseNotesHref}>詳しくはこちら →</a>
-        </div>
-      )}
+      {
+        latest && (
+          <div class="lp-download-notes">
+            <p class="lp-download-notes-heading">
+              リリースノート v{getDisplayVersion(latest)}
+            </p>
+            <p class="lp-download-notes-summary">{latest.data.summary}</p>
+            <a
+              class="lp-download-notes-link"
+              href={releaseNotesHref}
+              target="_blank"
+            >
+              詳しくはこちら →
+            </a>
+          </div>
+        )
+      }
 
       <DownloadButton href={downloadHref} />
     </div>
