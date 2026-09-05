@@ -11,6 +11,8 @@ description: データ出力機能で使用する検索条件セルの記入規�
 
 ## 検索条件が指定できる項目型
 
+<div class="standard-table">
+
 | 指定可能 | 指定不可 |
 |---|---|
 | 整数型・固定小数点型・浮動小数点型 | バイナリ型（Binary/Blob/Raw 等） |
@@ -19,7 +21,11 @@ description: データ出力機能で使用する検索条件セルの記入規�
 | 真偽値型（Bit/Boolean 等） | |
 | その他（UniqueId/Xml/Json/RowId 等） | |
 
+</div>
+
 ## 数値項目
+
+<div class="standard-table">
 
 | 表記例 | 意味 |
 |---|---|
@@ -29,6 +35,8 @@ description: データ出力機能で使用する検索条件セルの記入規�
 | `< 100 OR >9999` | 100未満または9999超 |
 | `(null)` | `IS NULL` |
 | `<>(null)` | `IS NOT NULL` |
+
+</div>
 
 使用できる比較演算子は `=`, `>`, `>=`, `<`, `<=`, `<>` の6種類です。`BETWEEN`, `AND`, `NOT`, `OR`, `IN` といった SQL 予約語は使用できません（結合には `AND`/`OR` を1つだけ使用可能）。数値はカンマ区切り（`999,999,999`）でも記入できます。
 
@@ -43,15 +51,21 @@ description: データ出力機能で使用する検索条件セルの記入規�
 
 ## 真偽値項目
 
+<div class="standard-table">
+
 | 表記例 | 意味 |
 |---|---|
 | `TRUE` / `true` | `= TRUE` |
 | `FALSE` / `false` | `= FALSE` |
 | `(NULL)` | `IS NULL` |
 
+</div>
+
 使用できる演算子は `=` と `<>` のみです。生成される SQL は DB種類によって異なります（例：SQL Server は `= 1` / `= 0`、PostgreSQL は `= TRUE` / `= FALSE`）。
 
 ## 文字列項目
+
+<div class="standard-table">
 
 | 記号 | 意味 |
 |---|---|
@@ -62,7 +76,11 @@ description: データ出力機能で使用する検索条件セルの記入規�
 | `\LF` | 改行コードを含む |
 | `\EMP` | 空白文字列（`=''`） |
 
+</div>
+
 ### よく使う表記例
+
+<div class="standard-table">
 
 | 表記例 | 意味 |
 |---|---|
@@ -73,13 +91,20 @@ description: データ出力機能で使用する検索条件セルの記入規�
 | `(null)` | `IS NULL` |
 | `\EMP` | 空文字列 |
 
+</div>
+
 :::caution[LIKE検索の大文字小文字の区別はDBによって異なる]
+
+<div class="standard-table">
+
 | DB種類 | 区別の有無 |
 |---|---|
 | PostgreSQL | 区別**あり**（`LIKE` はどのDBでも共通して使用し、`ILIKE` は使用しません） |
 | Oracle | 区別あり（ASCIIのみ） |
 | SQL Server | コレーション依存（通常は区別しない） |
 | MySQL / MariaDB / SQLite | 区別なし（既定） |
+
+</div>
 :::
 
 ### シングルクォート・ダブルクォートを含む値
@@ -88,11 +113,15 @@ description: データ出力機能で使用する検索条件セルの記入規�
 
 ## IS NULL / IS NOT NULL / 空文字列の指定（共通）
 
+<div class="standard-table">
+
 | 条件 | 記述方法 |
 |---|---|
 | IS NULL | `(null)` または `(NULL)` |
 | IS NOT NULL | `<>(null)` または `<>(NULL)` |
 | 空文字列である（文字列項目のみ） | `\EMP` または `\emp` |
 | 空文字列でない（文字列項目のみ） | `<>\EMP` または `<>\emp` |
+
+</div>
 
 これらの条件を記入したセルには、それ以外の内容を含めることはできません。他の条件と組み合わせることもできません。

@@ -1,5 +1,5 @@
 ---
-title: データ出力機能について
+title: データ出力の詳細
 description: データ出力処理の詳細な内部動作。
 ---
 
@@ -35,11 +35,15 @@ A列に「C」が記入された検索条件行2つ（OR関係）と、それぞ
 
 [データ出力ダイアログ](/ja/docs/features/io-operations/data-export-dialog/) で指定した上限件数と、実際にヒットした件数のうち小さい方が出力されます。上限を実現する SELECT 文の書き方は DB種類によって異なります。
 
+<div class="standard-table">
+
 | DB種類 | SELECT文の構文 |
 |---|---|
 | SQL Server | `SELECT TOP {上限} 項目リスト FROM テーブル名 [WHERE 条件式]` |
 | PostgreSQL / MySQL / MariaDB / SQLite | `SELECT 項目リスト FROM テーブル名 [WHERE 条件式] LIMIT {上限}` |
 | Oracle | `SELECT 項目リスト FROM テーブル名 [WHERE 条件式] FETCH FIRST {上限} ROWS ONLY` |
+
+</div>
 
 ## 出力結果の書き込み
 

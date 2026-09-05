@@ -55,12 +55,17 @@ End Function
    ![ワークシート関数とマクロ関数でサンプルデータを複数投入する例](../images/formulas/FM001_FormulatedInputSheet.jpg)
 
 このワークシートには次のような関数が埋め込まれています。
+
+<div class="two-column-table37">
+
 | 列 | 埋め込まれている関数 |
 |------|------|
 | C列(dept_id/部門ID) | INDEX(dept_id_source,RANDBETWEEN(1,ROWS(dept_id_source))) |
 | D列(last_name/姓) | LET(v,RAND(),IF(v<0.2,"鈴木",IF(v<0.4,"田中",IF(v<0.6,"佐藤",IF(v<0.8,"小林","石川"))))) |
 | E列(first_name/名) | LET(v,RAND(),IF(v<0.2,"誠也",IF(v<0.4,"美奈子",IF(v<0.6,"浩一郎",IF(v<0.8,"伸一","裕子"))))) |
 | F列(email/メールアドレス) | RandomMailAddress() |
+
+</div>
 
 - C列の関数内にある**dept_id_source**は、departments(部門マスター)シート上でサンプルデータが定義されているB8:B17の範囲を指します。
 

@@ -45,25 +45,27 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 
 ## SQExcel機能説明
 
+<div class="two-column-table46">
+
 | ページ | 概要 |
 |---|---|
 | [機能説明トップ](/ja/docs/features/) | 機能説明ページ群の案内 |
 | [スタートページ](/ja/docs/features/start-page/) | 起動直後に表示されるスタートページの構成と操作 |
 | [ホーム画面](/ja/docs/features/home-screen/) | プロジェクト・アプリDB・接続を管理するホーム画面の構成と操作 |
 | [IO操作画面](/ja/docs/features/io-operations/) | テーブルグループの編集と入力シート操作を行う画面の構成と操作 |
-| [IO操作画面：入力シート作成ダイアログ](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成時のオプション詳細 |
-| [IO操作画面：データ取り込みダイアログ](/ja/docs/features/io-operations/data-import-dialog/) | データ取り込み時のオプション詳細 |
-| [IO操作画面：データ出力ダイアログ](/ja/docs/features/io-operations/data-export-dialog/) | データ出力時のオプション詳細 |
+| [IO操作画面：入力シート作成機能](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成時のオプション詳細 |
+| [IO操作画面：データ取り込み機能](/ja/docs/features/io-operations/data-import-dialog/) | データ取り込み時のオプション詳細 |
+| [IO操作画面：データ出力機能](/ja/docs/features/io-operations/data-export-dialog/) | データ出力時のオプション詳細 |
 | [オプション設定ダイアログ](/ja/docs/features/option-settings-dialog/) | SQExcel 全体の設定項目（ツール → オプション） |
 
----
+</div>
 
 ## SQExcelの入力シートの説明
 
 | ページ | 概要 |
 |---|---|
 | [概要](/ja/docs/features/input-sheet/) | 入力シート仕様の詳細説明群の案内 |
-| [SQExcelの入力シートの構造と作成機能](/ja/docs/features/input-sheet/structure/) | 入力シートの書式・データ型対応・作成処理の詳細 |
+| [SQExcelの入力シートの構造と作成](/ja/docs/features/input-sheet/structure/) | 入力シートの書式・データ型対応・作成処理の詳細 |
 | [データ取り込み機能](/ja/docs/features/input-sheet/data-import/) | データ型×DB種類ごとの入力可否・SQL生成規則の詳細 |
 | [データ出力機能について](/ja/docs/features/input-sheet/data-export/) | データ出力処理の詳細 |
 | [入力シートへの検索条件記入方法](/ja/docs/features/input-sheet/search-conditions/) | 検索条件セルの記入規則一覧 |

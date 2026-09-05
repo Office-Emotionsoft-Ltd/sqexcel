@@ -200,29 +200,29 @@ export default defineConfig({
             },
             {
               label: 'IO Operations Screen: Input Sheet Creation Dialog',
-              translations: { ja: 'IO操作画面：入力シート作成ダイアログ' },
+              translations: { ja: 'IO操作画面：入力シート作成' },
               link: '/docs/features/io-operations/input-sheet-builder-dialog/',
             },
             {
               label: 'IO Operations Screen: Data Import Dialog',
-              translations: { ja: 'IO操作画面：データ取り込みダイアログ' },
+              translations: { ja: 'IO操作画面：データ取り込み' },
               link: '/docs/features/io-operations/data-import-dialog/',
             },
             {
               label: 'IO Operations Screen: Data Export Dialog',
-              translations: { ja: 'IO操作画面：データ出力ダイアログ' },
+              translations: { ja: 'IO操作画面：データ出力' },
               link: '/docs/features/io-operations/data-export-dialog/',
             },
             {
               label: 'Option Settings Dialog',
-              translations: { ja: 'オプション設定ダイアログ' },
+              translations: { ja: 'オプション設定' },
               link: '/docs/features/option-settings-dialog/',
             },
           ],
         },
         {
           label: 'The SQExcel Input Sheet',
-          translations: { ja: 'SQExcelの入力シートの説明' },
+          translations: { ja: '入力シート操作の説明' },
           items: [
             {
               label: 'Overview',
@@ -231,17 +231,17 @@ export default defineConfig({
             },
             {
               label: 'Structure & Creation',
-              translations: { ja: 'SQExcelの入力シートの構造と作成機能' },
+              translations: { ja: 'SQExcelの入力シートの構造と作成' },
               link: '/docs/features/input-sheet/structure/',
             },
             {
               label: 'Data Import',
-              translations: { ja: 'データ取り込み機能' },
+              translations: { ja: 'データ取り込みの詳細' },
               link: '/docs/features/input-sheet/data-import/',
             },
             {
               label: 'Data Export',
-              translations: { ja: 'データ出力機能について' },
+              translations: { ja: 'データ出力の詳細' },
               link: '/docs/features/input-sheet/data-export/',
             },
             {
@@ -258,16 +258,17 @@ export default defineConfig({
         },
         {
           label: 'About SQExcel',
-          translations: { ja: 'SQExcelについて' },
+          translations: { ja: 'SQExcelのHPへ' },
           // LP（ロケールルート）への相対リンク。空文字を渡すとStarlightが
           // 「/現在ロケール/」を組み立てた上でbaseを前置してくれるため、
           // オリジン（ドメイン）は付与されず、閲覧環境（localhost/プレビュー/本番）に
           // 自動追従するリンクになる。
           link: '',
+          attrs: { target: '_blank', rel: 'noopener noreferrer' },
         },
         {
           label: 'About Office Emotionsoft',
-          translations: { ja: 'Officeエモーションソフトについて' },
+          translations: { ja: 'OfficeエモーションソフトのHPへ' },
           // 開発元（有限会社エモーションソフト）のサイトへの直接リンク。
           // 旧スタブページ（/docs/about-emotionsoft/）は廃止し、外部サイトへ直接リンクする方式に統一
           // （LPフッタの「エモーションソフト（開発会社）」リンクと同じ方針）。

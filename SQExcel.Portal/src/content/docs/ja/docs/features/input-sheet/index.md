@@ -7,7 +7,7 @@ description: 入力シートの構造・処理仕様の詳細説明群。
 
 | ページ | 内容 |
 |---|---|
-| [入力シートの構造と作成機能](/ja/docs/features/input-sheet/structure/) | ワークブック・ワークシートの構造、テーブル情報ヘッダ・項目ヘッダの各セルの意味、データ型ごとのセル書式対応、ワークシート保護の範囲 |
+| [入力シートの構造と作成](/ja/docs/features/input-sheet/structure/) | ワークブック・ワークシートの構造、テーブル情報ヘッダ・項目ヘッダの各セルの意味、データ型ごとのセル書式対応、ワークシート保護の範囲 |
 | [データ取り込み機能](/ja/docs/features/input-sheet/data-import/) | SQL生成の書式規則、NULL・空文字列・特殊文字の指定方法、データ型×DB種類ごとの入力可否の詳細 |
 | [データ出力機能について](/ja/docs/features/input-sheet/data-export/) | テーブル・項目の照合方法、検索条件からのWHERE句組み立て、出力件数上限の実装、出力結果の書き込み位置 |
 | [入力シートへの検索条件記入方法](/ja/docs/features/input-sheet/search-conditions/) | 数値・日付・真偽値・文字列それぞれの検索条件セルの記入規則一覧 |

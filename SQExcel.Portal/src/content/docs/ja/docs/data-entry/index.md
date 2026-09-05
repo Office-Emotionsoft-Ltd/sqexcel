@@ -13,11 +13,15 @@ SQExcel のユーザーが一番やりたいことは、おそらく「新規デ
 
 ## 3つの方法
 
+<div class="two-column-table46">
+
 | 方法 | こんなときに |
 |---|---|
 | [入力シートに直接入力する](/ja/docs/data-entry/manual-entry/) | 数件〜数十件程度を手早く入力・修正したいとき |
 | [関数やワークシートマクロ関数を使用する](/ja/docs/data-entry/formulas/) | Excel の関数・マクロに慣れており、規則性のある大量データを生成したいとき |
 | [Microsoft 365 Copilotを利用する(お薦め)](/ja/docs/data-entry/copilot/) | 自然な文章の指示だけで、まとまった量のリアルなサンプルデータを作りたいとき |
+
+</div>
 
 3つの方法に共通する注意点として、外部キー参照のあるテーブル群を扱う場合は、必ず [外部キー参照のあるテーブルへのデータ挿入及び削除手順（重要）](/ja/docs/data-entry/foreign-key-order/) を確認してください。
 

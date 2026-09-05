@@ -111,7 +111,7 @@ MySQL・MariaDB・SQLite ではスキーマ階層が存在しないため、ツ�
 
    </div>
 
-<div class="two-column-table">
+<div class="two-column-table37">
 
 | 項目名 | 説明 |
 |---|---|
@@ -131,7 +131,7 @@ MySQL・MariaDB・SQLite ではスキーマ階層が存在しないため、ツ�
 
    </div>
 
-<div class="two-column-table">
+<div class="two-column-table37">
 
 | 項目名 | 説明 |
 |---|---|
@@ -171,7 +171,7 @@ MySQL・MariaDB・SQLite ではスキーマ階層が存在しないため、ツ�
 
    </div>
 
-<div class="two-column-table">
+<div class="two-column-table37">
 
 | 項目名 | 説明 |
 |---|---|

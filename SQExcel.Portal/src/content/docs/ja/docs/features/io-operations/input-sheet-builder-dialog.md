@@ -1,11 +1,11 @@
 ---
-title: 入力シート作成ダイアログ
-description: 入力シート作成時のオプション詳細。
+title: 入力シート作成
+description: 入力シート作成機能とダイアログから設定するオプションの詳細。
 ---
 
-[IO操作画面](/ja/docs/features/io-operations/) で選択済みテーブルリストにテーブルを設定した状態で「入力シート作成」ボタンをクリックすると、まず保存先を選択するファイルダイアログが開き、続けてこのダイアログが開きます。基本的な操作の流れは [SQExcelの入力シート操作概要](/ja/docs/input-sheet-overview/) の「通常の入力シート作成を実行する場合」で説明済みです。ここでは、そこでは触れていないオプション項目の詳細を説明します。
+[IO操作画面](/ja/docs/features/io-operations/) で選択済みテーブルリストにテーブルを設定した状態で「入力シート作成」ボタンをクリックすると、まず保存先を選択するファイルダイアログが開き、続けて入力シート作成ダイアログが開きます。基本的な操作の流れは [SQExcelの入力シート操作概要](/ja/docs/input-sheet-overview/) の「通常の入力シート作成を実行する場合」で説明済みです。ここでは、そこでは触れていないオプション項目の詳細を説明します。
 
-## 画面構成
+## 入力シート作成ダイアログ画面構成
 
    <div class="medium-scale-error-msg-img">
 
@@ -26,19 +26,28 @@ description: 入力シート作成時のオプション詳細。
 
 ### ワークシート設定タブ
 
-データ型カテゴリ（整数・小数・文字列・日付時刻・真偽値・バイナリ等）ごとに、生成される入力シートのセル表示形式を選択します。ここで選んだ内容は次回このダイアログを開いたときにも復元されます。
+<div class="medium-scale-img85">
 
+データ型カテゴリ（整数・小数・文字列・日付時刻・真偽値・バイナリ等）ごとに、生成される入力シートのセル表示形式を選択します。ここで選んだ内容は次回このダイアログを開いたときにも復元されます。
    ![ワークシート設定タブ](../../images/input-sheet-builder-dialog/IBD002_WorksheetSettingsPanel.jpg)
 
-データ型とセル書式の詳しい対応表は [入力シートの構造と作成機能](/ja/docs/features/input-sheet/structure/) を参照してください。
+データ型とセル書式の詳しい対応表は [入力シートの構造と作成](/ja/docs/features/input-sheet/structure/#データ型とセル書式の対応) を参照してください。
+
+</div>
 
 ### 列幅設定タブ
 
-文字列型・数値型など、データ型と桁数帯（例：1〜10桁／11〜20桁／21桁以上）の組み合わせごとに、入力エリアの列幅（ピクセル数）を設定します。
+文字列型・数値型など、データ型と桁数帯（1〜10桁／11〜20桁／21桁以上）の組み合わせごとに、入力エリアの列幅(エクセルで列幅を指定する際の単位に準拠)を設定します。
+
+<div class="medium-scale-img85">
 
    ![列幅設定タブ](../../images/input-sheet-builder-dialog/IBD003_ColumnWidthSetterPanel.jpg)
 
-対応する桁数帯や既定の列幅については、同じく [入力シートの構造と作成機能](/ja/docs/features/input-sheet/structure/) を参照してください。
+</div>
+
+- 各データ型の列幅入力エリアの単位はエクセルにおける文字数です。具体的には、標準フォント（初期設定では「11ポイントのMS Pゴシック」や「遊ゴシック」など）の半角数字の「0」が、1つのセルの中に何文字入るかを表しています。
+- 固定小数点や文字列の桁数帯は、それぞれのデータ型における桁数の範囲を3つのブロック(1〜10桁／11〜20桁／21桁以上)に分けたものです。入力シートを作成する際には既定でそれぞれに割り当てられた列幅を設定しますが、その後は自由に列幅を変更することが可能です。
+
 
 ## パスの記憶
 
@@ -52,9 +61,13 @@ description: 入力シート作成時のオプション詳細。
 
 保存先パスに既存の Excel ファイルを指定した場合、ワークブック全体を上書きするか、ワークブックに選択されたテーブル用の入力シートを追加するか、ワークシート設定タブ左下の次のチェックボックスで指定します。
 
+<div class="medium-scale-img85">
+
    ![既存の入力シートを指定した場合には選択済みテーブルを追加チェックボックス](../../images/input-sheet-builder-dialog/IBD004b_WSOptionAddTableSheetForExistinFile2.jpg)
 
-<div class="two-column-table">
+</div>
+
+<div class="two-column-table37">
 
 | チェックボックスの状態 | 動作 |
 |---|---|
@@ -63,23 +76,41 @@ description: 入力シート作成時のオプション詳細。
 
 </div>
 
-### 実例
+
+### 実行例
 
 1. テーブルグループ内の3つのテーブル clients(取引先マスター)、common_codes(共通コードマスター)、services(サービスマスター)の入力シートを持つワークブックが存在します。それぞれの入力シートには、既にデータ取り込み用のデータが入力されています。
 
+   <div class="medium-scale-img95">
+
    ![3つのテーブル用のシートを持つ既存の入力シート](../../images/input-sheet-builder-dialog/IBD005_ExistinWorkbookFor3Tables.jpg)
+
+   </div>
 
 2. このワークブックに3つのテーブルを追加して、1つのワークブックでデータ入出力を管理することになりました。追加するテーブルのうち2つは departments(部門マスター) と employees(従業員マスター)、残る1つはブック内に既に入力シートが存在する services(サービスマスター) です。
 
+   <div class="medium-scale-img75">
+
    ![既存のワークブックへの入力シートの追加指定](../../images/input-sheet-builder-dialog/IBD006_AddTablesToExistinWorkbook.jpg)
+
+   </div>
+
 
 3. この状態でOKをクリックすると処理内容を確認する以下のようなダイアログメッセージが表示されます。
 
+   <div class="medium-scale-img65">
+
    ![ワークブックへの入力シート追加確認](../../images/input-sheet-builder-dialog/IBD007_ConfirmAddTablesToExistinWorkbook.jpg)
+
+   </div>
 
 4. 既存のワークブックに指定されたテーブルの入力シートが追加されました。元々存在していた services テーブル用の入力シートにはデータが書き込まれていたため `services_old01` にリネームされ、新たに入力エリアが空の services シートが追加されています。
 
+   <div class="medium-scale-img95">
+
    ![3つのテーブルが追加された入力シート](../../images/input-sheet-builder-dialog/IBD008_NewInputsheetAddedToExistinWorkbook.jpg)
+
+   </div>
 
    「選択済みテーブルだけ追加・上書き」モードでは、対象テーブルの既存シートについて、データ入力エリアに何らかの書き込みがあるかどうかで挙動が変わります。
 
