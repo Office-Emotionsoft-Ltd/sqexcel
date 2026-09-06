@@ -76,5 +76,6 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 
 | ページ | 概要 |
 |---|---|
+| [動作環境](/ja/docs/environment/) | 対応OS・.NET Version・対応DBとデータ型ごとのExcelセル書式対応 |
 | [リリースノート](/ja/docs/release-notes/) | バージョンごとの変更履歴（準備中） |
 | [Officeエモーションソフトについて](https://emotionsoft.net/ja/) | 開発元（有限会社エモーションソフト）のサイトへ |

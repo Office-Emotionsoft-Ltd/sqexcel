@@ -252,6 +252,11 @@ export default defineConfig({
           ],
         },
         {
+          label: 'System Requirements',
+          translations: { ja: '動作環境' },
+          link: '/docs/environment/',
+        },
+        {
           label: 'Release Notes',
           translations: { ja: 'リリースノート' },
           link: '/docs/release-notes/',

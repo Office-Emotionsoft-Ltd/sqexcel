@@ -96,18 +96,18 @@ SQExcelの「入力シート」はこのワークブックを指し、個々の�
 
 ※`@`はセルの書式が文字列に設定されていることを示す記号です。
 
-- 数値型、日付型項目のデータ設定例
+- 数値型、日付型項目のデータ入力例
 ![数値型、日付型項目のデータ設定例](../../images/inputsheet-structure/IST005a_NumAndDateTime.jpg)
 
-- 文字型項目のデータ設定例
+- 文字型項目のデータ入力例
 ![文字型項目のデータ設定例](../../images/inputsheet-structure/IST005b_TextAndChar.jpg)
 
-- バイナリ型、BLOB型データの設定例
+- バイナリ型、BLOB型データの入力例
 ![バイナリ型、BLOB型データの設定例](../../images/inputsheet-structure/IST005c_OtherDataType.jpg)
 
 
 :::tip[列幅もデータ型に応じて自動調整]
-例えば `Char/VarChar` 等の文字列型は桁数帯（1〜10／11〜20／21〜）ごとに既定の列幅が設定されており、`Decimal/Numeric` も桁数帯によって列幅が変わります。詳細な対応表は [入力シート作成ダイアログ](/ja/docs/features/io-operations/input-sheet-builder-dialog/) の列幅設定タブで確認・変更できます。
+例えば `Char/VarChar` 等の文字列型は桁数帯（1〜10／11〜20／21〜）ごとに既定の列幅が設定されており、`Decimal/Numeric` も桁数帯によって列幅が変わります。詳細な対応表は [入力シート作成ダイアログの列幅設定タブ](/ja/docs/features/io-operations/input-sheet-builder-dialog//#列幅設定タブ) の列幅設定タブで確認・変更できます。
 :::
 
 ## ワークシート保護
