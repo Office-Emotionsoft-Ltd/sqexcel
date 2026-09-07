@@ -12,12 +12,7 @@ const base = process.env.BASE_PATH ?? '';
 
 export default defineConfig({
   site: 'https://sqexcel.net',
-  // ロケール省略時（例: /sqexcel/）はLP（/ja/）にフォールバックする。
-  // 注意: Astroのredirectsはbaseを自動的に前置しないため、ここでも明示的にbaseを連結する必要がある
-  // （前置しないと本リダイレクトの生成先ページがbase違いで404になる）
-  redirects: {
-    '/': `${base}/ja/`,
-  },
+  // ルート(/)は src/pages/index.astro が /ja/ と同じLPを直接描画するため、redirectsは使用しない
   markdown: {
     // starlight-image-zoom（Sätteri未対応）を使うため、remark/rehypeベースの旧processorに切り替え
     // ＋Markdown本文中の絶対パス内部リンク（/ja/docs/...）にbaseを自動前置するプラグインを追加
