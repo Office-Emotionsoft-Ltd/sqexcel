@@ -7,19 +7,11 @@ import starlightBlog from 'starlight-blog';
 import { unified } from '@astrojs/markdown-remark';
 import { rehypeBaseLinks } from './src/plugins/rehype-base-links.mjs';
 
-// TODO: 本番公開（独自ドメイン sqexcel.com 確定）時にこの2行は削除し、
-// site: 'https://sqexcel.com' のみ設定する（base はルート直下になるため不要）。
-// BASE_PATH は GitHub Actions（.github/workflows/deploy.yml）が
-// リポジトリ名（github.repository）から自動算出して渡す。ローカルの
-// npm run dev / npm run build ではプレビュー値をデフォルトとして使う。
-const base = process.env.BASE_PATH ?? '/sqexcel-prev-k3m9x2p7';
-// const base = process.env.BASE_PATH ?? '/sqexcel';
-
-const siteOrigin = 'https://office-emotionsoft-ltd.github.io';
+// 独自ドメイン sqexcel.net 配信用のbase（常にルート直下）。
+const base = process.env.BASE_PATH ?? '';
 
 export default defineConfig({
-  site: siteOrigin,
-  base,
+  site: 'https://sqexcel.net',
   // ロケール省略時（例: /sqexcel/）はLP（/ja/）にフォールバックする。
   // 注意: Astroのredirectsはbaseを自動的に前置しないため、ここでも明示的にbaseを連結する必要がある
   // （前置しないと本リダイレクトの生成先ページがbase違いで404になる）
