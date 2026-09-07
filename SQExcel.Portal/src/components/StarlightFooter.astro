@@ -13,16 +13,20 @@ const isNews = /\/news(\/|$)/.test(Astro.url.pathname);
   <Footer />
 )}
 
+<style is:global>
+  /* starlight-blogは一覧ページ用に「最初のcontent-panel（ページタイトル）」を隠すCSSを
+     同梱しているが、そのCSSがAstroのビルド時のチャンク分割によって他ページのバンドルにも
+     漏れて、ニュース以外のページ（ドキュメント記事等）のタイトルまで消えてしまうことがある
+     （Astroのスコープ付きCSSがページバンドルをまたいで共有される既知の挙動で、漏れの範囲は
+     ビルドのたびに変わり得る非決定的な問題）。このサイトにタイトルを意図的に隠したいページは
+     無いため、ニュースページに限定せず全ページで常に復元する */
+  .content-panel:first-of-type {
+    display: block !important;
+  }
+</style>
+
 {isNews && (
   <style is:global>
-    /* starlight-blogは一覧ページ用に「最初のcontent-panel（ページタイトル）」を隠すCSSを
-       同梱しているが、そのCSSが個別記事ページのバンドルにも漏れて記事タイトルまで消えてしまう
-       （Astroのスコープ付きCSSがページバンドルをまたいで共有される既知の挙動）。ここで明示的に
-       復元する（一覧ページ側も「ニュース」という見出しが出て問題ない） */
-    .content-panel:first-of-type {
-      display: block !important;
-    }
-
     /* StarlightTwoColumnContent.astroがニュースページの右カラム（目次パネル）を
        出さなくなったため、.main-paneが右カラム用に幅を控えていた計算（[data-has-toc]は
        ページ属性としては残ったまま）を打ち消し、本文エリアを全幅にする。あわせて記事本文
