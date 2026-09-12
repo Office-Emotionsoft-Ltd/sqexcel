@@ -10,7 +10,7 @@ SQExcelはインターネット上のSQExcelポータルサイトからダウン
 ## インストール手順
 
 1. SQExcelをインストールするには、ブラウザでSQExcelのポータルサイトからインストーラをダウンロードします。<br/>
-ブラウザで[SQExcelのポータルサイト](https://sqexcel.net/)を表示してトップメニューのダウンローﾄボタン、または画面左側の紹介文のすぐ下のDownloadボタンをクリックしてください。
+ブラウザで[SQExcelのポータルサイト](https://sqexcel.net/)を表示してトップメニューのダウンロードボタン、または画面左側の紹介文のすぐ下のDownloadボタンをクリックしてください。
 
    ![SQExcelのポータルサイトのダウンロードボタン](./images/installation/IST001_InstallFromPortal.jpg)
 
@@ -25,12 +25,12 @@ SQExcelはインターネット上のSQExcelポータルサイトからダウン
 
    ![Chromeのダウンロードインジケータ](./images/installation/IST003_DLProgress.jpg)
 
-4. ここでダウンロードインジケータの完了マークをクリックするとダウンロード履歴ダイアログが表示され、今回ダウンロードしたSQExcelのインストーラ(Emotionsoft.East.SQExcel-win-Setup.exe)が先頭に表示れます。
+4. ここでダウンロードインジケータの完了マークをクリックするとダウンロード履歴ダイアログが表示され、今回ダウンロードしたSQExcelのインストーラ(Emotionsoft.East.SQExcel-win-Setup.exe)が先頭に表示されます。
 
    ![ダウンロード履歴ダイアログに表示されるインストーラ](./images/installation/IST004_DLHistoryDialog.jpg)
 
 5. 表示されたEmotionsoft.East.SQExcel-win-Setup.exeをクリックするとインストールが開始されます。<br/>
-※もしPCにMicrofost .NET 8がインストールされていない場合(Windows10端末にインストールする場合等)には、直後に.NETのインストールが自動的に実行されます。
+※もしPCにMicrosoft .NET 8がインストールされていない場合(Windows10端末にインストールする場合等)には、直後に.NETのインストールが自動的に実行されます。
 
    <div class="medium-scale-error-msg-img">
 
@@ -52,13 +52,13 @@ SQExcelはインターネット上のSQExcelポータルサイトからダウン
 
 ## インストールの詳細
 
-### インストールディレクト
+### インストールディレクトリ
 SQExcelアプリケーション一式のインストール先は以下のディレクトリになります。	<br/>
   C:\Users\[ユーザー名]\AppData\Local\Emotionsoft.East.SQExcel<br/><br/>
 SQExcel本体のプログラムのパスは以下のようになります。	<br/>
-  C:\Users\[ユーザー名]\Local\Emotionsoft.East.SQExcel\current\EmotionSoft.East.SQL2Excel.exe<br/><br/>
-※SQExcelは任意のフォルダにインストールすることが出来ません。これはSQExcelがインストール時に後述するレジストリへの書き込みを行う際のセキュリティを担保するためです。	<br/>
-この制約によりSQExcelはインストールしたユーザー以外が使用することも出来ません。1つのPCで複数のユーザーがSQExcelを使用する場合は、ユーザーごとにインストールする必要があります。	
+  C:\Users\[ユーザー名]\AppData\Local\Emotionsoft.East.SQExcel\current\EmotionSoft.East.SQL2Excel.exe<br/><br/>
+※SQExcelは任意のフォルダにインストールすることができません。これはSQExcelがインストール時に後述するレジストリへの書き込みを行う際のセキュリティを担保するためです。	<br/>
+この制約によりSQExcelはインストールしたユーザー以外が使用することもできません。1つのPCで複数のユーザーがSQExcelを使用する場合は、ユーザーごとにインストールする必要があります。	
 
    ![SQExcelのインストール先](./images/installation/IST008_InstallFolder.jpg)
 
@@ -71,21 +71,21 @@ SQExcelのインストーラ(Emotionsoft.East.SQExcel-win-Setup.exe)はインス
 | レジストリキー | 設定値 | 意味 |  
 | --- | --- | --- |
 | [HKEY_CURRENT_USER\Software\Classes\.qtxl] | SQExcel.ProjectFile | 拡張子「.qtxl」ファイルがSQExcelのプロジェクトファイルであることを示す。 | 
-| [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile] | SQExcelプロジェクトファイル | レジストリキー「SQExcel.ProjectFile]」のタイトルを定義する。 |  
+| [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile] | SQExcelプロジェクトファイル | レジストリキー「SQExcel.ProjectFile」のタイトルを定義する。 |  
 | [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile\DefaultIcon] | [インストールディレクトリ内の.qtxlファイルのアイコンのパス] | .qtxlファイルのアイコンを指定する。 | 
-| [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile\shell\open\command] | [インストールディレクトリ内のSQExcel実行ファイルのパス] | .qtxlファイルとSQExcelプログラムの関連付けを行う。これによりエクスプローラ上で.qtxlファイルがダブル句リクされたり、コマンドプロンプトからファイル名が指定されたときに、SQExcelを起動する。 | 
+| [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile\shell\open\command] | [インストールディレクトリ内のSQExcel実行ファイルのパス] | .qtxlファイルとSQExcelプログラムの関連付けを行う。これによりエクスプローラ上で.qtxlファイルがダブルクリックされたり、コマンドプロンプトからファイル名が指定されたときに、SQExcelを起動する。 | 
 
 </div>
 
-これらのレジストリキーを[HKEY_LOCAL_MACHINE]の階層に対して書き込む権限を与えるにはインストーラ実行プロセスに管理者アクセスキー（トークン）の付与する必要がありますが、現在のSQExcelのバージョンではインストーラーに管理者ユーザートークンを付与することが出来ないため、[HKEY_CURRENT_USER]の階層に対してのみ書き込み可能となります。<br/>
+これらのレジストリキーを[HKEY_LOCAL_MACHINE]の階層に対して書き込む権限を与えるにはインストーラ実行プロセスに管理者アクセスキー（トークン）を付与する必要がありますが、現在のSQExcelのバージョンではインストーラーに管理者ユーザートークンを付与することが出来ないため、[HKEY_CURRENT_USER]の階層に対してのみ書き込み可能となります。<br/>
 このためSQExcelのインストール先は上に記したような制約を受けることになります。
 
    ![レジストリの設定内容](./images/installation/IST009_RegistrySettings.jpg)
 
 ## アンインストールの方法
 
-SQExcelをアンインストールする場合は、必ずWindowsメニュー「インストールされているアプリ」からEmotionSoft.East.SQExcelを選択してアンインストールを行ってください。<br/>
-（Windows10をお使いの方はコントロールメニューの「プログラムのアンインストールまたは変更」からEmotionSoft.East.SQExcelを選択してアンインストールしてください。）<br/>
+SQExcelをアンインストールする場合は、必ずWindowsメニュー「インストールされているアプリ」からEmotionsoft.East.SQExcelを選択してアンインストールを行ってください。<br/>
+（Windows10をお使いの方はコントロールパネルの「プログラムのアンインストールまたは変更」からEmotionsoft.East.SQExcelを選択してアンインストールしてください。）<br/>
 この操作によりアンインストールしないとレジストリに不要なキーが残ることになります。（実害はありません）
 
    ![インストールされているアプリからのアンインストール](./images/installation/IST010_UninstallSQExcel.jpg)

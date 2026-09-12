@@ -59,7 +59,7 @@ SQExcel の入力シートは、シート自体にテーブル名・項目名・
 
 例として部門マスター(departments)の入力シートで、Copilotに「このシートの構造と意味を理解して」を指示した後、「departmentsシートにサンプルデータを10件登録して」を指示します。
 
-   ![departmentsシートにサンプルデータを10件登録して」を指示](../images/copilot/CPL002_Set10DataToDepartment.jpg)
+   ![「departmentsシートにサンプルデータを10件登録して」を指示](../images/copilot/CPL002_Set10DataToDepartment.jpg)
 
 - 指示に対して、サンプルデータが10件作成されます。
 - 部門名は何も指示しなくても、実際に存在しそうな架空の部門名を割り当てています。
@@ -79,14 +79,14 @@ SQExcel の入力シートは、シート自体にテーブル名・項目名・
 
 例として取引先マスター(clients)の入力シートを開き、Copilotに「このシートの構造と意味を理解して」を指示した後、「clientsに取引先マスターのサンプルデータを30件作って」を指示します。
 
-   ![「clientsに取引先マスターのサンプルデータを作って」を指示](../images/copilot/CPL004_Set30DataToClientsNameEtc.jpg)
+   ![「clientsに取引先マスターのサンプルデータを30件作って」を指示](../images/copilot/CPL004_Set30DataToClientsNameEtc.jpg)
 
 - 指示に対して、取引先マスターのサンプルデータが30件作成されます。
 - 取引先名、取引先カナ名、先方担当者名や電話番号に架空の値がセットされますが、どれも存在しそうな値がセットされます。
 
 ここで取引先マスターに作成されたサンプルデータの住所関連の列を見てみましょう。
 
-   ![取引先マスターに作成されたサンプルデータの住所など](../images/copilot/CPL005_Set30DataToClientsAddressEtc.jpg)
+   ![取引先マスターに作成されたサンプルデータの住所など（調整前）](../images/copilot/CPL005_Set30DataToClientsAddressEtc.jpg)
 
 - **驚くのは、住所項目や郵便番号、国コードなどの項目名を読み取って、これも実在しそうな架空の値を自動的にセットしてくれる**ことです。氏名・住所・電話番号・メールアドレスなど、この手の架空データを自動生成してくれる点は非常に便利です。
 
@@ -98,7 +98,7 @@ SQExcel の入力シートは、シート自体にテーブル名・項目名・
 
 すると、結果がすぐに反映されます。
 
-   ![取引先マスターに作成されたサンプルデータの住所など](../images/copilot/CPL006_Set30DataToClientsAdjustAddress.jpg)
+   ![Copilotの指示により住所項目を調整した後の結果](../images/copilot/CPL006_Set30DataToClientsAdjustAddress.jpg)
 
 ※このように、作成するデータの項目や特性を細かく指示することもできます。
 

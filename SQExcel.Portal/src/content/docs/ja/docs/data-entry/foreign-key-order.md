@@ -62,7 +62,7 @@ INSERT 用に作られた順序（参照されるテーブル→参照するテ�
 
 6. 従業員マスターの18000015は外部参照キーエラーとなり、処理成否=FALSE、処理失敗メッセージにはエラー内容と実行されたSQL文が表示されます。
 
-   ![自己参照キーエラーを含む部門マスターの入力シートの取り込み結果](../images/foreign-key-order/FKO006_EmployeesErrorData.jpg)
+   ![外部参照キーエラーを含む従業員マスターの入力シートの取り込み結果](../images/foreign-key-order/FKO006_EmployeesErrorData.jpg)
 
 ### 2. データ削除時：逆順オプションを使わない場合(承前)
 

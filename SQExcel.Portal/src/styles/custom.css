@@ -121,6 +121,22 @@
 }
 
 /* --------------------------------
+   「入力シート作成の概要」ページ等: 番号付きリストの項目にぶら下がる
+   箇条書き（番号なしリスト）のインデントを既定の50%に縮小し、
+   行頭記号をネストのレベルに依らず黒丸(disc)に統一する。
+   （既定はブラウザのUAスタイルにより ol>ul が白丸(circle)・
+   インデント幅40px(=2.5em)相当になるため、その半分の20pxに設定）
+   -------------------------------- */
+.compact-sublist ul {
+  padding-inline-start: 20px;
+}
+
+.compact-sublist-black ul {
+  padding-inline-start: 20px;
+  list-style-type: disc;
+}
+
+/* --------------------------------
   以下tableタグ用のスタイル調整
   -------------------------------- */
 
@@ -339,7 +355,7 @@
   overflow-wrap: break-word;
 }
 
-.two-column-table td {
+.two-column-table37 td {
   overflow-wrap: break-word;
   padding: 0.3em 0.4em;
 }
@@ -432,7 +448,6 @@
   width: 30%;
 }
 
-
 /* --------------------------------
    4列テーブル全体の列幅の固定。
    列幅の比率を均等に設定する。
@@ -489,5 +504,124 @@
 /* 1列目 (25%) */
 .four-column-table-equal.left-bold th:nth-child(1),
 .four-column-table-equal.left-bold td:nth-child(1) {
+  font-weight: bold;
+}
+
+
+/* --------------------------------
+   4列テーブル全体の列幅の固定。
+   列幅の比率を均等に設定する。
+   -------------------------------- */
+.four-column-table-2224 table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.four-column-table-2224 th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.four-column-table-2224 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (20%) */
+.four-column-table-2224 th:nth-child(1),
+.four-column-table-2224 td:nth-child(1) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 2列目 (20%) */
+.four-column-table-2224 th:nth-child(2),
+.four-column-table-2224 td:nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 3列目 (20%) */
+.four-column-table-2224 th:nth-child(3),
+.four-column-table-2224 td:nth-child(3) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 4列目 (40%) */
+.four-column-table-2224 th:nth-child(4),
+.four-column-table-2224 td:nth-child(4) {
+  width: 40%;
+  text-align: left;
+}
+
+/* 1列目 (25%) */
+.four-column-table-2224.left-bold th:nth-child(1),
+.four-column-table-2224.left-bold td:nth-child(1) {
+  font-weight: bold;
+}
+
+/* --------------------------------
+   4列テーブル全体の列幅の固定。
+   列幅の比率を均等に設定する。
+   -------------------------------- */
+.four-column-table-2224x table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.four-column-table-2224x th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.four-column-table-2224x td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (15%) */
+.four-column-table-2224x th:nth-child(1),
+.four-column-table-2224x td:nth-child(1) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 2列目 (15%) */
+.four-column-table-2224x th:nth-child(2),
+.four-column-table-2224x td:nth-child(2) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 3列目 (30%) */
+.four-column-table-2224x th:nth-child(3),
+.four-column-table-2224x td:nth-child(3) {
+  width: 30%;
+  text-align: left;
+}
+
+/* 4列目 (40%) */
+.four-column-table-2224x th:nth-child(4),
+.four-column-table-2224x td:nth-child(4) {
+  width: 40%;
+  text-align: left;
+}
+
+/* 1列目 (25%) */
+.four-column-table-2224x.left-bold th:nth-child(1),
+.four-column-table-2224x.left-bold td:nth-child(1) {
   font-weight: bold;
 }

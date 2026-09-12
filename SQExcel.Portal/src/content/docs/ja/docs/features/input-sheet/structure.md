@@ -24,7 +24,7 @@ SQExcelの「入力シート」はこのワークブックを指し、個々の�
 | A1 / C1 / E1 | 見出しラベル「テーブル名」「論理名」「DB種類名」 |
 | B1 | `スキーマ名.テーブル物理名` 形式のテーブル名 |
 | D1 | テーブル論理名（DB側に論理名が登録されていない場合は論理名を含めてブロック単位で非表示） |
-| F1 | DB種類名（Microsoft SQL Server/ Oracle Database/ PostgreSQL/ MySQL/ MariaDB/ SQLite のいずれか  ） |
+| F1 | DB種類名（Microsoft SQL Server/ Oracle Database/ PostgreSQL/ MySQL/ MariaDB/ SQLite のいずれか） |
 | A2 | 見出しラベル「処理結果」 |
 | B2 | データ取り込み・データ出力の処理結果メッセージがここに書き込まれる |
 
@@ -77,24 +77,25 @@ SQExcelの「入力シート」はこのワークブックを指し、個々の�
 
 ## データ型とセル書式の対応
 
-入力シート作成時、テーブル項目のデータ型に応じて、Excel のセル書式が自動的に設定されます。主な対応は次の通りです（詳細な桁数範囲やデフォルト値は [入力シート作成ダイアログ](/ja/docs/features/io-operations/input-sheet-builder-dialog/) のワークシート設定タブ・列幅設定タブで調整できます）。
+入力シート作成時、テーブル項目のデータ型に応じて、Excel のセル書式が自動的に設定されます。主な対応は次の通りです（詳細な桁数範囲や既定値は [入力シート作成ダイアログ](/ja/docs/features/io-operations/input-sheet-builder-dialog/) のワークシート設定タブ・列幅設定タブで調整できます）。
 
 <div class="two-column-table46">
 
 | データ型カテゴリ | 対応するセル書式 |
 |---|---|
-| 整数型（TinyInt/SmallInt/Int/BigInt） | 標準（General）、または整数表示 |
+| 整数型（TinyInt/SmallInt/Int/BigInt） | <strong>標準（General）</strong>、または整数表示 |
 | 固定小数点型（Decimal/Numeric） | 桁数に応じた小数点表示（例：`0.0000`） |
-| 浮動小数点型（Float/Real/Double） | 標準（General）、または誤差を抑えた固定桁表示 |
-| 文字列型（Char/VarChar/Text/Clob 等） | 標準（General）、または文字列（`@`）＋折り返して全体を表示 |
-| 日付・時刻型（Date/Time/DateTime 等） | `yyyy/mm/dd` 等、複数の書式から選択可 |
+| 浮動小数点型（Float/Real/Double） | <strong>標準（General）</strong>、または誤差を抑えた固定桁表示 |
+| 文字列型（Char/VarChar/Text/Clob 等） | 標準（General）、または<strong>文字列（`@`）＋折り返して全体を表示</strong> |
+| 日付・時刻型（Date/Time/DateTime 等） | 日付書式は<strong>`yyyy/mm/dd`</strong> 等、時刻書式は<strong>`hh:mm:ss`</strong> 等、複数の書式から選択可 |
 | 真偽値型（Bit/Boolean/Number1 等） | 標準（General） |
-| バイナリ型（Binary/Blob/Bytea 等） | 標準（General）、または文字列（`@`）＋折り返して全体を表示（16進数文字列） |
-| その他（Guid/Xml/Json/RowId 等） | 標準（General）、または文字列（`@`）＋折り返して全体を表示 |
+| バイナリ型（Binary/Blob/Bytea 等） | 標準（General）、また<strong>は文字列（`@`）＋折り返して全体を表示</strong>（16進数文字列） |
+| その他（Guid/Xml/Json/RowId 等） | 標準（General）、または<strong>文字列（`@`）＋折り返して全体を表示</strong> |
+
+※既定の書式は太字で表示されています。<br/>
+※`@`はセルの書式が文字列に設定されていることを示す記号です。<br/>
 
 </div>
-
-※`@`はセルの書式が文字列に設定されていることを示す記号です。
 
 - 数値型、日付型項目のデータ入力例
 ![数値型、日付型項目のデータ設定例](../../images/inputsheet-structure/IST005a_NumAndDateTime.jpg)
@@ -107,7 +108,7 @@ SQExcelの「入力シート」はこのワークブックを指し、個々の�
 
 
 :::tip[列幅もデータ型に応じて自動調整]
-例えば `Char/VarChar` 等の文字列型は桁数帯（1〜10／11〜20／21〜）ごとに既定の列幅が設定されており、`Decimal/Numeric` も桁数帯によって列幅が変わります。詳細な対応表は [入力シート作成ダイアログの列幅設定タブ](/ja/docs/features/io-operations/input-sheet-builder-dialog//#列幅設定タブ) の列幅設定タブで確認・変更できます。
+例えば `Char/VarChar` 等の文字列型は桁数帯（1〜10／11〜20／21〜）ごとに既定の列幅が設定されており、`Decimal/Numeric` も桁数帯によって列幅が変わります。詳細な対応表は [入力シート作成ダイアログの列幅設定タブ](/ja/docs/features/io-operations/input-sheet-builder-dialog/#列幅設定タブ) の列幅設定タブで確認・変更できます。
 :::
 
 ## ワークシート保護

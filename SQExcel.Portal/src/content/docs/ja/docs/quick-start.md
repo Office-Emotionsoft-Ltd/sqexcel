@@ -97,7 +97,7 @@ description: クイックモードで最小の手間でデータ入出力を体�
 
 12. 実際にデータが登録されたかを確認してみましょう。データベースクライアントツール（SQL Server Management Studio）でclientsテーブルを検索すると、データが登録されていることが確認できます。
 
-    ![入力シート（Insert処理成功）](./images/quick-start/QS020_SSMS.jpg)
+    ![SQL Server Management Studioでclientsテーブルを検索した結果](./images/quick-start/QS020_SSMS.jpg)
 
 13. 最後に、生成されたSQLスクリプトを確認してみましょう。入力シートと同じフォルダに、同じ名前（拡張子は.sql）で保存されています。
 

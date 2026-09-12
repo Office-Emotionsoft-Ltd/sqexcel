@@ -90,10 +90,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | postal_code | 郵便番号 | VARCHAR(20) | | | | 郵便番号（ハイフンなし） |
 | country_code | 国コード | CHAR(2) | | ○ | 'JP' | ISO 3166-1 alpha-2 国コード |
 | is_active | 有効フラグ | BIT | | ○ | 1 | 1=有効、0=無効 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -107,7 +107,7 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 |---|---|---|---|---|---|---|
 | service_id | サービスID | CHAR(8) | ○ | ○ | | サービスを一意に識別するID（0詰め8桁） |
 | service_name | サービス名 | NVARCHAR(200) | | ○ | | サービスの名称 |
-| ad_type | 広告種別 | CHAR(1) | | ○ | | common_codeで定義域を設定 |
+| ad_type | 広告種別 | CHAR(1) | | ○ | | common_codesで定義域を設定 |
 | banner_size | バナーサイズ | VARCHAR(20) | | | | バナー広告のサイズ（バナー広告のみ） |
 | html_embed_available | HTML埋め込み可否 | BIT | | ○ | 0 | 1=可、0=不可 |
 | js_embed_available | JS埋め込み可否 | BIT | | ○ | 0 | 1=可、0=不可 |
@@ -116,10 +116,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | price_monthly | 月単位料金（税抜） | DECIMAL(15,2) | | ○ | 0 | 月単位の広告掲載料金 |
 | currency_code | 通貨コード | CHAR(3) | | ○ | 'JPY' | ISO 4217 通貨コード |
 | is_active | 有効フラグ | BIT | | ○ | 1 | 1=有効、0=無効 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -135,10 +135,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | category_code | 区分値 | NVARCHAR(100) | ○ | ○ | | その区分のコード値 |
 | category_code_name | 区分値名 | NVARCHAR(200) | | ○ | | その区分のコード値に割り当てられる名前 |
 | category_code_description | 区分値説明 | NVARCHAR(100) | | | | その区分のコード値の説明 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -166,10 +166,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | employee_id | 担当者ID | CHAR(8) | | ○ | | 担当営業社員。employeesへのFK |
 | status | ステータス | CHAR(1) | | ○ | '1' | 見積のステータスコード |
 | notes | 備考 | NVARCHAR(1000) | | | | 自由記述の備考欄 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -192,10 +192,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | amount_foreign | 外貨建て金額 | DECIMAL(18,2) | | | | 外貨建て明細金額 |
 | amount_jpy | 円建て金額 | DECIMAL(18,2) | | | | 円建て明細金額 |
 | amount_jpy_est | 予想円換算金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算金額 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -222,10 +222,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | employee_id | 担当者ID | CHAR(8) | | ○ | | 担当営業社員。employeesへのFK |
 | status | ステータス | CHAR(1) | | ○ | '1' | 契約のステータスコード |
 | notes | 備考 | NVARCHAR(1000) | | | | 自由記述の備考欄 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -249,10 +249,10 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | amount_foreign | 外貨建て金額 | DECIMAL(18,2) | | | | 外貨建て明細金額 |
 | amount_jpy | 円建て金額 | DECIMAL(18,2) | | | | 円建て明細金額 |
 | amount_jpy_est | 予想円換算金額 | DECIMAL(18,2) | | | | 外貨建て契約の予想円換算金額 |
-| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | |
-| created_by | 作成者ID | VARCHAR(20) | | ○ | | |
-| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | |
-| updated_by | 更新者ID | VARCHAR(20) | | ○ | | |
+| created_at | 作成日時 | DATETIME2 | | ○ | GETDATE() | レコード作成日時 |
+| created_by | 作成者ID | VARCHAR(20) | | ○ | | レコード作成者のユーザーID |
+| updated_at | 更新日時 | DATETIME2 | | ○ | GETDATE() | レコード最終更新日時 |
+| updated_by | 更新者ID | VARCHAR(20) | | ○ | | レコード最終更新者のユーザーID |
 
 </div>
 
@@ -269,7 +269,7 @@ description: SQExcelの機能説明に使用するサンプルデータベース
 | employees（従業員マスター） | employee_id(従業員ID) | dept_id(部門ID)→departments.dept_idを外部参照 |
 | clients（取引先マスター） | client_id(取引先ID) | |
 | services（サービスマスター） | service_id(サービスID) | |
-| common_codes（共通コードマスター） | category_name(区分名),category_code(区分コード) | |
+| common_codes（共通コードマスター） | category_name(区分名),category_code(区分値) | |
 | quotations（見積ヘッダー） | quotation_id(見積ID) | client_id(取引先ID)→clients.client_idを外部参照<br/>site_operator_id(サイト運営会社ID)→clients.client_idを外部参照<br/>employee_id(担当者ID)→employees.employee_idを外部参照 |
 | quotation_details（見積明細） | detail_id (明細ID) | quotation_id(見積ID)→quotations.quotation_idを外部参照<br/>service_id(サービスID)→services.service_idを外部参照 |
 | contracts（契約ヘッダー） | contract_id(契約ID) | quotation_id(見積ID)→quotations.quotation_idを外部参照<br/>client_id(取引先ID)→clients.client_idを外部参照<br/>site_operator_id(サイト運営会社ID)→clients.client_idを外部参照<br/>employee_id(担当者ID)→employees.employee_idを外部参照 |

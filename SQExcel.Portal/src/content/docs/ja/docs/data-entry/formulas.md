@@ -39,7 +39,7 @@ Public Function RandomMailAddress() As String
     Randomize
 
     Dim names() As String
-    names = Array("tesut.user01", "tesut.user02", "tesut.user03", "tesut.user04", "tesut.user05")
+    names = Array("test.user01", "test.user02", "test.user03", "test.user04", "test.user05")
 
     Dim domains() As String
     domains = Array("domain-test01.com", "domain-test02.com", "domain-test03.com", "domain-test04.com", "domain-test05.com")
@@ -78,7 +78,7 @@ End Function
 
 ### ワンポイント
 このようにワークシート関数やマクロ関数を使用する場合、その行全体をコピーして後方の行に数式コピーすることにより、100件から数1000件単位でサンプルデータを作成することが出来ます。項目値の設定に制限や規則がある場合に、大量のサンプルデータを投入する際には非常に有利な方法です。<br/>
-※複雑な関数を埋め込んだ行が多くなりすぎると、エクセルのパフォーマンスに影響を与えるので注意が必要です。
+※複雑な関数を埋め込んだ行が多くなりすぎると、Excelのパフォーマンスに影響を与えるので注意が必要です。
 
 ## この方法の限界
 

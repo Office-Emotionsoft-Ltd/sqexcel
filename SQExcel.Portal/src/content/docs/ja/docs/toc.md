@@ -12,9 +12,10 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | ページ | 概要 |
 |---|---|
 | [SQExcelの紹介](/ja/docs/) | SQExcel の特徴・セールスポイント・対応データベースの紹介 |
-| [SQExcelのインストール方法](/ja/docs/installation/) | インストーラーの入手方法と初回起動手順（準備中） |
+| [SQExcelのインストール方法](/ja/docs/installation/) | インストーラーの入手方法と初回起動手順 |
 | [取り敢えず使ってみよう](/ja/docs/quick-start/) | 最小の手間でデータ入出力を体験する、クイックモードの紹介 |
 | [操作の流れとデータモデル階層](/ja/docs/operation-flow/) | 通常モードの操作フローと、プロジェクト／アプリDB／接続／テーブルグループの関係 |
+| [サンプルデータベースについて](/ja/docs/sample-db/) | 各シナリオで使用するサンプルDB（ネット広告代理店向け簡易販売管理システム）の構造 |
 
 ---
 
@@ -77,5 +78,5 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | ページ | 概要 |
 |---|---|
 | [動作環境](/ja/docs/environment/) | 対応OS・.NET Version・対応DBとデータ型ごとのExcelセル書式対応 |
-| [リリースノート](/ja/docs/release-notes/) | バージョンごとの変更履歴（準備中） |
+| [リリースノート](/ja/docs/release-notes/) | バージョンごとの変更履歴 |
 | [Officeエモーションソフトについて](https://emotionsoft.net/ja/) | 開発元（有限会社エモーションソフト）のサイトへ |

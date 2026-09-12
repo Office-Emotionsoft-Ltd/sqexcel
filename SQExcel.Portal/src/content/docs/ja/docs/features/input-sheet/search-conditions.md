@@ -3,11 +3,10 @@ title: 入力シートへの検索条件記入方法
 description: データ出力機能で使用する検索条件セルの記入規則一覧。
 ---
 
-[データ出力機能について](/ja/docs/features/input-sheet/data-export/) で説明した検索条件行（A列に `C` を記入した行）の、各データ型ごとの具体的な記入規則です。
+このページでは[データ出力機能について](/ja/docs/features/input-sheet/data-export/) で説明した検索条件行（A列に `C` を記入した行）の、各データ型ごとの具体的な記入規則を示します。
 
-:::note[🖼️ 画像プレースホルダー: `SCH001_MixedConditionExample.jpg`]
-1つの入力シートに、数値条件・日付範囲条件・文字列部分一致条件を含む検索条件行が複数並んだ状態（本ページで紹介する表記例のうち代表的なものを実際に入力した状態）。
-:::
+![文字型項目への検索条件設定例](../../images/inputsheet-data-export/IDE005c_ConditionsRowForTestColumns.jpg)
+
 
 ## 検索条件が指定できる項目型
 

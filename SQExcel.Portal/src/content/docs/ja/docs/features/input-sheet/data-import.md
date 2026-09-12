@@ -14,9 +14,9 @@ description: SQL生成規則と、DB種類×データ型ごとの入力可否の
 - テーブル名・項目名にスペースや予約語が含まれる場合は、DB種類ごとの識別子クォート（`[ ]` / `" "` / `` ` ` `` 等）で囲まれます
 - `UPDATE` 文でキー項目を変更することはできません（主キーの値を変更する場合は `DELETE` と `INSERT` を個別に実行してください）
 
-### INSERT文・UPDATE文のスタイル
+### INSERT文のスタイル
 
-[データ取り込みダイアログ](/ja/docs/features/io-operations/data-import-dialog/) の「INSERT文１行当たりの項目数」「INSERT文のスタイル」「UPDATE文スタイル」の組み合わせにより、生成される SQL の見た目（括弧やカンマの位置）が変わります。<br/>
+[データ取り込みダイアログ](/ja/docs/features/io-operations/data-import-dialog/) の「INSERT文１行当たりの項目数」「INSERT文のスタイル」の組み合わせにより、生成される SQL の見た目（括弧やカンマの位置）が変わります。<br/>
 
 ■ 生成される文例(INSERT文)：
 
@@ -40,6 +40,9 @@ INSERT INTO table1 (
     value1, value2, value3, value4, value5
 );
 ```
+### UPDATE文のスタイル
+
+[データ取り込みダイアログ](/ja/docs/features/io-operations/data-import-dialog/) の「UPDATE文スタイル」の選択により、生成される SQL の見た目（カンマの位置）が変わります。<br/>
 
 ■ 生成される文例(UPDATE文)：
 
@@ -74,14 +77,15 @@ DB種類ごとに構文が異なるため、それぞれ最適な UPSERT 構文�
 | DB種類 | 使用される構文 |
 |---|---|
 | SQL Server | `MERGE INTO ... USING ... WHEN MATCHED / WHEN NOT MATCHED` |
-| Oracle | `MERGE INTO ... USING ... FROM dual` |
-| PostgreSQL / SQLite | `INSERT ... ON CONFLICT (...) DO UPDATE SET` |
+| Oracle | `MERGE INTO ... USING ... WHEN MATCHED / WHEN NOT MATCHED` |
+| PostgreSQL | `INSERT ... ON CONFLICT (...) DO UPDATE SET` |
 | MySQL / MariaDB | `INSERT ... ON DUPLICATE KEY UPDATE` |
+| SQLite | `INSERT ... ON CONFLICT (...) DO UPDATE SET` |
 
 </div>
 
 <br/>
-■ 生成される文例(SQL Server、パラメータ化クエリを使用しない場合)：
+■ 生成される文例(SQL Server)：
 
 ```sql
 -- SQL ServerのUPSERT文例
@@ -113,49 +117,133 @@ WHEN NOT MATCHED THEN
     );
 ```
 
-■ 生成される文例(Oracle、パラメータ化クエリを使用する場合)：
+■ 生成される文例(Oracle)：
 
 ```sql
 -- Oracle DBのUPSERT文例
-DECLARE
-    p1 CHAR(6)        := 'OF0001';  -- DEPT_ID
-    p2 NVARCHAR2(100) := '東京本社';  -- DEPT_NAME
-    p3 VARCHAR2(20)   := '2022-04-01 09:00:00';  -- CREATED_AT
-    p4 VARCHAR2(20)   := 'system';  -- CREATED_BY
-    p5 VARCHAR2(20)   := '2026-04-01 10:15:00';  -- UPDATED_AT
-    p6 VARCHAR2(20)   := 'sys_administrator';  -- UPDATED_BY
-BEGIN
-    MERGE INTO HR.DEPARTMENTS T
-    USING (
-        SELECT
-            p1 AS DEPT_ID, p2 AS DEPT_NAME, NULL AS PARENT_DEPT_ID, TO_DATE(p3, 'YYYY-MM-DD HH24:MI:SS') AS CREATED_AT,
-            p4 AS CREATED_BY, TO_DATE(p5, 'YYYY-MM-DD HH24:MI:SS') AS UPDATED_AT, p6 AS UPDATED_BY
-        FROM dual
-    ) S
-    ON (
-        T.DEPT_ID = S.DEPT_ID
+MERGE INTO HR.DEPARTMENTS T
+USING (
+    SELECT
+        'OF0001' AS DEPT_ID, '東京本社' AS DEPT_NAME, NULL AS PARENT_DEPT_ID, TO_DATE('2022-04-01 09:00:00', 'YYYY-MM-DD HH24:MI:SS') AS CREATED_AT,
+        'system' AS CREATED_BY, TO_DATE('2026-04-01 10:15:00', 'YYYY-MM-DD HH24:MI:SS') AS UPDATED_AT, 'sys_administrator' AS UPDATED_BY
+    FROM dual
+) S
+ON (
+    T.DEPT_ID = S.DEPT_ID
+)
+WHEN MATCHED THEN
+    UPDATE SET
+        T.DEPT_NAME = S.DEPT_NAME,
+        T.PARENT_DEPT_ID = S.PARENT_DEPT_ID,
+        T.CREATED_AT = S.CREATED_AT,
+        T.CREATED_BY = S.CREATED_BY,
+        T.UPDATED_AT = S.UPDATED_AT,
+        T.UPDATED_BY = S.UPDATED_BY
+WHEN NOT MATCHED THEN
+    INSERT (
+        DEPT_ID, DEPT_NAME, PARENT_DEPT_ID, CREATED_AT,
+        CREATED_BY, UPDATED_AT, UPDATED_BY
     )
-    WHEN MATCHED THEN
-        UPDATE SET
-            T.DEPT_NAME = S.DEPT_NAME,
-            T.PARENT_DEPT_ID = S.PARENT_DEPT_ID,
-            T.CREATED_AT = S.CREATED_AT,
-            T.CREATED_BY = S.CREATED_BY,
-            T.UPDATED_AT = S.UPDATED_AT,
-            T.UPDATED_BY = S.UPDATED_BY
-    WHEN NOT MATCHED THEN
-        INSERT (
-            DEPT_ID, DEPT_NAME, PARENT_DEPT_ID, CREATED_AT,
-            CREATED_BY, UPDATED_AT, UPDATED_BY
-        )
-        VALUES (
-            S.DEPT_ID, S.DEPT_NAME, S.PARENT_DEPT_ID, S.CREATED_AT,
-            S.CREATED_BY, S.UPDATED_AT, S.UPDATED_BY
-        );
-END;
+    VALUES (
+        S.DEPT_ID, S.DEPT_NAME, S.PARENT_DEPT_ID, S.CREATED_AT,
+        S.CREATED_BY, S.UPDATED_AT, S.UPDATED_BY
+    );
 ```
 
-- パラメータ化クエリについては、このページの後方で詳しく説明します。
+■ 生成される文例(PostgreSQL)：
+
+```sql
+-- PostgreSQL DBのUPSERT文例
+INSERT INTO hr.departments (
+    dept_id,
+    dept_name,
+    parent_dept_id,
+    created_at,
+    created_by,
+    updated_at,
+    updated_by
+)
+VALUES (
+    'OF0001',
+    '東京本社',
+    NULL,
+    '2022-04-01 09:00:00',
+    'system',
+    '2026-04-01 10:15:00',
+    'sys_administrator'
+)
+ON CONFLICT (dept_id)
+DO UPDATE SET
+    dept_name = EXCLUDED.dept_name,
+    parent_dept_id = EXCLUDED.parent_dept_id,
+    created_at = EXCLUDED.created_at,
+    created_by = EXCLUDED.created_by,
+    updated_at = EXCLUDED.updated_at,
+    updated_by = EXCLUDED.updated_by;
+```
+
+■ 生成される文例(MySQL/MariaDB)：
+
+```sql
+-- MySQL/MariaDB DBのUPSERT文例
+INSERT INTO departments (
+    dept_id,
+    dept_name,
+    parent_dept_id,
+    created_at,
+    created_by,
+    updated_at,
+    updated_by
+)
+VALUES (
+    'OF0001',
+    '東京本社',
+    NULL,
+    '2022-04-01 09:00:00',
+    'system',
+    '2026-04-01 10:15:00',
+    'sys_administrator'
+)
+ON DUPLICATE KEY UPDATE
+    dept_name = VALUES(dept_name),
+    parent_dept_id = VALUES(parent_dept_id),
+    created_at = VALUES(created_at),
+    created_by = VALUES(created_by),
+    updated_at = VALUES(updated_at),
+    updated_by = VALUES(updated_by);
+```
+
+
+■ 生成される文例(SQLite)：
+
+```sql
+-- SQLiteの文例
+INSERT INTO departments (
+    dept_id,
+    dept_name,
+    parent_dept_id,
+    created_at,
+    created_by,
+    updated_at,
+    updated_by
+) VALUES (
+    'OF0001',
+    '東京本社',
+    NULL,
+    '2022-04-01 09:00:00',
+    'system',
+    '2026-04-01 10:15:00',
+    'sys_administrator'
+)
+ON CONFLICT (dept_id)
+DO UPDATE SET
+    dept_name = excluded.dept_name,
+    parent_dept_id = excluded.parent_dept_id,
+    created_at = excluded.created_at,
+    created_by = excluded.created_by,
+    updated_at = excluded.updated_at,
+    updated_by = excluded.updated_by;
+```
 
 ## 文字列項目の特殊文字
 
@@ -180,7 +268,7 @@ END;
 |---|---|---|---|
 | SQL Server | エスケープ不要(「\」をそのまま記入可能) | エスケープ不要(改行をそのまま記入可能) | なし |
 | PostgreSQL | E'...'内で\n等を使用する | エスケープ不要(改行をそのまま記入可能) | E'...' |
-| MySQL/ MariaDB | エスケープ不要(「\」をそのまま記入可能) | \nが推奨されている | なし |
+| MySQL/ MariaDB | `\\`でエスケープ | \nが推奨されている | なし |
 | SQLite | エスケープ不要(「\」をそのまま記入可能) | エスケープ不要(改行をそのまま記入可能) | なし |
 | Oracle | エスケープ不要(「\」をそのまま記入可能) | q[...]構文を用いる | q[...] |
 
@@ -278,7 +366,7 @@ C:\temp\test
 
    <div class="medium-scale-img95">
 
-   ![3つのテーブルが追加された入力シート](../../images/inputsheet-data-import/IDI001_NullAndEmpty.jpg)
+   ![NULL・空文字列・文字列としての(null)の入力例](../../images/inputsheet-data-import/IDI001_NullAndEmpty.jpg)
 
    </div>
 
@@ -299,7 +387,7 @@ C:\temp\test
 ### 6種類のDB種類に対応
 
 パラメータ化クエリを使用する場合はSQL文は単一の文ではなく、複数のSQL文から構成されるコードブロックとして実行されます。
-またパラメータ化クエリの定義やコードブロックの記載方法やDB種類毎に異なります。
+またパラメータ化クエリの定義やコードブロックの記載方法はDB種類毎に異なります。
 <br/>
 SQExcelはDB種類に応じてそれぞれの表記規則に則ったコードブロックを出力します。
 
@@ -380,9 +468,9 @@ INSERT INTO departments (
 WITH params AS (
     SELECT 'OF0001' AS p1,  -- dept_id
            '東京本社' AS p2,  -- dept_name
-           '2022年4月1日 9:00:00' AS p3,  -- created_at
+           '2022-04-01 09:00:00' AS p3,  -- created_at
            'system' AS p4,  -- created_by
-           '2026年4月1日 10:15:00' AS p5,  -- updated_at
+           '2026-04-01 10:15:00' AS p5,  -- updated_at
            'sys_administrator' AS p6  -- updated_by
 )
 INSERT INTO departments (
@@ -417,10 +505,12 @@ END;
 /
 ```
 
+※UPDATE文、INSERT or UPDATE(=UPSERT)文、DELETE文でのパラメータ化クエリ使用時に生成されるSQLについては、実際のご利用時に出力されるSQLをご参照ください。
+
 ### SQLインジェクション対策
 
 パラメータ化クエリを使用する目的は、SQLインジェクション攻撃を完全に防御し、データベースの安全性を確保することです。また、処理の高速化という副次的なメリットもあります。<br/>
-ただしSQExcelではパラメータ化クエリを使用せずに通常のリテラルSQLを生成する場合でも、最低限のSQLインジェクション対応を行っています。<br/>
+ただし<strong>SQExcelではパラメータ化クエリを使用せずに通常のリテラルSQLを生成する場合でも、最低限のSQLインジェクション対応を行っています。</strong><br/>
 <br/>
 リテラルSQLを使用する際にSQLインジェクション対応を行う場合は、シングルクォーテーションなどのSQL文の構造を変更して任意のコマンドを挿入する可能性のある文字や記号をエスケープする必要があります。SQExcelは入力シートのセル内にそのような文字を見つけると自動的にエスケープ処理を行い無害化します。<br/>
 
@@ -428,8 +518,6 @@ END;
 
 
 ### パラメータ化クエリの使用・不使用により結果が異なる場合
-
-入力値が同一でもパラメータ化クエリの使用・不使用により結果が異なる場合がある
 
 重要なポイントとして、**同じ入力値でも、パラメータ化クエリとリテラルSQLとで処理結果（成功／エラー）が異なる場合があります**。これはパラメータバインド時にドライバ・SQExcel 側で型変換が行われるためで、SQExcel の仕様上の挙動です。<br/>
 
@@ -445,17 +533,3 @@ END;
 
 </div>
 
-
-## データ型のDB種類ごとの対比
-
-SQExcelが取り扱う6つのDB種類では基本的な数値型・日付時刻型・文字型の項目は定義域を共有しますが、一部DB種類特有のデータ型を有するものがあります。以下に一覧を定義します。
-
-<div class="standard-table">
-
-| DB種類 | 項目・データ型 | 入力値の例 | 結果 | 補足 |
-|---|---|---|---|---|
-| SQL Server | col_tinyint（TinyInt） | `1.5`（小数） | パラメータ化クエリ使用時：エラー | TinyInt型パラメータに小数値をバインドできないため |
-| SQL Server | col_date（Date） | `2026/05-13`（区切り文字不均一） | リテラルSQL：エラー／パラメータ化クエリ：成功 | 上表「パラメータ化クエリとリテラルSQLの違い」を参照 |
-| SQL Server | col_uniqueidentifier（UniqueIdentifier） | ハイフンなしGUID文字列 | リテラルSQL：エラー／パラメータ化クエリ：成功 | 同上 |
-
-</div>
