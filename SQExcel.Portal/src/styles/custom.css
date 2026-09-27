@@ -448,6 +448,51 @@
   width: 30%;
 }
 
+
+/* --------------------------------
+   3列テーブル全体の列幅の固定。
+   列幅の比率を2:4:4に設定する。
+   -------------------------------- */
+.three-column-table244 table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.three-column-table244 th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.three-column-table244 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (20%) */
+.three-column-table244 th:nth-child(1),
+.three-column-table244 td:nth-child(1) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 2列目 (40%) */
+.three-column-table244 th:nth-child(2),
+.three-column-table244 td:nth-child(2) {
+  width: 40%;
+}
+
+/* 3列目 (40%) */
+.three-column-table244 th:nth-child(3),
+.three-column-table244 td:nth-child(3) {
+  width: 40%;
+}
+
 /* --------------------------------
    4列テーブル全体の列幅の固定。
    列幅の比率を均等に設定する。
