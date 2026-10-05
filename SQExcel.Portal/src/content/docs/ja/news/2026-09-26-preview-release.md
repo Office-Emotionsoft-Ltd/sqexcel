@@ -1,6 +1,6 @@
 ---
 title: SQExcel Preview版を公開しました
-date: 2026-09-26
+date: 2026-10-05
 excerpt: SQExcelの最初のPreview版（v0.1.0-preview）を公開しました。<br/>より多くの環境・使い方でお試しいただき、皆さまのご意見をもとに改良を進めるための先行公開版です。
 ---
 
