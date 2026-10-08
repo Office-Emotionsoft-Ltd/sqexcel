@@ -70,7 +70,7 @@ SQExcelのインストーラ(Emotionsoft.East.SQExcel-win-Setup.exe)はインス
 
 | レジストリキー | 設定値 | 意味 |  
 | --- | --- | --- |
-| [HKEY_CURRENT_USER\Software\Classes\.qtxl] | SQExcel.ProjectFile | 拡張子「.qtxl」ファイルがSQExcelのプロジェクトファイルであることを示す。 | 
+| [HKEY_CURRENT_USER\Software\Classes\\.qtxl] | SQExcel.ProjectFile | 拡張子「.qtxl」ファイルがSQExcelのプロジェクトファイルであることを示す。 | 
 | [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile] | SQExcelプロジェクトファイル | レジストリキー「SQExcel.ProjectFile」のタイトルを定義する。 |  
 | [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile\DefaultIcon] | [インストールディレクトリ内の.qtxlファイルのアイコンのパス] | .qtxlファイルのアイコンを指定する。 | 
 | [HKEY_CURRENT_USER\Software\Classes\SQExcel.ProjectFile\shell\open\command] | [インストールディレクトリ内のSQExcel実行ファイルのパス] | .qtxlファイルとSQExcelプログラムの関連付けを行う。これによりエクスプローラ上で.qtxlファイルがダブルクリックされたり、コマンドプロンプトからファイル名が指定されたときに、SQExcelを起動する。 | 
