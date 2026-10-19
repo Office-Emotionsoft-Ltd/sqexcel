@@ -5,6 +5,7 @@ import {
   getLatestReleaseNote,
   getDisplayVersion,
 } from "../../../lib/releaseNotes";
+import NoticeBanner from "../../../components/EmmergencyNoticeBanner.astro"; // 追加
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const latest = await getLatestReleaseNote("ja");
@@ -22,6 +23,7 @@ const downloadHref =
   title="ダウンロード | SQExcel"
   description="SQExcelのダウンロードページ。最新版インストーラーをダウンロードできます。"
 >
+  <NoticeBanner href="/ja/news/2026-10-19-setupexe-dl-error" />
   <section class="lp-download-dialog">
     <div class="lp-download-card">
       <h1>SQExcelをダウンロード</h1>

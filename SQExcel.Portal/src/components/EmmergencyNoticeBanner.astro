@@ -1,0 +1,46 @@
+---
+// 告知を出すときだけ true にする。解除時は false にするだけでよい。
+const { show = true, href = "/ja/news/" } = Astro.props;
+---
+
+{
+  show && (
+    <div class="notice-banner" role="status">
+      <span class="notice-banner__icon" aria-hidden="true">
+        ⚠
+      </span>
+      <p class="notice-banner__text">
+        現在、最新版のインストーラーがMcAfeeで誤検知される場合があります(対応を申請済み)。
+        <a href={href}>詳細はニュースをご確認ください。</a>
+      </p>
+    </div>
+  )
+}
+
+<style>
+  .notice-banner {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 0 0 1.5rem;
+    padding: 0.8rem 1rem;
+    background: #fff8e1;
+    color: #3d2e00;
+    border: 1px solid #f0c36d;
+    border-left: 6px solid #e8a200;
+    border-radius: 6px;
+    line-height: 1.6;
+  }
+  .notice-banner__icon {
+    font-size: 1.2rem;
+    line-height: 1.5;
+  }
+  .notice-banner__text {
+    margin: 0;
+  }
+  .notice-banner a {
+    color: #8a4b00;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+</style>

@@ -15,6 +15,7 @@ import featureQuickMode from "../../content/docs/ja/docs/images/lp/feature-quick
 import featureInputSheet from "../../content/docs/ja/docs/images/lp/feature-inputsheet.jpg";
 import featureDataCreation from "../../content/docs/ja/docs/images/lp/feature-datacreation.jpg";
 import featureFullDml from "../../content/docs/ja/docs/images/lp/feature-fulldml.jpg";
+import NoticeBanner from "../../components/EmmergencyNoticeBanner.astro"; // 追加
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
@@ -78,6 +79,7 @@ const features = [
   title="SQExcel - SQL Serverほか6DBとExcelを行き来させるデータ交換ツール"
   description="SQExcel（SQL2Excel）は、SQL Server・Oracle・PostgreSQL・MySQL・MariaDB・SQLiteとExcelの間でデータをやり取りできるWindowsアプリケーションです。"
 >
+  <NoticeBanner href="/ja/news/2026-10-19-setupexe-dl-error" />
   <section class="lp-hero">
     <div class="lp-hero-inner">
       <div class="lp-hero-copy">
