@@ -1,6 +1,6 @@
 ---
 // 告知を出すときだけ true にする。解除時は false にするだけでよい。
-const { show = true, href = "/ja/news/" } = Astro.props;
+const { show = false, href = "/ja/news/" } = Astro.props;
 ---
 
 {
@@ -32,8 +32,9 @@ const { show = true, href = "/ja/news/" } = Astro.props;
     line-height: 1.6;
   }
   .notice-banner__icon {
-    font-size: 1.2rem;
+    font-size: 1.8rem;
     line-height: 1.5;
+    vertical-align: middle;
   }
   .notice-banner__text {
     margin: 0;
