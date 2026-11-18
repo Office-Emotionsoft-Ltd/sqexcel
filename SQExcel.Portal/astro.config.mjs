@@ -205,6 +205,11 @@ export default defineConfig({
               translations: { ja: 'オプション設定' },
               link: '/docs/features/option-settings-dialog/',
             },
+            {
+              label: 'Save Diagnostics',
+              translations: { ja: '診断情報を保存' },
+              link: '/docs/features/diagnostics_dialog/',
+            },
           ],
         },
         {

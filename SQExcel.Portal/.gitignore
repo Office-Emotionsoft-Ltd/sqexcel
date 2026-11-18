@@ -27,3 +27,5 @@ npm-debug.log*
 *.skrold.skrold
 .$*.bkp
 
+# 画像ファイルのマニュアルバックアップフォルダ
+src/content/docs/ja/docs/images_bkup/

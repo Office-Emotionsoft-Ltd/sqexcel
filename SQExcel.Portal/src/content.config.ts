@@ -17,7 +17,7 @@ export const collections = {
       // （例: -preview.202608271838 の末尾12桁部分）を取り除いたものを自動生成する
       displayVersion: z.string().optional(),
       date: z.date(),
-      channel: z.enum(['preview', 'rc', 'ga']),
+      channel: z.enum(['preview', 'beta', 'rc', 'ga']),
       summary: z.string(),
     }),
   }),

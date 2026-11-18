@@ -8,6 +8,7 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 ---
 
 ## はじめに
+<div class="two-column-table46">
 
 | ページ | 概要 |
 |---|---|
@@ -17,9 +18,11 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | [操作の流れとデータモデル階層](/ja/docs/operation-flow/) | 通常モードの操作フローと、プロジェクト／アプリDB／接続／テーブルグループの関係 |
 | [サンプルデータベースについて](/ja/docs/sample-db/) | 各シナリオで使用するサンプルDB（ネット広告代理店向け簡易販売管理システム）の構造 |
 
+</div>
 ---
 
 ## SQExcelの入力シート操作のポイント
+<div class="two-column-table46">
 
 | ページ | 概要 |
 |---|---|
@@ -31,9 +34,11 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | [外部キー参照のあるテーブルへのデータ挿入及び削除手順（重要）](/ja/docs/data-entry/foreign-key-order/) | 3方式共通で重要な、テーブル間の依存順序に関する注意事項 |
 | [入力シートへのデータ投入方法の比較](/ja/docs/data-entry/comparison/) | 3方式を評価基準ごとに比較した一覧表 |
 
+</div>
 ---
 
 ## 実際の開発で使ってみよう
+<div class="two-column-table46">
 
 | ページ | 概要 |
 |---|---|
@@ -42,10 +47,10 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | [中規模以上の開発で使う](/ja/docs/real-world/medium-scale/) | アプリDB2・接続4・テーブルグループ3・開発者3〜10名の例 |
 | [大規模システムのメンテナンスで使う](/ja/docs/real-world/large-scale/) | テーブル100個以上の既存システムを少人数で保守する例 |
 
+</div>
 ---
 
 ## SQExcel機能説明
-
 <div class="two-column-table46">
 
 | ページ | 概要 |
@@ -54,14 +59,15 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | [スタートページ](/ja/docs/features/start-page/) | 起動直後に表示されるスタートページの構成と操作 |
 | [ホーム画面](/ja/docs/features/home-screen/) | プロジェクト・アプリDB・接続を管理するホーム画面の構成と操作 |
 | [IO操作画面](/ja/docs/features/io-operations/) | テーブルグループの編集と入力シート操作を行う画面の構成と操作 |
-| [IO操作画面：入力シート作成機能](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成時のオプション詳細 |
+| [IO操作画面：入力シート作成機能](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成時のオプション詳細（外部キー情報の付加と既存ブックの更新を含む） |
 | [IO操作画面：データ取り込み機能](/ja/docs/features/io-operations/data-import-dialog/) | データ取り込み時のオプション詳細 |
 | [IO操作画面：データ出力機能](/ja/docs/features/io-operations/data-export-dialog/) | データ出力時のオプション詳細 |
-| [オプション設定ダイアログ](/ja/docs/features/option-settings-dialog/) | SQExcel 全体の設定項目（ツール → オプション） |
+| [オプション設定ダイアログ](/ja/docs/features/option-settings-dialog/) | SQExcel 全体の設定項目（ツール → オプション）。DB接続パスワードの保存方式を含む |
 
 </div>
 
 ## SQExcelの入力シートの説明
+<div class="two-column-table46">
 
 | ページ | 概要 |
 |---|---|
@@ -71,12 +77,16 @@ description: SQExcelオンラインヘルプの全ページ一覧と概要。
 | [データ出力機能について](/ja/docs/features/input-sheet/data-export/) | データ出力処理の詳細 |
 | [入力シートへの検索条件記入方法](/ja/docs/features/input-sheet/search-conditions/) | 検索条件セルの記入規則一覧 |
 
+</div>
 ---
 
 ## その他
+<div class="two-column-table46">
 
 | ページ | 概要 |
 |---|---|
 | [動作環境](/ja/docs/environment/) | 対応OS・.NET Version・対応DBとデータ型ごとのExcelセル書式対応 |
 | [リリースノート](/ja/docs/release-notes/) | バージョンごとの変更履歴 |
 | [Officeエモーションソフトについて](https://emotionsoft.net/ja/) | 開発元（有限会社エモーションソフト）のサイトへ |
+
+</div>

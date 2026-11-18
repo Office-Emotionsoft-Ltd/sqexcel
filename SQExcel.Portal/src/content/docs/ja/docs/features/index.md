@@ -12,13 +12,15 @@ description: 画面ごとの詳細なリファレンス。
 | [スタートページ](/ja/docs/features/start-page/) | 起動直後に表示され、最近使ったプロジェクトの選択やクイックモード・新規プロジェクトの入り口となる画面 |
 | [ホーム画面](/ja/docs/features/home-screen/) | プロジェクト・アプリDB・接続を追加・編集・削除し、IO操作画面へ遷移する画面 |
 | [IO操作画面](/ja/docs/features/io-operations/) | テーブルグループの編集と、入力シート作成・データ取り込み・データ出力の各ダイアログを起動する画面 |
-| [入力シート作成](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成処理内容とダイアログから設定するオプションの詳細 |
+| [入力シート作成](/ja/docs/features/io-operations/input-sheet-builder-dialog/) | 入力シート作成処理内容とダイアログから設定するオプションの詳細（外部キー情報の付加と既存ブックの更新を含む）  |
 | [データ取り込み](/ja/docs/features/io-operations/data-import-dialog/) | データ取り込み処理内容とダイアログから設定するオプションの詳細 |
 | [データ出力](/ja/docs/features/io-operations/data-export-dialog/) | データ出力処理内容とダイアログから設定するオプションの詳細 |
-| [オプション設定](/ja/docs/features/option-settings-dialog/) | SQExcel 全体の設定項目（ツール → オプションで表示されるダイアログからのアプリケーション設定） |
+| [オプション設定](/ja/docs/features/option-settings-dialog/) | SQExcel 全体の設定項目（ツール → オプションで表示されるダイアログからのアプリケーション設定。DB接続パスワードの保存方式の設定を含む。） |
+| [診断情報を保存](/ja/docs/features/diagnostics_dialog/) | 不具合報告用に、環境情報とログをマスク・取捨選択してZIPで保存する機能（ツール → 診断情報を保存） |
 
 </div>
 
+---
 :::tip[画面の操作フロー自体は「操作の流れとデータモデル階層」で先に確認]
 本セクションは画面・ダイアログ単位のリファレンスのため、複数画面をまたぐ一連の操作の流れ（プロジェクト作成→アプリDB追加→接続追加→テーブルグループ作成→入力シート操作）を掴みたい場合は、先に [操作の流れとデータモデル階層](/ja/docs/operation-flow/) を参照してください。
 :::

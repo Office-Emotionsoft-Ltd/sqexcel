@@ -86,8 +86,18 @@
 }
 
 /* 表示幅を85%に縮小する */
+.medium-scale-img img {
+  max-width: 100%;
+}
+
+/* 表示幅を85%に縮小する */
 .medium-scale-img95 img {
   max-width: 95%;
+}
+
+/* 表示幅を85%に縮小する */
+.medium-scale-img90 img {
+  max-width: 90%;
 }
 
 /* 表示幅を85%に縮小する */
@@ -105,9 +115,20 @@
   max-width: 65%;
 }
 
+
+/* 表示幅を75%に縮小する */
+.medium-scale-img55 img {
+  max-width: 55%;
+}
+
 /* 表示幅を50%に縮小する */
 .medium-scale-img50 img {
   max-width: 50%;
+}
+
+/* 表示幅を50%に縮小する */
+.medium-scale-img40 img {
+  max-width: 40%;
 }
 
 /* 表示幅を30%に縮小する */
@@ -131,9 +152,21 @@
   padding-inline-start: 20px;
 }
 
+.compact-sublist-il40 ul {
+  padding-inline-start: 40px;
+  line-height: 1.2em;
+}
+
+
 .compact-sublist-black ul {
   padding-inline-start: 20px;
   list-style-type: disc;
+}
+
+.compact-sublist-il40-black ul {
+  padding-inline-start: 40px;
+  list-style-type: disc;
+  line-height: 1.2em;
 }
 
 /* --------------------------------
@@ -406,6 +439,52 @@
 
 /* --------------------------------
    3列テーブル全体の列幅の固定。
+   列幅の比率を2.5:2.5:5に設定する。
+   -------------------------------- */
+.three-column-table225 table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.three-column-table225 th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.three-column-table225 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (25%) */
+.three-column-table225 th:nth-child(1),
+.three-column-table225 td:nth-child(1) {
+  width: 25%;
+  text-align: left;
+}
+
+/* 2列目 (25%) */
+.three-column-table225 th:nth-child(2),
+.three-column-table225 td:nth-child(2) {
+  width: 25%;
+}
+
+/* 3列目 (50%) */
+.three-column-table225 th:nth-child(3),
+.three-column-table225 td:nth-child(3) {
+  width: 50%;
+}
+
+
+
+/* --------------------------------
+   3列テーブル全体の列幅の固定。
    列幅の比率を4:3:3に設定する。
    -------------------------------- */
 .three-column-table433 table {
@@ -447,7 +526,6 @@
 .three-column-table433 td:nth-child(3) {
   width: 30%;
 }
-
 
 /* --------------------------------
    3列テーブル全体の列幅の固定。
@@ -491,6 +569,51 @@
 .three-column-table244 th:nth-child(3),
 .three-column-table244 td:nth-child(3) {
   width: 40%;
+}
+
+
+/* --------------------------------
+   3列テーブル全体の列幅の固定。
+   列幅の比率を2:4:8に設定する。
+   -------------------------------- */
+.three-column-table248 table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.three-column-table248 th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.three-column-table248 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (20%) */
+.three-column-table248 th:nth-child(1),
+.three-column-table248 td:nth-child(1) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 2列目 (40%) */
+.three-column-table248 th:nth-child(2),
+.three-column-table248 td:nth-child(2) {
+  width: 25%;
+}
+
+/* 3列目 (40%) */
+.three-column-table248 th:nth-child(3),
+.three-column-table248 td:nth-child(3) {
+  width: 60%;
 }
 
 /* --------------------------------
@@ -555,7 +678,7 @@
 
 /* --------------------------------
    4列テーブル全体の列幅の固定。
-   列幅の比率を均等に設定する。
+   列幅の比率を20/20/20/40に設定する。
    -------------------------------- */
 .four-column-table-2224 table {
   table-layout: fixed;
@@ -614,7 +737,7 @@
 
 /* --------------------------------
    4列テーブル全体の列幅の固定。
-   列幅の比率を均等に設定する。
+   列幅の比率を15/15/30/40に設定する。
    -------------------------------- */
 .four-column-table-2224x table {
   table-layout: fixed;
@@ -668,5 +791,203 @@
 /* 1列目 (25%) */
 .four-column-table-2224x.left-bold th:nth-child(1),
 .four-column-table-2224x.left-bold td:nth-child(1) {
+  font-weight: bold;
+}
+
+/* --------------------------------
+   4列テーブル全体の列幅の固定。
+   列幅の比率を10/20/45/25に設定する。
+   -------------------------------- */
+.four-column-table-1242 table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.four-column-table-1242 th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.four-column-table-1242 td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (10%) */
+.four-column-table-1242 th:nth-child(1),
+.four-column-table-1242 td:nth-child(1) {
+  width: 10%;
+  text-align: left;
+}
+
+/* 2列目 (20%) */
+.four-column-table-1242 th:nth-child(2),
+.four-column-table-1242 td:nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 3列目 (45%) */
+.four-column-table-1242 th:nth-child(3),
+.four-column-table-1242 td:nth-child(3) {
+  width: 45%;
+  text-align: left;
+}
+
+/* 4列目 (25%) */
+.four-column-table-1242 th:nth-child(4),
+.four-column-table-1242 td:nth-child(4) {
+  width: 25%;
+  text-align: left;
+}
+
+/* 1列目 (25%) */
+.four-column-table-1242.left-bold th:nth-child(1),
+.four-column-table-1242.left-bold td:nth-child(1) {
+  font-weight: bold;
+}
+
+/* --------------------------------
+   5列テーブル全体の列幅の固定。
+   列幅の比率を均等に設定する。
+   -------------------------------- */
+.five-column-table-22222x table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.five-column-table-22222x th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.five-column-table-22222x td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (20%) */
+.five-column-table-22222x th:nth-child(1),
+.five-column-table-22222x td:nth-child(1) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 2列目 (20%) */
+.five-column-table-22222x th:nth-child(2),
+.five-column-table-22222x td:nth-child(2) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 3列目 (20%) */
+.five-column-table-22222x th:nth-child(3),
+.five-column-table-22222x td:nth-child(3) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 4列目 (20%) */
+.five-column-table-22222x th:nth-child(4),
+.five-column-table-22222x td:nth-child(4) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 5列目 (20%) */
+.five-column-table-22222x th:nth-child(5),
+.five-column-table-22222x td:nth-child(5) {
+  width: 20%;
+  text-align: left;
+}
+
+/* 1列目 */
+.five-column-table-22222x.left-bold th:nth-child(1),
+.five-column-table-22222x.left-bold td:nth-child(1) {
+  font-weight: bold;
+}
+
+/* --------------------------------
+   6列テーブル全体の列幅の固定。
+   列幅の比率を均等に設定する。
+   -------------------------------- */
+.six-column-table-222222x table {
+  table-layout: fixed;
+  font-size: 0.9em;
+  width: 100%;
+}
+
+/* セルの折り返しと基本スタイル */
+.six-column-table-222222x th {
+  background-color: #f0f0f0c0;
+  padding: 0.1em 0.1em;
+  overflow-wrap: break-word;
+}
+
+.six-column-table-222222x td {
+  overflow-wrap: break-word;
+  /* 長い単語や英数字も強制折り返し */
+  word-break: break-all;
+  /* 長いURL等の溢れ防止 */
+  padding: 0.3em 0.4em;
+}
+
+/* 1列目 (15%) */
+.six-column-table-222222x th:nth-child(1),
+.six-column-table-222222x td:nth-child(1) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 2列目 (15%) */
+.six-column-table-222222x th:nth-child(2),
+.six-column-table-222222x td:nth-child(2) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 3列目 (30%) */
+.six-column-table-222222x th:nth-child(3),
+.six-column-table-222222x td:nth-child(3) {
+  width: 30%;
+  text-align: left;
+}
+
+/* 4列目 (40%) */
+.six-column-table-222222x th:nth-child(4),
+.six-column-table-222222x td:nth-child(4) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 5列目 (10%) */
+.six-column-table-222222x th:nth-child(5),
+.six-column-table-222222x td:nth-child(5) {
+  width: 15%;
+  text-align: left;
+}
+
+/* 6列目 (20%) */
+.six-column-table-222222x th:nth-child(6),
+.six-column-table-222222x td:nth-child(6) {
+  width: 25%;
+  text-align: left;
+}
+
+/* 1列目 (25%) */
+.six-column-table-222222x.left-bold th:nth-child(1),
+.six-column-table-222222x.left-bold td:nth-child(1) {
   font-weight: bold;
 }
