@@ -1,0 +1,55 @@
+---
+// 告知を出すときだけ true にする。解除時は false にするだけでよい。
+const { show = true, href = "/ja/news/" } = Astro.props;
+---
+
+{show && (
+  <div class="notice-banner" role="status">
+    <i class="fa-solid fa-circle-info notice-banner__icon" aria-hidden="true" />
+    <p class="notice-banner__text">
+      β版リリースのお知らせ：SQExcelは現在β版としてリリースされています。正式版リリースまでの間、皆様からのフィードバックをお待ちしております。
+      <a href={href}>詳細はニュースをご確認ください。</a>
+    </p>
+  </div>
+)}
+
+<style>
+  .notice-banner {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 0 0 1.5rem;
+    padding: 0.8rem 1rem;
+    background: #b7e0fc;
+    color: #002b3d;
+    border: 1px solid #ceecff;
+    border-left: 12px solid #357196;
+    border-radius: 6px;
+    line-height: 1.6;
+  }
+  <!-- .notice-banner__icon {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+  -- > .notice-banner__icon {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    vertical-align: middle;
+  }
+  .notice-banner__text {
+    margin: 0;
+  }
+  .notice-banner a {
+    color: #005582;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+  .notice-banner__icon {
+    flex-shrink: 0;
+    font-size: 1.1em;
+    line-height: calc(
+      1.6em / 1.1
+    ); /* 本文の line-height 1.6 と同じ高さにする */
+  }
+</style>

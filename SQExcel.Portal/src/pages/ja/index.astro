@@ -19,6 +19,8 @@ import featureFullDml from "../../content/docs/ja/docs/images/lp/feature-fulldml
 import EmmergencyNoticeBanner from "../../components/EmergencyNoticeBanner.astro";
 // 通常告知用バナー
 import NoticeBanner from "../../components/NoticeBanner.astro";
+// 良いニュース用バナー
+import GoodNewsBanner from "../../components/GoodNewsBanner.astro";
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 
@@ -84,6 +86,7 @@ const features = [
 >
   <EmmergencyNoticeBanner href="/ja/news/2026-11-19b-setupexe-dl-error" />
   <NoticeBanner href="/ja/news/2026-11-19c-setupexe-dl-ok" />
+  <GoodNewsBanner href="/ja/news/2026-11-19a-beta-release" />
   <section class="lp-hero">
     <div class="lp-hero-inner">
       <div class="lp-hero-copy">
@@ -119,20 +122,18 @@ const features = [
         label="対応データベース"
         count={databases.length}
       >
-        {
-          databases.map((db) => (
-            <article class="lp-card" data-carousel-card>
-              <Image
-                src={db.image}
-                alt={`${db.name}での実行結果画面`}
-                width={560}
-                height={380}
-              />
-              <h3>{db.name}</h3>
-              <p>{db.version}</p>
-            </article>
-          ))
-        }
+        {databases.map((db) => (
+          <article class="lp-card" data-carousel-card>
+            <Image
+              src={db.image}
+              alt={`${db.name}での実行結果画面`}
+              width={560}
+              height={380}
+            />
+            <h3>{db.name}</h3>
+            <p>{db.version}</p>
+          </article>
+        ))}
       </Carousel>
     </div>
   </section>
@@ -146,20 +147,18 @@ const features = [
         </p>
       </div>
       <Carousel id="feature-carousel" label="機能概要" count={features.length}>
-        {
-          features.map((feature) => (
-            <article class="lp-card" data-carousel-card>
-              <Image
-                src={feature.image}
-                alt={`${feature.title}の画面キャプチャ`}
-                width={560}
-                height={380}
-              />
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </article>
-          ))
-        }
+        {features.map((feature) => (
+          <article class="lp-card" data-carousel-card>
+            <Image
+              src={feature.image}
+              alt={`${feature.title}の画面キャプチャ`}
+              width={560}
+              height={380}
+            />
+            <h3>{feature.title}</h3>
+            <p>{feature.description}</p>
+          </article>
+        ))}
       </Carousel>
     </div>
   </section>

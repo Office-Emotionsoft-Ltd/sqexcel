@@ -1,22 +1,17 @@
 ---
 // 告知を出すときだけ true にする。解除時は false にするだけでよい。
-const { show = true, href = "/ja/news/" } = Astro.props;
+const { show = false, href = "/ja/news/" } = Astro.props;
 ---
 
-{
-  show && (
-    <div class="notice-banner" role="status">
-      <i
-        class="fa-solid fa-circle-info notice-banner__icon"
-        aria-hidden="true"
-      />
-      <p class="notice-banner__text">
-        最新版のインストーラーがMcAfeeで誤検知される問題は解決しています。
-        <a href={href}>詳細はニュースをご確認ください。</a>
-      </p>
-    </div>
-  )
-}
+{show && (
+  <div class="notice-banner" role="status">
+    <i class="fa-solid fa-circle-info notice-banner__icon" aria-hidden="true" />
+    <p class="notice-banner__text">
+      最新版のインストーラーがMcAfeeで誤検知される問題は解決しています。
+      <a href={href}>詳細はニュースをご確認ください。</a>
+    </p>
+  </div>
+)}
 
 <style>
   .notice-banner {
