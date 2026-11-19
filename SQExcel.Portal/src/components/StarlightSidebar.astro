@@ -17,7 +17,11 @@ if (isNews) {
 
   const posts = (await getCollection('docs'))
     .filter((entry) => entry.id.startsWith(`${locale ?? 'ja'}/news/`) && entry.data.date)
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+    // 新しい日付順。同日の記事はファイル名（例: 2026-11-19a/b/c）の降順で並べる
+    .sort(
+      (a, b) =>
+        b.data.date.getTime() - a.data.date.getTime() || (a.id < b.id ? 1 : a.id > b.id ? -1 : 0),
+    );
 
   sublist = [
     {
